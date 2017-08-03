@@ -1,0 +1,25 @@
+{
+  "id": "0ac706e2-79de-4645-8cb0-5f8913012b88",
+  "rev": "7-71e6b9cdc72083c2992b889e02cfd3bc",
+  "name": "privacy",
+  "description": "",
+  "classification": "content",
+  "typeId": "60716007-4e99-49c6-af11-1c2a59d60cee",
+  "locale": "en-US",
+  "lastModified": "2017-06-08T14:08:57.861Z",
+  "lastModifierId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "created": "2017-04-20T11:56:26.917Z",
+  "creatorId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "tags": [],
+  "status": "ready",
+  "elements": {
+    "title": {
+      "elementType": "text",
+      "value": "Personal Information"
+    },
+    "body": {
+      "elementType": "text",
+      "value": "E-Shopper is committed to protecting and respecting your privacy. You can visit E-Shopper  on the Web without telling us who you are or revealing any information about yourself. When necessary, for shipping and billing purposes, your personal information is stored in a secure server and will never be sold to a third party or used for contacting you without your consent.\n\nIf you choose to give us personal information through the Internet that we may need to correspond with you or to process an order, it is our intent to let you know how we will use this information. If you tell us that you do not wish to have this information used as a basis for further contact with you, we will respect your wishes.\n\nInformation collected by E-Shopper  is used internally by authorized E-Shopper  employees for three main purposes. First, we collect information to determine how to improve our site by seeing which areas, features and products are most popular. Second, we collect information in order to personalize the site for our customers. For example, in the future, we may recommend products or features you may like based on what you have liked in the past. Lastly, we keep track of the domains from which people visit us. We analyze this data for trends and statistics, and then discard it.\n\nThat is our commitment to you."
+    }
+  }
+}

@@ -1,0 +1,140 @@
+
+/**
+ * {{&summary}}
+ * `@method`
+ * `@name {{&className}}#{{&methodName}}`
+ *
+ * `@param {any} headers (optional)` will add headers to rest request
+ *
+ * `@param {string} url (optional)` will override the default domain used by the service. Url can be relative or absolute
+ *
+ * `@param {any} parameters` have following properties:
+ ** `@property {any} pathParameters` the list of path parameters. If a path parameter was not found, the same named property in `parameters` will be used.
+ {{#parameters}}{{^isSingleton}} ** `@property {{^isBodyParameter}}{{=<% %>=}}{<%&type%>}<%={{ }}=%>{{/isBodyParameter}}{{#isBodyParameter}}{any}{{/isBodyParameter}} {{&camelCaseName}} {{#required}}(required){{/required}}` {{#isPathParameter}}The child property of `pathParameters`. If not specified in `pathParameters`, the same named property in `parameters` will be used. {{/isPathParameter}}{{&description}}{{/isSingleton}}
+{{/parameters}}
+ */
+{{&methodName}}(parameters: any, headers?: any, url?: string ): Observable<Response> {
+    let useMocks = false;
+    //Set domain based on profile.
+    if (url && url === 'mocks') {
+        url = undefined;
+        useMocks = true;
+    }
+    let domain = url || this.getRequestUrl();
+    let path = '{{&path}}';
+    let requestUrl = domain + path;
+    let method = '{{&method}}';
+    if ({{&moduleName}}Environment.{{&mustache}}{{resourceDomainNameCamelCase}}UseMocks || useMocks) {
+        method = 'GET';
+        requestUrl = 'mocks/{{&mustache}}{{moduleNameCamelCase}}/{{resourceDomainNameCamelCase}}' + path + '.{{&methodName}}.mocks.json';
+    }
+    let form = {};
+    let body = {};
+    let header: Headers;
+    let queryParameters = new URLSearchParams();
+    let formParams = new URLSearchParams();
+    if ( typeof headers === 'undefined' || headers === null ) {
+        header = new Headers();
+    }
+    else {
+        header = new Headers( headers );
+    }
+    if(parameters === undefined) {
+        parameters = {};
+    }
+    if (parameters.pathParameters === undefined){
+        parameters.pathParameters = {};
+    }
+
+    let headerValues = {};
+	{{#headers}}
+        headerValues['{{&name}}'] = [{{&value}}];
+        for (let val of headerValues['{{&name}}']){
+		    header.append('{{&name}}', val);
+        }
+	{{/headers}}
+
+    {{#parameters}}
+
+        //allow use of param with or without underscore
+        parameters['{{&camelCaseName}}'] = parameters['{{&camelCaseName}}'] || parameters['{{&name}}'];
+        {{#isQueryParameter}}
+            {{#isSingleton}}
+                queryParameters.set('{{&name}}', '{{&singleton}}');
+            {{/isSingleton}}
+            {{^isSingleton}}
+                {{#isPatternType}}
+                    Object.keys(parameters).forEach(function(parameterName) {
+                        if(new RegExp('{{&pattern}}').test(parameterName)){
+                            queryParameters.set(parameterName, parameters[parameterName]);
+                        }
+                    });
+                {{/isPatternType}}
+                {{^isPatternType}}
+                if(parameters['{{&camelCaseName}}'] !== undefined){
+                    queryParameters.set('{{&name}}', parameters['{{&camelCaseName}}']);
+                }
+                {{/isPatternType}}
+            {{/isSingleton}}
+        {{/isQueryParameter}}
+        {{#isPathParameter}}
+            parameters.pathParameters['{{&camelCaseName}}'] = parameters.pathParameters['{{&camelCaseName}}'] || parameters.pathParameters['{{&name}}'];
+            if (parameters.pathParameters['{{&camelCaseName}}'] === undefined){
+                parameters.pathParameters['{{&camelCaseName}}'] = parameters['{{&camelCaseName}}'];
+            }
+            requestUrl = requestUrl.replace('{{=<% %>=}}{<%&name%>}<%={{ }}=%>', parameters.pathParameters['{{&camelCaseName}}']);
+        {{/isPathParameter}}
+
+        {{#isHeaderParameter}}
+            {{#isSingleton}}
+                header.append('{{&name}}', '{{&singleton}}');
+            {{/isSingleton}}
+            {{^isSingleton}}
+                if(parameters['{{&camelCaseName}}'] !== undefined){
+                    header.append('{{&name}}', parameters['{{&camelCaseName}}']);
+                }
+            {{/isSingleton}}
+        {{/isHeaderParameter}}
+
+        {{#isBodyParameter}}
+            if(parameters['{{&camelCaseName}}'] !== undefined){
+                body = parameters['{{&camelCaseName}}'];
+            }
+        {{/isBodyParameter}}
+
+         {{#isFormParameter}}
+            {{#isSingleton}}
+                form['{{&name}}'] = '{{&singleton}}';
+            {{/isSingleton}}
+            {{^isSingleton}}
+                if(parameters['{{&camelCaseName}}'] !== undefined){
+                    form['{{&name}}'] = parameters['{{&camelCaseName}}'];
+                }
+            {{/isSingleton}}
+        {{/isFormParameter}}
+
+        {{#required}}
+        {{#isPathParameter}}
+        if(parameters.pathParameters['{{&camelCaseName}}'] === undefined){
+            throw new Error( "Request '{{&path}}' missing required parameter {{&camelCaseName}}" );
+        }
+        {{/isPathParameter}}
+        {{^isPathParameter}}
+        if(parameters['{{&camelCaseName}}'] === undefined){
+            throw new Error( "Request '{{&path}}' missing required parameter {{&camelCaseName}}" );
+        }
+        {{/isPathParameter}}
+        {{/required}}
+
+    {{/parameters}}
+
+    if(parameters.$queryParameters) {
+        Object.keys(parameters.$queryParameters)
+        .forEach(function(parameterName){
+            var parameter = parameters.$queryParameters[parameterName];
+            queryParameters.set(parameterName,parameter);
+        });
+    }
+
+    {{> request}}
+ };

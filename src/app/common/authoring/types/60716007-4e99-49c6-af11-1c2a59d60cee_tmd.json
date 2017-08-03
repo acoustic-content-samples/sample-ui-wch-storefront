@@ -1,0 +1,26 @@
+{
+  "id": "60716007-4e99-49c6-af11-1c2a59d60cee",
+  "rev": "4-69fcd8e72f3f819835bb8d84e8ce4592",
+  "name": "static-page-Simple",
+  "classification": "content-type",
+  "description": "",
+  "creatorId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "created": "2017-04-20T11:49:54.493Z",
+  "lastModifierId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "lastModified": "2017-04-20T11:50:39.367Z",
+  "status": "ready",
+  "tags": [],
+  "elements": [
+    {
+      "elementType": "text",
+      "label": "title",
+      "key": "title"
+    },
+    {
+      "elementType": "text",
+      "label": "body",
+      "key": "body",
+      "displayType": "multiLine"
+    }
+  ]
+}

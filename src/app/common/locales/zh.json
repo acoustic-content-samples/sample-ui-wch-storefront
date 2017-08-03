@@ -1,0 +1,20 @@
+{
+	"Canada": "加拿大",
+	"UK": "英国",
+	
+	"Account": "帐户",
+	"Wishlist": "愿望清单",
+	"Checkout": "结帐",
+	"Cart": "购物车",
+	"Login": "登录",
+	"Logout": "注销",
+
+	"Signup": "注册",
+	"Could not log in": "无法登录",
+	"Could not register new user": "无法注册新用户",
+	"Login to your account": "登录到您的帐户",
+	"Username is required": "用户名是必填字段",
+	"Email is required": "电子邮件是必填字段",
+	"Password is required": "密码是必填字段"
+}
+

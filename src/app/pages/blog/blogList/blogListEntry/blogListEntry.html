@@ -1,0 +1,15 @@
+<div class="single-blog-post">
+	<h3>{{post.document.name}}</h3>
+	<div class="post-meta">
+		<ul>
+			<li><i class="fa fa-user"></i> n/a</li>
+			<li><i class="fa fa-clock-o"></i> {{post.document.created | date:'shortTime'}}</li>
+			<li><i class="fa fa-calendar"></i> {{post.document.created | date:'mediumDate'}}</li>
+		</ul>
+	</div>
+	<img [src]="storefrontUtils.baseUrl+post.document.elements.image.renditions.list.url" alt="">
+	<div class="post-text">
+		{{post.document.elements.post.value}}
+	</div>
+	<a  class="btn btn-primary" [routerLink]="['/blog', post.document.name]">Read More</a>
+</div>

@@ -1,0 +1,19 @@
+{
+	"Canada": "Canada",
+	"UK": "UK",
+	
+	"Account": "Account",
+	"Wishlist": "Wishlist",
+	"Checkout": "Checkout",
+	"Cart": "Cart",
+	"Login": "Login",
+	"Logout": "Logout",
+
+	"Signup": "Signup",
+	"Could not log in": "Could not log in",
+	"Could not register new user": "Could not register new user",
+	"Login to your account": "Login to your account",
+	"Username is required": "Username is required",
+	"Email is required": "Email is required",
+	"Password is required": "Password is required"
+}

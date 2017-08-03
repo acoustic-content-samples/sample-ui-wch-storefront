@@ -1,0 +1,2516 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": ".",
+        "version": "1.0.0",
+        "title": ""
+    },
+    "basePath": "/search/resources",
+    "tags": [
+        {
+            "name": "CategoryView"
+        },
+        {
+            "name": "SiteContent"
+        },
+        {
+            "name": "ProductView"
+        },
+        {
+            "name": "Ping"
+        }
+    ],
+    "paths": {
+        "/ping": {
+            "get": {
+                "tags": [
+                    "Ping"
+                ],
+                "summary": "Ping the solr server.",
+                "description": "",
+                "operationId": "ping",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    },
+                    "503": {
+                        "description": "Service unavailable."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/categoryview/@top": {
+            "get": {
+                "tags": [
+                    "CategoryView"
+                ],
+                "summary": "Gets all top level categories.",
+                "description": "",
+                "operationId": "findTopCategories",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "depthAndLimit",
+                        "in": "query",
+                        "description": "The comma separated list of numbers is to control the depth of sub-categories and limit the number of items returned under each child category level. The first number in this list determines the maximum of categories (first level sub-categories) to be returned under the immediate child category. The second number in the list determines the maximum number of categories to be returned under the first level sub-categories. A value of \"-1\" implies no limit. In that case, only the first level categories will be returned. For example, \"pageSize=4&limitSubCategories=-1,3,0,1\" implies that there will be unlimited first level sub-categories under the immediate child categories.  Under these categories (up to 4), all sub-categories will be returned and a maximum of 3 second level sub-categories will be returned. There will be no third level or fourth level since the third level limit is 0. Any level after a limit of 0 will be ignored. By default, no sub-category will be returned if this parameter is not specified. When the asterisk \"*\" is specified, it is considered the same as \"-1\" but, any subsequent levels will also be treated \"-1\".",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "The field name to use when ordering the results.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Page size. Used to limit the amount of data returned by a query. Valid values include positive integers of 1 and above. The \"pageNumber\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "description": "Page number, starting at 1. Valid values include positive integers of 1 and above. The \"pageSize\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "checkEntitlement",
+                        "in": "query",
+                        "description": "Option to force an entitlement check.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/categoryview/byId/{categoryId}": {
+            "get": {
+                "tags": [
+                    "CategoryView"
+                ],
+                "summary": "Gets category details based on its unique ID assigned by the database.",
+                "description": "",
+                "operationId": "findCategoryByUniqueId",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "The category identifier that was assigned by the database.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "checkEntitlement",
+                        "in": "query",
+                        "description": "Option to force an entitlement check.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/categoryview/byIds": {
+            "get": {
+                "tags": [
+                    "CategoryView"
+                ],
+                "summary": "Gets category details based on its unique ID.",
+                "description": "",
+                "operationId": "findCategoryByUniqueIds",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "The list of category identifiers.",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "The field name to use when ordering the results.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "checkEntitlement",
+                        "in": "query",
+                        "description": "Option to force an entitlement check.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/categoryview/byParentCategory/{parentCategoryId}": {
+            "get": {
+                "tags": [
+                    "CategoryView"
+                ],
+                "summary": "Gets child categories based on the parent category unique ID.",
+                "description": "",
+                "operationId": "findSubCategories",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parentCategoryId",
+                        "in": "path",
+                        "description": "The parent category id.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "depthAndLimit",
+                        "in": "query",
+                        "description": "The comma separated list of numbers is to control the depth of sub-categories and limit the number of items returned under each child category level. The first number in this list determines the maximum of categories (first level sub-categories) to be returned under the immediate child category. The second number in the list determines the maximum number of categories to be returned under the first level sub-categories. A value of \"-1\" implies no limit. In that case, only the first level categories will be returned. For example, \"pageSize=4&limitSubCategories=-1,3,0,1\" implies that there will be unlimited first level sub-categories under the immediate child categories.  Under these categories (up to 4), all sub-categories will be returned and a maximum of 3 second level sub-categories will be returned. There will be no third level or fourth level since the third level limit is 0. Any level after a limit of 0 will be ignored. By default, no sub-category will be returned if this parameter is not specified. When the asterisk \"*\" is specified, it is considered the same as \"-1\" but, any subsequent levels will also be treated \"-1\".",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "The field name to use when ordering the results.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Page size. Used to limit the amount of data returned by a query. Valid values include positive integers of 1 and above. The \"pageNumber\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "description": "Page number, starting at 1. Valid values include positive integers of 1 and above. The \"pageSize\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "checkEntitlement",
+                        "in": "query",
+                        "description": "Option to force an entitlement check.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/categoryview/{categoryIdentifier}": {
+            "get": {
+                "tags": [
+                    "CategoryView"
+                ],
+                "summary": "Gets category details based on its identifier (not the id assigned by the database).",
+                "description": "",
+                "operationId": "findCategoryByIdentifier",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "categoryIdentifier",
+                        "in": "path",
+                        "description": "The category identifier that was configured, not the one assigned by the database.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "checkEntitlement",
+                        "in": "query",
+                        "description": "Option to force an entitlement check.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/productview/byCategory/{categoryId}": {
+            "get": {
+                "tags": [
+                    "ProductView"
+                ],
+                "summary": "Finds a product by its ID.",
+                "description": "",
+                "operationId": "findProductsByCategory",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "The category identifier.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "associationType",
+                        "in": "query",
+                        "description": "The type of the merchandising association to be returned.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "attributeKeyword",
+                        "in": "query",
+                        "description": "The attribute associated keywords to be returned.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "facet",
+                        "in": "query",
+                        "description": "The selected facets.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "facetLimit",
+                        "in": "query",
+                        "description": "The multiple name-value pairs of facet limit defining the maximum number of items to be returned under each facet. The sequence of limits honored alongside with the sequence of facet name-value pairs.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "advancedFacetList",
+                        "in": "query",
+                        "description": "The advanced facet list.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "filterFacet",
+                        "in": "query",
+                        "description": "The filter facet.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "filterTerm",
+                        "in": "query",
+                        "description": "The filter term.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "manufacturer",
+                        "in": "query",
+                        "description": "The manufacturer name.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "minPrice",
+                        "in": "query",
+                        "description": "The minimum price. Based on the selected currency.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "maxPrice",
+                        "in": "query",
+                        "description": "The maximum price. Based on the selected currency.mc",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "The field name to use when ordering the results.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "searchType",
+                        "in": "query",
+                        "description": "The search type is a numeric string with controls the query operator: ANY, OR, AND and control what data to be returned. For a detailed list of valid values, see the online documentation on Match type (_wcf.search.type). Known valid values include : 0: ANY (exclude SKU)1: EXACT (exclude SKU), 2: ALL (exclude SKU), 3: NONE (exclude SKU), 10: ANY (include SKU), 11: EXACT (include SKU), 12: ALL (include SKU), 13: NONE (include SKU), 100: ANY (only SKU), 101: EXACT (only SKU), 102: ALL (only SKU), 103: NONE (only SKU), 1000: ANY (include products, kits, bundles, category level SKU) (exclude product level SKU), 1001: EXACT (include products, kits, bundles, category level SKU) (exclude product level SKU), 1002: ALL (include products, kits, bundles, category level SKU) (exclude product level SKU), 1003: NONE (include products, kits, bundles, category level SKU) (exclude product level SKU), 10000: ANY (include category level SKU) (exclude products, kits, bundles, product level SKU), 10001: EXACT (include category level SKU) (exclude products, kits, bundles, product level SKU), 10002: ALL (include category level SKU) (exclude products, kits, bundles, product level SKU), 10003: NONE (include category level SKU) (exclude products, kits, bundles, product level SKU)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "searchSource",
+                        "in": "query",
+                        "description": "The search source. The default is \"N\" for shallow search navigation. All other values will result in expanded search in sub-categories.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "priceMode",
+                        "in": "query",
+                        "description": "The price mode.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "checkEntitlement",
+                        "in": "query",
+                        "description": "Option to force an entitlement check.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "attachementFilter",
+                        "in": "query",
+                        "description": "The attachment filter.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Page size. Used to limit the amount of data returned by a query. Valid values include positive integers of 1 and above. The \"pageNumber\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "description": "Page number, starting at 1. Valid values include positive integers of 1 and above. The \"pageSize\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/productview/byCategoryForAdmin/{categoryId}": {
+            "get": {
+                "tags": [
+                    "ProductView"
+                ],
+                "summary": "By default, this API returns all products under the category and subcategories by deep search. It does not only return products in the current category. There is no control over the limit of each subcategory under the category facet.",
+                "description": "",
+                "operationId": "findProductsByCategoryForAdmin",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "The category identifier.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "associationType",
+                        "in": "query",
+                        "description": "The type of the merchandising association to be returned.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "attributeKeyword",
+                        "in": "query",
+                        "description": "The attribute associated keywords to be returned.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "facet",
+                        "in": "query",
+                        "description": "The selected facets.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "facetLimit",
+                        "in": "query",
+                        "description": "The multiple name-value pairs of facet limit defining the maximum number of items to be returned under each facet. The sequence of limits honored alongside with the sequence of facet name-value pairs.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "advancedFacetList",
+                        "in": "query",
+                        "description": "The advanced facet list.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "filterFacet",
+                        "in": "query",
+                        "description": "The filter facet.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "filterTerm",
+                        "in": "query",
+                        "description": "The filter term.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "manufacturer",
+                        "in": "query",
+                        "description": "The manufacturer name.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "minPrice",
+                        "in": "query",
+                        "description": "The minimum price. Based on the selected currency.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "maxPrice",
+                        "in": "query",
+                        "description": "The maximum price. Based on the selected currency.mc",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "The field name to use when ordering the results.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "searchType",
+                        "in": "query",
+                        "description": "The search type is a numeric string with controls the query operator: ANY, OR, AND and control what data to be returned. For a detailed list of valid values, see the online documentation on Match type (_wcf.search.type). Known valid values include : 0: ANY (exclude SKU)1: EXACT (exclude SKU), 2: ALL (exclude SKU), 3: NONE (exclude SKU), 10: ANY (include SKU), 11: EXACT (include SKU), 12: ALL (include SKU), 13: NONE (include SKU), 100: ANY (only SKU), 101: EXACT (only SKU), 102: ALL (only SKU), 103: NONE (only SKU), 1000: ANY (include products, kits, bundles, category level SKU) (exclude product level SKU), 1001: EXACT (include products, kits, bundles, category level SKU) (exclude product level SKU), 1002: ALL (include products, kits, bundles, category level SKU) (exclude product level SKU), 1003: NONE (include products, kits, bundles, category level SKU) (exclude product level SKU), 10000: ANY (include category level SKU) (exclude products, kits, bundles, product level SKU), 10001: EXACT (include category level SKU) (exclude products, kits, bundles, product level SKU), 10002: ALL (include category level SKU) (exclude products, kits, bundles, product level SKU), 10003: NONE (include category level SKU) (exclude products, kits, bundles, product level SKU)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "searchSource",
+                        "in": "query",
+                        "description": "The search source. The default is \"N\" for shallow search navigation. All other values will result in expanded search in sub-categories.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "priceMode",
+                        "in": "query",
+                        "description": "The price mode.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "checkEntitlement",
+                        "in": "query",
+                        "description": "Option to force an entitlement check.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "attachementFilter",
+                        "in": "query",
+                        "description": "The attachment filter.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Page size. Used to limit the amount of data returned by a query. Valid values include positive integers of 1 and above. The \"pageNumber\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sequenceRule",
+                        "in": "query",
+                        "description": "The dynamic sequencing formula to be applied on the search results, ",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "excludeIds",
+                        "in": "query",
+                        "description": " The list of product to be excluded from the search results , this is comma separated productId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "debug",
+                        "in": "query",
+                        "description": "Used to display debug info. Set to 'true' to display sequence score.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "description": "Page number, starting at 1. Valid values include positive integers of 1 and above. The \"pageSize\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/productview/byId/{productId}": {
+            "get": {
+                "tags": [
+                    "ProductView"
+                ],
+                "summary": "Gets product details based on the product ID.",
+                "description": "",
+                "operationId": "findProductById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "description": "The product identifier.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "associationType",
+                        "in": "query",
+                        "description": "The type of the merchandising association to be returned.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "attributeKeyword",
+                        "in": "query",
+                        "description": "The attribute associated keywords to be returned.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "checkEntitlement",
+                        "in": "query",
+                        "description": "Option to force an entitlement check.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "attachementFilter",
+                        "in": "query",
+                        "description": "The attachment filter.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/productview/byIds": {
+            "get": {
+                "tags": [
+                    "ProductView"
+                ],
+                "summary": "Gets product details based on the product ID.",
+                "description": "",
+                "operationId": "findProductsByIds",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "The product identifiers.",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "associationType",
+                        "in": "query",
+                        "description": "The type of the merchandising association to be returned.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "attributeKeyword",
+                        "in": "query",
+                        "description": "The attribute associated keywords to be returned.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "checkEntitlement",
+                        "in": "query",
+                        "description": "Option to force an entitlement check.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "attachementFilter",
+                        "in": "query",
+                        "description": "The attachment filter.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/productview/byPartNumbers": {
+            "get": {
+                "tags": [
+                    "ProductView"
+                ],
+                "summary": "Gets products by part numbers.",
+                "description": "",
+                "operationId": "findProductByPartNumbers",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "partNumber",
+                        "in": "query",
+                        "description": "The product part numbers.",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "associationType",
+                        "in": "query",
+                        "description": "The type of the merchandising association to be returned.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "checkEntitlement",
+                        "in": "query",
+                        "description": "Option to force an entitlement check.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "attachementFilter",
+                        "in": "query",
+                        "description": "The attachment filter.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/productview/bySearchTerm/{searchTerm}": {
+            "get": {
+                "tags": [
+                    "ProductView"
+                ],
+                "summary": "Gets product details based on a search term.",
+                "description": "",
+                "operationId": "findProductsBySearchTerm",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "searchTerm",
+                        "in": "path",
+                        "description": "The term to search for.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "associationType",
+                        "in": "query",
+                        "description": "The type of the merchandising association to be returned.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "attributeKeyword",
+                        "in": "query",
+                        "description": "The attribute associated keywords to be returned.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "facet",
+                        "in": "query",
+                        "description": "The selected facets.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "facetLimit",
+                        "in": "query",
+                        "description": "The multiple name-value pairs of facet limit defining the maximum number of items to be returned under each facet. The sequence of limits honored alongside with the sequence of facet name-value pairs.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "advancedFacetList",
+                        "in": "query",
+                        "description": "The advanced facet list.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "filterFacet",
+                        "in": "query",
+                        "description": "The filter facet.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "filterTerm",
+                        "in": "query",
+                        "description": "The filter term.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "manufacturer",
+                        "in": "query",
+                        "description": "The manufacturer name.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "minPrice",
+                        "in": "query",
+                        "description": "The minimum price. Based on the selected currency.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "maxPrice",
+                        "in": "query",
+                        "description": "The maximum price. Based on the selected currency.mc",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "The field name to use when ordering the results.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "searchType",
+                        "in": "query",
+                        "description": "The search type is a numeric string with controls the query operator: ANY, OR, AND and control what data to be returned. For a detailed list of valid values, see the online documentation on Match type (_wcf.search.type). Known valid values include : 0: ANY (exclude SKU)1: EXACT (exclude SKU), 2: ALL (exclude SKU), 3: NONE (exclude SKU), 10: ANY (include SKU), 11: EXACT (include SKU), 12: ALL (include SKU), 13: NONE (include SKU), 100: ANY (only SKU), 101: EXACT (only SKU), 102: ALL (only SKU), 103: NONE (only SKU), 1000: ANY (include products, kits, bundles, category level SKU) (exclude product level SKU), 1001: EXACT (include products, kits, bundles, category level SKU) (exclude product level SKU), 1002: ALL (include products, kits, bundles, category level SKU) (exclude product level SKU), 1003: NONE (include products, kits, bundles, category level SKU) (exclude product level SKU), 10000: ANY (include category level SKU) (exclude products, kits, bundles, product level SKU), 10001: EXACT (include category level SKU) (exclude products, kits, bundles, product level SKU), 10002: ALL (include category level SKU) (exclude products, kits, bundles, product level SKU), 10003: NONE (include category level SKU) (exclude products, kits, bundles, product level SKU)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "searchSource",
+                        "in": "query",
+                        "description": "The search source. The default is \"N\" for shallow search navigation. All other values will result in expanded search in sub-categories.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "priceMode",
+                        "in": "query",
+                        "description": "The price mode.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "checkEntitlement",
+                        "in": "query",
+                        "description": "Option to force an entitlement check.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "categoryId",
+                        "in": "query",
+                        "description": "The category identifier.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "searchTerm",
+                        "in": "query",
+                        "description": "The optional searchTerm parameter that will replace the {searchTerm} value in the context path parameter. It is used to avoid potential limitation of the special characters as being part of the context path.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "intentSearchTerm",
+                        "in": "query",
+                        "description": "The value of the parameter is the term that the user intends to search. Characters are not escaped for the search engine.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "originalSearchTerm",
+                        "in": "query",
+                        "description": "The value of the parameter is the term that the user intends to search. Characters are escaped for the search engine.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "filterType",
+                        "in": "query",
+                        "description": "Used for advanced search option. 0 - search for any match, 1 - search for exact match, 2 - search for all matches",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "physicalStoreIds",
+                        "in": "query",
+                        "description": "The list of physical store identifiers.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "attachementFilter",
+                        "in": "query",
+                        "description": "The attachment filter.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Page size. Used to limit the amount of data returned by a query. Valid values include positive integers of 1 and above. The \"pageNumber\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "description": "Page number, starting at 1. Valid values include positive integers of 1 and above. The \"pageSize\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/productview/{partNumber}": {
+            "get": {
+                "tags": [
+                    "ProductView"
+                ],
+                "summary": "Gets products by part number.",
+                "description": "",
+                "operationId": "findProductByPartNumber",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "partNumber",
+                        "in": "path",
+                        "description": "The product part number.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "associationType",
+                        "in": "query",
+                        "description": "The type of the merchandising association to be returned.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "attributeKeyword",
+                        "in": "query",
+                        "description": "The attribute associated keywords to be returned.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "checkEntitlement",
+                        "in": "query",
+                        "description": "Option to force an entitlement check.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "attachementFilter",
+                        "in": "query",
+                        "description": "The attachment filter.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/sitecontent/brandSuggestions": {
+            "get": {
+                "tags": [
+                    "SiteContent"
+                ],
+                "summary": "Provides suggestions with type-ahead for search result page.",
+                "description": "",
+                "operationId": "findBrandSuggestions",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "The number of suggested keywords to be returned. The default value is 4.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "termsSort",
+                        "in": "query",
+                        "description": "The sorting to be used in the returned result, \"count\" or \"index\". By default, it is \"count\".",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/sitecontent/categorySuggestions": {
+            "get": {
+                "tags": [
+                    "SiteContent"
+                ],
+                "summary": "Provides suggestions with type-ahead for search result page.",
+                "description": "",
+                "operationId": "findCategorySuggestions",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "The number of suggested keywords to be returned. The default value is 4.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "termsSort",
+                        "in": "query",
+                        "description": "The sorting to be used in the returned result, \"count\" or \"index\". By default, it is \"count\".",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/sitecontent/customSuggestions/{suggestType}": {
+            "get": {
+                "tags": [
+                    "SiteContent"
+                ],
+                "summary": "Provides suggestions with type-ahead for search result page.",
+                "description": "",
+                "operationId": "findCustomSuggestions",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "term",
+                        "in": "query",
+                        "description": "The search term.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "suggestType",
+                        "in": "path",
+                        "description": "The custom suggestion type being requested.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "The number of suggested keywords to be returned. The default value is 4.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Page size. Used to limit the amount of data returned by a query. Valid values include positive integers of 1 and above. The \"pageNumber\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "description": "Page number, starting at 1. Valid values include positive integers of 1 and above. The \"pageSize\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "searchType",
+                        "in": "query",
+                        "description": "The search type is a numeric string with controls the query operator: ANY, OR, AND and control what data to be returned. For a detailed list of valid values, see the online documentation on Match type (_wcf.search.type). Known valid values include : 0: ANY (exclude SKU)1: EXACT (exclude SKU), 2: ALL (exclude SKU), 3: NONE (exclude SKU), 10: ANY (include SKU), 11: EXACT (include SKU), 12: ALL (include SKU), 13: NONE (include SKU), 100: ANY (only SKU), 101: EXACT (only SKU), 102: ALL (only SKU), 103: NONE (only SKU), 1000: ANY (include products, kits, bundles, category level SKU) (exclude product level SKU), 1001: EXACT (include products, kits, bundles, category level SKU) (exclude product level SKU), 1002: ALL (include products, kits, bundles, category level SKU) (exclude product level SKU), 1003: NONE (include products, kits, bundles, category level SKU) (exclude product level SKU), 10000: ANY (include category level SKU) (exclude products, kits, bundles, product level SKU), 10001: EXACT (include category level SKU) (exclude products, kits, bundles, product level SKU), 10002: ALL (include category level SKU) (exclude products, kits, bundles, product level SKU), 10003: NONE (include category level SKU) (exclude products, kits, bundles, product level SKU)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "termsSort",
+                        "in": "query",
+                        "description": "The sorting to be used in the returned result, \"count\" or \"index\". By default, it is \"count\".",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/sitecontent/keywordSuggestionsByTerm/{term}": {
+            "get": {
+                "tags": [
+                    "SiteContent"
+                ],
+                "summary": "Provides keyword suggestions with type-ahead for search result page based on a term.",
+                "description": "",
+                "operationId": "findKeywordSuggestionsByTerm",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "term",
+                        "in": "path",
+                        "description": "The search term.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "The number of suggested keywords to be returned. The default value is 4.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "termsSort",
+                        "in": "query",
+                        "description": "The sorting to be used in the returned result, \"count\" or \"index\". By default, it is \"count\".",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/sitecontent/productSuggestionsBySearchTerm/{searchTerm}": {
+            "get": {
+                "tags": [
+                    "SiteContent"
+                ],
+                "summary": "Provides suggestions with type-ahead for search result page.",
+                "description": "",
+                "operationId": "findProductSuggestionsBySearchTerm",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "searchTerm",
+                        "in": "path",
+                        "description": "The term to search for.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Page size. Used to limit the amount of data returned by a query. Valid values include positive integers of 1 and above. The \"pageNumber\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "description": "Page number, starting at 1. Valid values include positive integers of 1 and above. The \"pageSize\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "searchType",
+                        "in": "query",
+                        "description": "The search type is a numeric string with controls the query operator: ANY, OR, AND and control what data to be returned. For a detailed list of valid values, see the online documentation on Match type (_wcf.search.type). Known valid values include : 0: ANY (exclude SKU)1: EXACT (exclude SKU), 2: ALL (exclude SKU), 3: NONE (exclude SKU), 10: ANY (include SKU), 11: EXACT (include SKU), 12: ALL (include SKU), 13: NONE (include SKU), 100: ANY (only SKU), 101: EXACT (only SKU), 102: ALL (only SKU), 103: NONE (only SKU), 1000: ANY (include products, kits, bundles, category level SKU) (exclude product level SKU), 1001: EXACT (include products, kits, bundles, category level SKU) (exclude product level SKU), 1002: ALL (include products, kits, bundles, category level SKU) (exclude product level SKU), 1003: NONE (include products, kits, bundles, category level SKU) (exclude product level SKU), 10000: ANY (include category level SKU) (exclude products, kits, bundles, product level SKU), 10001: EXACT (include category level SKU) (exclude products, kits, bundles, product level SKU), 10002: ALL (include category level SKU) (exclude products, kits, bundles, product level SKU), 10003: NONE (include category level SKU) (exclude products, kits, bundles, product level SKU)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "term",
+                        "in": "query",
+                        "description": "The sorting to be used in the returned result, \"count\" or \"index\". By default, it is \"count\".",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "termsSort",
+                        "in": "query",
+                        "description": "The sorting to be used in the returned result, \"count\" or \"index\". By default, it is \"count\".",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "checkEntitlement",
+                        "in": "query",
+                        "description": "Option to force an entitlement check.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/sitecontent/suggestions": {
+            "get": {
+                "tags": [
+                    "SiteContent"
+                ],
+                "summary": "Provides suggestions with type-ahead for search result page.",
+                "description": "",
+                "operationId": "findSuggestions",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "suggestType",
+                        "in": "query",
+                        "description": "The suggestion type. Accepted values are 'Category', 'Brand', 'Articles', 'Keyword', and 'Product'.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "term",
+                        "in": "query",
+                        "description": "The search term.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "The number of suggested keywords to be returned. The default value is 4.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "The contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "termsSort",
+                        "in": "query",
+                        "description": "The sorting to be used in the returned result, \"count\" or \"index\". By default, it is \"count\".",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/sitecontent/webContentSuggestions": {
+            "get": {
+                "tags": [
+                    "SiteContent"
+                ],
+                "summary": "Provides suggestions with type-ahead for search result page.",
+                "description": "",
+                "operationId": "findWebContentSuggestions",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "The number of suggested keywords to be returned. The default value is 4.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "termsSort",
+                        "in": "query",
+                        "description": "The sorting to be used in the returned result, \"count\" or \"index\". By default, it is \"count\".",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        },
+        "/store/{storeId}/sitecontent/webContentsBySearchTerm/{searchTerm}": {
+            "get": {
+                "tags": [
+                    "SiteContent"
+                ],
+                "summary": "Search unstructured content details for search result page based on a search term.",
+                "description": "",
+                "operationId": "findWebContentsBySearchTerm",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeId",
+                        "in": "path",
+                        "description": "The store ID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "searchTerm",
+                        "in": "path",
+                        "description": "The term to search for.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "facet",
+                        "in": "query",
+                        "description": "The selected facets.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "facetLimit",
+                        "in": "query",
+                        "description": "The multiple name-value pairs of facet limit defining the maximum number of items to be returned under each facet. The sequence of limits honored alongside with the sequence of facet name-value pairs.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "The field name to use when ordering the results.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "The catalog identifier. If none is specified, the store default catalog shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "langId",
+                        "in": "query",
+                        "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Page size. Used to limit the amount of data returned by a query. Valid values include positive integers of 1 and above. The \"pageNumber\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "description": "Page number, starting at 1. Valid values include positive integers of 1 and above. The \"pageSize\" must be specified for paging to work.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profileName",
+                        "in": "query",
+                        "description": "Profile name. Profiles determine the subset of data to be returned by a search query.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is completed successfully."
+                    },
+                    "400": {
+                        "description": "Bad request. Some of the inputs provided to the request aren't valid."
+                    },
+                    "401": {
+                        "description": "Not authenticated. The user session isn't valid."
+                    },
+                    "403": {
+                        "description": "The user isn't authorized to perform the specified request."
+                    },
+                    "404": {
+                        "description": "The specified resource couldn't be found."
+                    },
+                    "500": {
+                        "description": "Internal server error. Additional details will be contained on the server logs."
+                    }
+                }
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Reference material from IBM Knowledge Center",
+        "url": "https://www.ibm.com/support/knowledgecenter/SSZLC2_7.0.0/com.ibm.commerce.developer.doc/tasks/tsdsearchcoreops.htm"
+    }
+}

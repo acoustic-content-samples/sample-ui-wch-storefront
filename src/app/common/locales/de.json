@@ -1,0 +1,20 @@
+{
+	"Canada": "Kanada",
+	"UK": "GB",
+	
+	"Account": "Konto",
+	"Wishlist": "Wunschliste",
+	"Checkout": "Check-out",
+	"Cart": "Warenkorb",
+	"Login": "Anmeldung",
+	"Logout": "Abmelden",
+
+	"Signup": "Anmelden",
+	"Could not log in": "Anmeldung war nicht möglich",
+	"Could not register new user": "Neuer Benutzer konnte nicht registriert werden",
+	"Login to your account": "Melden Sie sich bei Ihrem Konto an",
+	"Username is required": "Benutzername ist erforderlich",
+	"Email is required": "E-Mail ist erforderlich",
+	"Password is required": "Kennwort ist erforderlich"
+}
+

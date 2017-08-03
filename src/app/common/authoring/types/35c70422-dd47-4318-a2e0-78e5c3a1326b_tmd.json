@@ -1,0 +1,60 @@
+{
+  "id": "35c70422-dd47-4318-a2e0-78e5c3a1326b",
+  "rev": "10-4789a71be09e3fa8793199fa6049ea7d",
+  "name": "static-page-Contact",
+  "classification": "content-type",
+  "description": "",
+  "creatorId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "created": "2017-04-18T18:13:12.014Z",
+  "lastModifierId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "lastModified": "2017-05-17T17:49:09.897Z",
+  "status": "ready",
+  "tags": [],
+  "elements": [
+    {
+      "elementType": "text",
+      "label": "title",
+      "key": "title"
+    },
+    {
+      "elementType": "text",
+      "label": "company",
+      "key": "company"
+    },
+    {
+      "elementType": "text",
+      "label": "address",
+      "key": "address"
+    },
+    {
+      "elementType": "text",
+      "label": "mobile",
+      "key": "mobile"
+    },
+    {
+      "elementType": "text",
+      "label": "fax",
+      "key": "fax"
+    },
+    {
+      "elementType": "text",
+      "label": "email",
+      "key": "email"
+    },
+    {
+      "elementType": "location",
+      "label": "location",
+      "key": "location"
+    },
+    {
+      "elementType": "text",
+      "label": "template",
+      "key": "template"
+    },
+    {
+      "elementType": "text",
+      "label": "widget",
+      "key": "widget"
+    }
+  ]
+}

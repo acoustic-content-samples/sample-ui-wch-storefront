@@ -1,0 +1,16 @@
+@import '../../common/variables';
+
+.search_box {
+  background: $brand-color-secondary;
+  border: medium none;
+  color: lighten($base-text-color, 20%);
+  font-size: 12px;
+  font-weight: 300;
+  height: 35px;
+  outline: medium none;
+  padding-left: 10px;
+  width: 155px;
+  background-image: url('../../common/images/home/searchicon.png');
+  background-repeat: no-repeat;
+  background-position: 130px;
+}

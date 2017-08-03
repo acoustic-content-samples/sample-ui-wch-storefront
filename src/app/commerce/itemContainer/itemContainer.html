@@ -1,0 +1,35 @@
+<div class="col-sm-4">
+	<div class="product-image-wrapper">
+		<div class="single-products">
+
+			<a [routerLink]="[getUrl(item)]" >
+				<div class="productinfo text-center" [ngClass]="{categoryinfo: !item.price} ">
+					<img src="{{item.thumbnail}}" alt="" />
+					<h2 *ngIf="item.price">
+						<ng-container *ngFor="let price of item.price">
+							<span *ngIf="price.usage === 'Offer'">${{price.value}}</span>
+						</ng-container>
+					</h2>
+					<p>{{item.name}}</p>
+				</div>
+			</a>
+			<!--<div class="product-overlay">
+				<div class="overlay-content">
+					<h2 *ngIf="item.price">
+						<ng-container *ngFor="let price of item.price">
+							<span *ngIf="price.usage === 'Display'">${{price.value}}</span>
+						</ng-container>
+					</h2>
+					<p>{{item.name}}</p>
+					<a [routerLink]="['/aurora', item.partNumber || item.identifier.split(' ').join('-')]" class="btn btn-default add-to-cart"><i class="fa"></i>More..</a>
+				</div>
+			</div> -->
+		</div>
+		<div *ngIf="item.price" class="choose">
+			<ul class="nav nav-pills nav-justified">
+				<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+				<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+			</ul>
+		</div>
+	</div>
+</div>

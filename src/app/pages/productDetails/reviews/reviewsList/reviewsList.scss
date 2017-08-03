@@ -1,0 +1,26 @@
+@import '../../../../common/variables.scss';
+
+ul {
+	background: $white;
+	border: 0 none;
+	list-style: none outside none;
+	margin: 0 0 20px;
+	padding: 0;
+
+	li {
+		display: inline-block;
+		span {
+			color: lighten($base-text-color, 10%);
+			padding-right: 15px;
+
+			.fa {
+				color:$brand-color-primary;
+				padding-right:8px;
+			}
+		}
+	}
+}
+
+.review-text {
+	color: $base-text-color;
+}

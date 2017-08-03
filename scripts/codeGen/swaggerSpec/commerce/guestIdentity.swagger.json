@@ -1,0 +1,196 @@
+{
+    "models": {
+        "Empty": {
+            "description": "Empty model. Used as default value when no model is specified.",
+            "id": "Empty",
+            "properties": {}
+        },
+        "com.ibm.commerce.rest.member.handler.GuestIdentityHandler$UserIdentity": {
+            "description": "Information about a guest user identity.",
+            "id": "com.ibm.commerce.rest.member.handler.GuestIdentityHandler$UserIdentity",
+            "properties": {
+                "personalizationID": {
+                    "name": "personalizationID",
+                    "description": "The personalization identifier for the current session.",
+                    "type": "string",
+                    "required": true
+                },
+                "WCToken": {
+                    "name": "WCToken",
+                    "description": "The token used for authentication.",
+                    "type": "string",
+                    "required": true
+                },
+                "userId": {
+                    "name": "userId",
+                    "description": "The user unique identifier.",
+                    "type": "string",
+                    "required": true
+                },
+                "WCTrustedToken": {
+                    "name": "WCTrustedToken",
+                    "description": "The trusted token used for authentication. This token should only be used on encrypted channels.",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        }
+    },
+    "apiVersion": "WC.TOOLKIT Enterprise Version : 8 Fix Pack : 0",
+    "swaggerVersion": "1.2",
+    "basePath": "http://@csx00621.canlab.ibm.com/wcs/resources",
+    "apis": [
+        {
+            "path": "/store/{storeId}/guestidentity",
+            "operations": [
+                {
+                    "summary": "Creates identity tokens for a guest user.",
+                    "notes": "",
+                    "method": "POST",
+                    "responseClass": "com.ibm.commerce.rest.member.handler.GuestIdentityHandler$UserIdentity",
+                    "secureCallMandatory": false,
+                    "partialAuthenticationAllowed": true,
+                    "nickname": "login",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "com.ibm.commerce.rest.member.handler.GuestIdentityHandler$UserIdentity",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 201,
+                            "message": "The requested resource has been created."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 404,
+                            "message": "The specified resource couldn't be found."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/guestidentity/@self",
+            "operations": [
+                {
+                    "summary": "Logs out a guest user.",
+                    "notes": "",
+                    "method": "DELETE",
+                    "responseClass": "Empty",
+                    "secureCallMandatory": false,
+                    "partialAuthenticationAllowed": true,
+                    "nickname": "logout",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "Empty",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 404,
+                            "message": "The specified resource couldn't be found."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "resourcePath": "store/{storeId}/guestidentity",
+    "description": "This class provides RESTful services to create a guest and log the guest out. It performs the service by delegating to the Person BOD service."
+}

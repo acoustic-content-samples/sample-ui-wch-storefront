@@ -1,0 +1,43 @@
+<section id="form"><!--form-->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-sm-offset-1">
+				<div class="login-form"><!--login form-->
+					<h2 translate>Login to your account</h2>
+					<form name="form1" (ngSubmit)="loginForm.form.valid && login()" #loginForm="ngForm">
+						<div *ngIf="loginForm.submitted && loginErrorMsg" class="login-error" role="alert" translate>{{loginErrorMsg}}</div>
+						<input type="text" name="username1" placeholder="Username" [(ngModel)]="user.username1" #username1="ngModel" required />
+						<div *ngIf="loginForm.submitted && !username1.valid" class="login-error" role="alert" translate>Username is required</div>
+						<input type="password" name="password1" placeholder="Password" [(ngModel)]="user.password1" #password1="ngModel" required />
+						<div *ngIf="loginForm.submitted && !password1.valid" class="login-error" role="alert" translate>Password is required</div>
+						<!--span>
+							<input type="checkbox" class="checkbox"> 
+							Keep me signed in
+						</span-->
+						<button type="submit" [disabled]="!loginForm.form.valid || loginLoading" class="btn btn-default" translate>Login</button>
+						<img *ngIf="loginLoading" class="login-loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+					</form>
+				</div><!--/login form-->
+			</div>
+			<div class="col-sm-1">
+				<h2 class="or">OR</h2>
+			</div>
+			<div class="col-sm-4">
+				<div class="signup-form"><!--sign up form-->
+					<h2>New User Signup!</h2>
+					<form name="form2" (ngSubmit)="registerForm.form.valid && register()" #registerForm="ngForm">
+						<div *ngIf="registerForm.submitted && registerErrorMsg" class="login-error" role="alert" translate>{{registerErrorMsg}}</div>
+						<input type="text" name="username2" placeholder="Username" [(ngModel)]="user.username2" #username2="ngModel" required />
+						<div *ngIf="registerForm.submitted && !username2.valid" class="login-error" role="alert" translate>Username is required</div>
+						<input type="email" name="email" placeholder="Email Address" [(ngModel)]="user.email" #email="ngModel" required />
+						<div *ngIf="registerForm.submitted && !email.valid" class="login-error" role="alert" translate>Email is required</div>
+						<input type="password" name="password2" placeholder="Password" [(ngModel)]="user.password2" #password2="ngModel" required />
+						<div *ngIf="registerForm.submitted && !password2.valid" class="login-error" role="alert" translate>Password is required</div>
+						<button type="submit" [disabled]="!registerForm.form.valid || registerLoading" class="btn btn-default" translate>Signup</button>
+						<img *ngIf="registerLoading" class="login-loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+					</form>
+				</div><!--/sign up form-->
+			</div>
+		</div>
+	</div>
+</section><!--/form-->

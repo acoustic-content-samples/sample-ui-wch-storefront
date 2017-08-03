@@ -1,0 +1,57 @@
+@import '../../../common/variables';
+
+.header_top {
+	background-color: $brand-color-secondary;
+}
+
+.contactinfo {
+	margin-left: -15px;
+
+	.contact-link {
+		font-size: 12px;
+		color: lighten($base-text-color, 10%);
+
+		&:hover {
+			background: inherit;
+		}
+	}
+}
+
+.social-icons .social-icons-link {
+	border: 0 none;
+	border-radius: 0;
+	color: lighten($base-text-color, 10%);
+	padding: 0;
+
+	.fa {
+		padding: 11px 15px;
+		transition: all .9s ease 0s;
+
+		&:hover {
+			color: $white;
+			transition: all .9s ease 0s;
+		}
+	}
+}
+
+.fa-facebook:hover {
+	background: #0083C9;
+}
+
+.fa-twitter:hover  {
+	background: #5BBCEC;
+}
+
+.fa-instagram:hover  {
+	background: #FF4518;
+}
+
+.fa-linkedin:hover {
+    background: #ff4518;
+}
+.fa-dribbble:hover {
+    background: #90c9dc;
+}
+.fa-google-plus:hover {
+    background: #ce3c2d;
+}

@@ -1,0 +1,330 @@
+@import '../../common/variables.scss';
+
+/*************************
+*******Product Details CSS******
+**************************/
+
+.title {
+	color: $brand-color-primary;
+	font-size: 18px;
+	font-weight: 700;
+	margin: 0 15px;
+	text-transform: uppercase;
+	margin-bottom: 30px;
+	position: relative;
+
+	&:after {
+		content: '';
+		position: absolute;
+		border: 1px solid #f5f5f5;
+		bottom:8px;
+		left: 0;
+		width: 100%;
+		height: 0;
+		z-index: -2;
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		background: $white;
+		bottom: -6px;
+		width: 220px;
+		height: 30px;
+		z-index: -1;
+		left: 50%;
+		margin-left: -110px;
+	}
+}
+
+.category-tab {
+	overflow: hidden;
+}
+
+#details {
+	padding: 0 25px;
+}
+
+.category-tab .nav-tabs {
+	background: darken($brand-color-tertiary, 10%);
+	border-bottom: 2px solid $brand-color-primary;
+	list-style: none outside none;
+	margin: 0 0 30px;
+	padding: 0;
+	width: 100%;
+
+	.active {
+		.tab-header {
+			background-color: $brand-color-primary;
+			border:0px;
+			color: $white;
+			cursor: default;
+		}
+	}
+
+	.tab-header {
+		border: 0 none;
+		border-radius: 0;
+		color: darken($brand-color-secondary, 30%);
+		display: block;
+		text-transform: uppercase;
+		margin: 0;
+
+		&:hover {
+			background: $brand-color-primary;
+			color: $white;
+		}
+	}
+}
+
+.product-details{
+	overflow:hidden;
+}
+
+#similar-product {
+	margin-top: 40px;
+}
+
+#reviews {
+	padding-left: 25px;
+	padding-right: 25px;
+}
+
+.product-details {
+	margin-bottom: 40px;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+.view-product {
+	position: relative;
+}
+
+.view-product img {
+	border: 1px solid #F7F7F0;
+	height: 380px;
+	width: 100%;
+}
+
+.view-product h3 {
+	background: $brand-color-primary;
+	bottom: 0;
+	color: $white;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	margin-bottom: 0;
+	padding: 8px 20px;
+	position: absolute;
+	right: 0;
+}
+
+#similar-product .carousel-inner .item{
+	padding-left:0px;
+}
+
+#similar-product .carousel-inner .item img {
+	display: inline-block;
+	margin-left: 15px;
+}
+
+.item-control {
+	position: absolute;
+	top: 35%;
+}
+.item-control i {
+	background: $brand-color-primary;
+	color: $white;
+	font-size: 20px;
+	padding: 5px 10px;
+}
+
+.item-control i:hover{
+	background:#ccccc6;
+}
+
+.product-information {
+	border: 1px solid #F7F7F0;
+	overflow: hidden;
+	padding-bottom: 60px;
+	padding-left: 60px;
+	padding-top: 60px;
+	position: relative;
+}
+
+.newarrival{
+	position:absolute;
+	top:0;
+	left:0
+}
+
+.product-information h2 {
+	color: $base-text-color;
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+	margin-top: 0;
+}
+
+.product-information p {
+	color: lighten($base-text-color, 10%);
+	font-family: 'Roboto', sans-serif;
+	margin-bottom: 5px;
+}
+
+.product-information span {
+	display: inline-block;
+	margin-bottom: 8px;
+	margin-top: 18px;
+}
+
+.product-information span span {
+	color: $brand-color-primary;
+	float: left;
+	font-family: 'Roboto', sans-serif;
+	font-size: 30px;
+	font-weight: 700;
+	margin-right: 20px;
+	margin-top: 0px;
+}
+.product-information span input {
+	border: 1px solid #DEDEDC;
+	color: lighten($base-text-color, 10%);
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+	font-weight: 700;
+	height: 33px;
+	outline: medium none;
+	text-align: center;
+	width: 50px;
+}
+
+.product-information span label {
+	color: lighten($base-text-color, 10%);
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	margin-right: 5px;
+}
+
+.share {
+	margin-top: 15px;
+}
+
+.cart {
+	background: $brand-color-primary;
+	border: 0 none;
+	border-radius: 0;
+	color: $white;
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
+	margin-bottom: 10px;
+	margin-left: 20px;
+}
+
+
+.shop-details-tab {
+	border: 1px solid #F7F7F0;
+	margin-bottom: 75px;
+	margin-left: 15px;
+	margin-right: 15px;
+	padding-bottom: 10px;
+}
+
+.shop-details-tab .col-sm-12 {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+
+
+.product-image-wrapper{
+	border:1px solid #F7F7F5;
+	overflow: hidden;
+	margin-bottom:30px;
+}
+
+.single-products {
+	position: relative;
+}
+
+.productinfo h2{
+	color: $brand-color-primary;
+	font-family: 'Roboto', sans-serif;
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.product-overlay h2{
+	color: $white;
+	font-family: 'Roboto', sans-serif;
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.productinfo p{
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	color: lighten($base-text-color, 10%);
+}
+
+.productinfo img{
+	width: 100%;
+}
+
+.productinfo{
+ position:relative;
+}
+
+.add-to-cart {
+	background:lighten($brand-color-primary, 40%);
+	border: 0 none;
+	border-radius: 0;
+	color: lighten($base-text-color, 10%);
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
+	margin-bottom: 25px;
+}
+
+.add-to-cart:hover {
+	background: $brand-color-primary;
+	border: 0 none;
+	border-radius: 0;
+	color: $white;
+}
+
+.add-to{
+	margin-bottom: 10px;
+}
+
+.add-to-cart i{
+	margin-right:5px;
+}
+
+.add-to-cart:hover {
+	background: $brand-color-primary;
+	color: $white;
+}
+
+.recommended_items {
+	overflow: hidden;
+}
+
+#recommended-item-carousel .carousel-inner .item {
+	padding-left: 0;
+}
+
+.recommended-item-control {
+	position: absolute;
+	top: 41%;
+}
+
+.recommended-item-control i {
+	background: none repeat scroll 0 0 $brand-color-primary;
+	color: $white;
+	font-size: 20px;
+	padding: 4px 10px;
+}
+
+.recommended-item-control i:hover {
+	background: #ccccc6;
+}

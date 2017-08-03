@@ -1,0 +1,15 @@
+<div *ngIf="brands.length > 0" class="brands_products"><!--brands_products-->
+	<h2>Brands</h2>
+	<div class="brands-name">
+		<ul class="nav nav-pills nav-stacked">
+			<form name="brandForm">
+			<li *ngFor="let brand of brands" class="checkbox">
+				<label>
+					<input (change)="addBrand($event, brand.brand)" [attr.checked]="(isSelected(brand.brand))? '': null" type="checkbox">
+					<span class="pull-right">({{brand.count}})</span>{{brand.brand}}
+				</label>
+			</li>
+			</form>
+		</ul>
+	</div>
+</div><!--/brands_products-->

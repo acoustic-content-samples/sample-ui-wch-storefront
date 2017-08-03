@@ -1,0 +1,221 @@
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<side-nav></side-nav>
+			</div>
+			<div class="col-sm-9 padding-right">
+				<div class="product-details">
+					<!--product-details-->
+					<div class="col-sm-5">
+						<div class="view-product">
+							<img [src]="currentSelection.sku.fullImage" alt="" />
+							<h3>ZOOM</h3>
+						</div>
+						<!-- <div id="similar-product" class="carousel slide" data-ride="carousel">
+
+							<div class="carousel-inner">
+								<div class="item active">
+									<a routerLink="/nowhere"><img src="../../common/images/product-details/similar1.jpg" alt=""></a>
+									<a routerLink="/nowhere"><img src="../../common/images/product-details/similar2.jpg" alt=""></a>
+									<a routerLink="/nowhere"><img src="../../common/images/product-details/similar3.jpg" alt=""></a>
+								</div>
+								<div class="item">
+									<a routerLink="/nowhere"><img src="../../common/images/product-details/similar1.jpg" alt=""></a>
+									<a routerLink="/nowhere"><img src="../../common/images/product-details/similar2.jpg" alt=""></a>
+									<a routerLink="/nowhere"><img src="../../common/images/product-details/similar3.jpg" alt=""></a>
+								</div>
+								<div class="item">
+									<a routerLink="/nowhere"><img src="../../common/images/product-details/similar1.jpg" alt=""></a>
+									<a routerLink="/nowhere"><img src="../../common/images/product-details/similar2.jpg" alt=""></a>
+									<a routerLink="/nowhere"><img src="../../common/images/product-details/similar3.jpg" alt=""></a>
+								</div>
+
+							</div>
+
+							<a class="left item-control" href="#similar-product" data-slide="prev">
+								<i class="fa fa-angle-left"></i>
+							</a>
+							<a class="right item-control" href="#similar-product" data-slide="next">
+								<i class="fa fa-angle-right"></i>
+							</a>
+						</div> -->
+
+					</div>
+					<div class="col-sm-7">
+						<div class="product-information">
+							<!--/product-information-->
+							<img src="../../common/images/product-details/new.jpg" class="newarrival" alt="" />
+							<h2>{{product.name}}</h2>
+							<p>SKU: {{currentSelection.sku.partNumber}}</p>
+							<star-rating rating="2.3"></star-rating>
+							<div>
+								<span>
+									<ng-container *ngFor="let price of product.price">
+										<span *ngIf="price.usage === 'Offer'">{{price.currency}} ${{price.value}}</span>
+								</ng-container>
+								</span>
+							</div>
+							<div class="container-fluid">
+								<form #productForm="ngForm" (ngSubmit)="onSubmit()">
+									<div [hidden]="!invalidSKU" class="alert alert-danger">
+										Selection not available, choose a different combination.
+									</div>
+									<ng-container *ngFor="let att of product.availableAttributes">
+										<div class="form-group" *ngIf="att.usage === 'Defining'">
+											<label for="{{att.identifier}}">{{att.name}}</label>
+											<select class="form-control" name="{{att.identifier}}" id="{{att.identifier}}" required (change)="onAttributeChange()" [(ngModel)]="currentSelection.selectedAttributes[att.identifier]">
+												<option *ngFor="let value of att.values" [value]="value.identifier">{{value.identifier}}</option>
+											</select>
+										</div>
+									</ng-container>
+									<div class="form-group">
+										<label for="quantity">Quantity</label>
+										<input type="number" class="form-control" id="quantity" required [(ngModel)]="currentSelection.quantity" name="quantity">
+									</div>
+									<div [hidden]="currentSelection.quantity > 0" class="alert alert-danger">
+										Quantity must be greater or equal to 1.
+									</div>
+									<button type="submit" class="btn btn-default cart" [disabled]="!productForm.form.valid || invalidSKU || currentSelection.quantity < 1"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+								</form>
+							</div>
+							<p><b>Availability:</b> {{(product.buyable) ? 'In Stock' : 'Out of Stock'}}</p>
+							<p><b>Brand:</b> {{product.manufacturer}}</p>
+							<a routerLink="/nowhere"><img src="../../common/images/product-details/share.png" class="share img-responsive" alt="" /></a>
+						</div>
+						<!--/product-information-->
+					</div>
+				</div>
+				<!--/product-details-->
+
+				<div class="category-tab shop-details-tab">
+					<!--category-tab-->
+					<div class="col-sm-12">
+						<ul class="nav nav-tabs">
+							<li class="active"><a class="tab-header" href="#details" data-toggle="tab">Details</a></li>
+							<li><a class="tab-header" href="#reviews" data-toggle="tab">Reviews (5)</a></li>
+						</ul>
+					</div>
+					<div class="tab-content">
+						<div class="tab-pane fade active in" id="details">
+							<div class="details">
+								<ul>
+									<li *ngFor="let attribute of product.attributes">
+										<strong>{{attribute.name}}</strong>
+										<ng-container *ngFor="let v of attribute.values; last as isLast">
+											<span>{{v.value}}</span>
+											<span *ngIf="!isLast">, </span>
+										</ng-container>
+									</li>
+								</ul>
+								{{product.longDescription}}
+							</div>
+						</div>
+
+						<div class="tab-pane fade" id="reviews">
+							<div class="col-sm-12">
+								<reviews [partNumber]="product.partNumber"></reviews>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!--/category-tab-->
+
+				<div class="recommended_items">
+					<!--recommended_items-->
+					<h2 class="title text-center">recommended items</h2>
+
+					<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+						<div class="carousel-inner">
+							<div class="item active">
+								<div class="col-sm-4">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="../../common/images/home/recommend1.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="../../common/images/home/recommend2.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="../../common/images/home/recommend3.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="col-sm-4">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="../../common/images/home/recommend1.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="../../common/images/home/recommend2.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="../../common/images/home/recommend3.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+				</div>
+				<!--/recommended_items-->
+
+			</div>
+		</div>
+	</div>
+</section>

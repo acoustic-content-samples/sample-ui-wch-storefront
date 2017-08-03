@@ -1,0 +1,1619 @@
+{
+    "models": {
+        "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType.externalIdentifier": {
+            "id": "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType.externalIdentifier",
+            "properties": {
+                "identifier": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "cart-payment_instruction": {
+            "id": "cart-payment_instruction",
+            "properties": {
+                "paymentInstruction": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-payment_instruction.paymentInstruction"
+                    },
+                    "required": false
+                },
+                "orderId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "userDataField": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-payment_instruction.userDataField"
+                    },
+                    "required": false
+                },
+                "paymentStatus": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "financialTransaction": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType"
+                    },
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.rest.order.handler.PaymentInstructionHandler$PaymentInstructionList": {
+            "description": "Payment instruction list.",
+            "id": "com.ibm.commerce.rest.order.handler.PaymentInstructionHandler$PaymentInstructionList",
+            "properties": {
+                "orderId": {
+                    "name": "orderId",
+                    "description": "Order identifier.",
+                    "type": "string",
+                    "required": true
+                },
+                "paymentInstruction": {
+                    "name": "paymentInstruction",
+                    "description": "List of payment instructions.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "com.ibm.commerce.rest.order.handler.PaymentInstructionHandler$PaymentInstructionList$PaymentInstruction"
+                    },
+                    "required": true
+                }
+            }
+        },
+        "com.ibm.commerce.rest.order.handler.PaymentInstructionHandler$PaymentInstructionList$PaymentInstruction": {
+            "description": "Payment instruction.",
+            "id": "com.ibm.commerce.rest.order.handler.PaymentInstructionHandler$PaymentInstructionList$PaymentInstruction",
+            "properties": {
+                "piId": {
+                    "name": "piId",
+                    "description": "Payment instruction ID.",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType": {
+            "id": "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType",
+            "properties": {
+                "userData": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.userData",
+                    "required": false
+                },
+                "paymentInstructionID": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "avsCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "requestAmount": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.requestAmount",
+                    "required": false
+                },
+                "financialTransactionIdentifier": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.financialTransactionIdentifier",
+                    "required": false
+                },
+                "responseCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "transactionType": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "requestTime": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "merchantOrderNumber": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "transactionExtensionData": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.transactionExtensionData"
+                    },
+                    "required": false
+                },
+                "referenceNumber": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "expirationTime": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "lastUpdate": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "paymentProtocolData": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.paymentProtocolData"
+                    },
+                    "required": false
+                },
+                "reasonCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "status": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "trackingID": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.requestAmount": {
+            "id": "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.requestAmount",
+            "properties": {
+                "currency": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "value": {
+                    "format": "double",
+                    "description": "",
+                    "type": "number",
+                    "required": false
+                }
+            }
+        },
+        "cart-payment_instruction.paymentInstruction.userDataField": {
+            "id": "cart-payment_instruction.paymentInstruction.userDataField",
+            "properties": {
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "key": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType": {
+            "id": "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType",
+            "properties": {
+                "externalIdentifier": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType.externalIdentifier",
+                    "required": false
+                },
+                "distinguishedName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "uniqueID": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.userData.userDataField": {
+            "id": "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.userData.userDataField",
+            "properties": {
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "key": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.transactionExtensionData": {
+            "id": "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.transactionExtensionData",
+            "properties": {
+                "name": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.paymentProtocolData": {
+            "id": "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.paymentProtocolData",
+            "properties": {
+                "name": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "cart-payment_instruction.paymentInstruction": {
+            "id": "cart-payment_instruction.paymentInstruction",
+            "properties": {
+                "zipCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "country": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "personTitle": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "mobilePhone1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "postalCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone2": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "language": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone2Publish": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "paymentRule": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone1Publish": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "organizationUnitName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "piDescription": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "geographicalShippingCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "payMethodId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "email2": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "email1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "organizationIdentifier": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.foundation.common.datatypes.OrganizationIdentifierType",
+                    "required": false
+                },
+                "businessTitle": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "fax2": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "state": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "fax1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "phone2Type": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "piAmount": {
+                    "format": "double",
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "billing_address_id": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "sequenceNumber": {
+                    "format": "int64",
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "organizationName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "addressType": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "nickName": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "paymentTermConditionId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "priority": {
+                    "format": "int64",
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "piLanguage": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "firstName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "primary": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "piId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "minAmount": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.foundation.common.datatypes.MonetaryAmountType",
+                    "required": false
+                },
+                "lastName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "city": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "maxAmount": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.foundation.common.datatypes.MonetaryAmountType",
+                    "required": false
+                },
+                "mobilePhone1Country": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "userDataField": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-payment_instruction.paymentInstruction.userDataField"
+                    },
+                    "required": false
+                },
+                "geographicalTaxCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "addressLine": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "required": false
+                },
+                "phone1Type": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "stateOrProvinceName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "piStatus": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "bestCallingTime": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "refundAllowed": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "protocolData": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-payment_instruction.paymentInstruction.protocolData"
+                    },
+                    "required": false
+                },
+                "piCurrency": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "internalOfficeAddress": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "personIdentifier": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType",
+                    "required": false
+                },
+                "attributes": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-payment_instruction.paymentInstruction.attributes"
+                    },
+                    "required": false
+                },
+                "middleName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "cart-payment_instruction.paymentInstruction.attributes": {
+            "id": "cart-payment_instruction.paymentInstruction.attributes",
+            "properties": {
+                "attrKey": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "attrValue": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.financialTransactionIdentifier": {
+            "id": "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.financialTransactionIdentifier",
+            "properties": {
+                "externalIdentifier": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "uniqueID": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "Empty": {
+            "description": "Empty model. Used as default value when no model is specified.",
+            "id": "Empty",
+            "properties": {}
+        },
+        "cart-payment_instruction.paymentInstruction.protocolData": {
+            "id": "cart-payment_instruction.paymentInstruction.protocolData",
+            "properties": {
+                "name": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.edp.beans.EDPSensitiveDataMaskHelperDataBean_IBM_sensitiveDataMaskByPlainString": {
+            "description": "",
+            "id": "com.ibm.commerce.edp.beans.EDPSensitiveDataMaskHelperDataBean_IBM_sensitiveDataMaskByPlainString",
+            "properties": {
+                "plainLength": {
+                    "format": "int32",
+                    "description": "",
+                    "type": "integer"
+                },
+                "maskChar": {
+                    "description": "",
+                    "type": "string"
+                },
+                "maskedString": {
+                    "description": "",
+                    "type": "string"
+                }
+            }
+        },
+        "cart-payment_instruction.userDataField": {
+            "id": "cart-payment_instruction.userDataField",
+            "properties": {
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "key": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "com.ibm.commerce.foundation.common.datatypes.OrganizationIdentifierType": {
+            "id": "com.ibm.commerce.foundation.common.datatypes.OrganizationIdentifierType",
+            "properties": {
+                "distinguishedName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "uniqueID": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.userData": {
+            "id": "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.userData",
+            "properties": {
+                "userDataField": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "com.ibm.commerce.order.facade.datatypes.FinancialTransactionType.userData.userDataField"
+                    },
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.foundation.common.datatypes.MonetaryAmountType": {
+            "id": "com.ibm.commerce.foundation.common.datatypes.MonetaryAmountType",
+            "properties": {
+                "currency": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "value": {
+                    "format": "double",
+                    "description": "",
+                    "type": "number",
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.payment.punchout.commands.PunchoutPaymentCallBackCmd": {
+            "description": "",
+            "id": "com.ibm.commerce.payment.punchout.commands.PunchoutPaymentCallBackCmd",
+            "properties": {}
+        }
+    },
+    "apiVersion": "WC.TOOLKIT Enterprise Version : 8 Fix Pack : 0",
+    "swaggerVersion": "1.2",
+    "basePath": "http://@csx00621.canlab.ibm.com/wcs/resources",
+    "apis": [
+        {
+            "path": "/store/{storeId}/cart/@self/payment_instruction",
+            "operations": [
+                {
+                    "summary": "Gets payment instructions for the shopping cart.",
+                    "notes": "",
+                    "method": "GET",
+                    "responseClass": "cart-payment_instruction",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "getPaymentInfo",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "cart-payment_instruction",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "currency",
+                            "description": "The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "ARS",
+                                "ATS",
+                                "AUD",
+                                "BEF",
+                                "BRL",
+                                "CAD",
+                                "CHF",
+                                "CNY",
+                                "DEM",
+                                "DKK",
+                                "EGP",
+                                "ESP",
+                                "EUR",
+                                "FIM",
+                                "FRF",
+                                "GBP",
+                                "HKD",
+                                "IEP",
+                                "ITL",
+                                "JPY",
+                                "KRW",
+                                "LUF",
+                                "NLG",
+                                "NOK",
+                                "PLN",
+                                "PTE",
+                                "ROL",
+                                "RON",
+                                "RUB",
+                                "SEK",
+                                "SGD",
+                                "TWD",
+                                "USD",
+                                "ZAR"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 404,
+                            "message": "The specified resource couldn't be found."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/cart/@self/payment_instruction/punchoutPaymentInfo",
+            "operations": [
+                {
+                    "summary": "Get payment instruction for the punch out payment.",
+                    "notes": "",
+                    "method": "GET",
+                    "responseClass": "cart-payment_instruction",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "getPunchoutPaymentInfo",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "cart-payment_instruction",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "orderId",
+                            "description": "The order identifier.",
+                            "type": "string",
+                            "required": true
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "piId",
+                            "description": "The payment instruction identifier.",
+                            "type": "string",
+                            "required": true
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "currency",
+                            "description": "The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "ARS",
+                                "ATS",
+                                "AUD",
+                                "BEF",
+                                "BRL",
+                                "CAD",
+                                "CHF",
+                                "CNY",
+                                "DEM",
+                                "DKK",
+                                "EGP",
+                                "ESP",
+                                "EUR",
+                                "FIM",
+                                "FRF",
+                                "GBP",
+                                "HKD",
+                                "IEP",
+                                "ITL",
+                                "JPY",
+                                "KRW",
+                                "LUF",
+                                "NLG",
+                                "NOK",
+                                "PLN",
+                                "PTE",
+                                "ROL",
+                                "RON",
+                                "RUB",
+                                "SEK",
+                                "SGD",
+                                "TWD",
+                                "USD",
+                                "ZAR"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 404,
+                            "message": "The specified resource couldn't be found."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/cart/@self/payment_instruction",
+            "operations": [
+                {
+                    "summary": "Adds payment instruction to the shopping cart.",
+                    "notes": "",
+                    "method": "POST",
+                    "responseClass": "com.ibm.commerce.rest.order.handler.PaymentInstructionHandler$PaymentInstructionList",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "addPaymentInstruction",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "com.ibm.commerce.rest.order.handler.PaymentInstructionHandler$PaymentInstructionList",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "body",
+                            "description": "body data required for rest method",
+                            "type": "cart-payment_instruction",
+                            "required": false
+                        }
+                    ],
+                    "consumes": [
+                        "application/json",
+                        "application/xml"
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 201,
+                            "message": "The requested resource has been created."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/cart/@self/payment_instruction",
+            "operations": [
+                {
+                    "summary": "Updates payment instructions in the shopping cart.",
+                    "notes": "",
+                    "method": "PUT",
+                    "responseClass": "com.ibm.commerce.rest.order.handler.PaymentInstructionHandler$PaymentInstructionList",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "updatePaymentInstruction",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "com.ibm.commerce.rest.order.handler.PaymentInstructionHandler$PaymentInstructionList",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "body",
+                            "description": "Request body.",
+                            "type": "cart-payment_instruction",
+                            "required": false
+                        }
+                    ],
+                    "consumes": [
+                        "application/json",
+                        "application/xml"
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/cart/@self/payment_instruction/{paymentInstruction_id}",
+            "operations": [
+                {
+                    "summary": "Deletes a payment instruction in the shopping cart.",
+                    "notes": "",
+                    "method": "DELETE",
+                    "responseClass": "Empty",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "deletePaymentInstruction",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "Empty",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "paymentInstruction_id",
+                            "description": "Payment instruction identifier to delete.",
+                            "type": "string",
+                            "required": true
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 404,
+                            "message": "The specified resource couldn't be found."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/cart/@self/payment_instruction",
+            "operations": [
+                {
+                    "summary": "Deletes all payment Instructions from the shopping cart.",
+                    "notes": "",
+                    "method": "DELETE",
+                    "responseClass": "Empty",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "deleteAllPaymentInstructions",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "Empty",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 404,
+                            "message": "The specified resource couldn't be found."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/cart/@self/payment_instruction/sensitive_data_mask_by_plain_string",
+            "operations": [
+                {
+                    "summary": "Gets sensitive data mask information for plain string.",
+                    "notes": "",
+                    "method": "GET",
+                    "responseClass": "com.ibm.commerce.edp.beans.EDPSensitiveDataMaskHelperDataBean_IBM_sensitiveDataMaskByPlainString",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "getSensitiveDataMaskByPlainString",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "com.ibm.commerce.edp.beans.EDPSensitiveDataMaskHelperDataBean_IBM_sensitiveDataMaskByPlainString",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "profileName",
+                            "description": "Profile name. Profiles determine the subset of data to be returned by a query.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 404,
+                            "message": "The specified resource couldn't be found."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/cart/@self/payment_instruction/repay",
+            "operations": [
+                {
+                    "summary": "Processes the punchout payment requests.",
+                    "notes": "",
+                    "method": "POST",
+                    "responseClass": "Empty",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "repay",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "Empty",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "orderId",
+                            "description": "The order identifier.",
+                            "type": "string",
+                            "required": true
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "piId",
+                            "description": "The payment instruction identifier.",
+                            "type": "string",
+                            "required": true
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/cart/@self/payment_instruction/callback",
+            "operations": [
+                {
+                    "summary": "Processes the punch-out call back requests",
+                    "notes": "",
+                    "method": "POST",
+                    "responseClass": "com.ibm.commerce.payment.punchout.commands.PunchoutPaymentCallBackCmd",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "punchoutPaymentCallBack",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "com.ibm.commerce.payment.punchout.commands.PunchoutPaymentCallBackCmd",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 404,
+                            "message": "The specified resource couldn't be found."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/cart/@self/payment_instruction/payment_token",
+            "operations": [
+                {
+                    "summary": "fetch payment token data.",
+                    "notes": "",
+                    "method": "GET",
+                    "responseClass": "Empty",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "fetchPaymentToken",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "Empty",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "payment_token",
+                            "description": "payment_token",
+                            "type": "string",
+                            "required": true
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "payment_method",
+                            "description": "payment_method",
+                            "type": "string",
+                            "required": true
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "resourcePath": "store/{storeId}/cart/@self/payment_instruction",
+    "description": "This class provides RESTful services to add, get, update, and delete payment instructions for the current shopping cart."
+}

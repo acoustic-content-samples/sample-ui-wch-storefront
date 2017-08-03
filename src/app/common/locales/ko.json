@@ -1,0 +1,20 @@
+{
+	"Canada": "캐나다",
+	"UK": "영국",
+	
+	"Account": "계정",
+	"Wishlist": "찜 목록",
+	"Checkout": "체크아웃",
+	"Cart": "장바구니",
+	"Login": "로그인",
+	"Logout": "로그아웃",
+
+	"Signup": "가입",
+	"Could not log in": "로그인할 수 없음",
+	"Could not register new user": "새 사용자를 등록할 수 없음",
+	"Login to your account": "사용자 계정에 로그인",
+	"Username is required": "사용자 이름은 필수임",
+	"Email is required": "이메일은 필수임",
+	"Password is required": "비밀번호는 필수임"
+}
+

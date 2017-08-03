@@ -1,0 +1,35 @@
+{
+  "id": "0c6ba657-7e9d-47bd-86a8-bc1dd318f2bc",
+  "rev": "5-45856a5de203469c568e411e7cac5fc2",
+  "name": "Blog-Post",
+  "classification": "content-type",
+  "description": "",
+  "creatorId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "created": "2017-04-20T17:07:04.607Z",
+  "lastModifierId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "lastModified": "2017-04-26T14:42:50.492Z",
+  "status": "ready",
+  "tags": [],
+  "elements": [
+    {
+      "elementType": "image",
+      "acceptType": [
+        "jpg",
+        "jpeg",
+        "png",
+        "gif"
+      ],
+      "label": "Image",
+      "key": "image",
+      "imageProfileId": "68207f64-990e-444e-95d0-894f36426176"
+    },
+    {
+      "elementType": "text",
+      "label": "Post",
+      "key": "post",
+      "displayType": "multiLine",
+      "displayWidth": 80,
+      "displayHeight": 20
+    }
+  ]
+}

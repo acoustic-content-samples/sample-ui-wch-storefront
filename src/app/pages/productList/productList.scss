@@ -1,0 +1,233 @@
+@import '../../common/variables';
+
+/*************************
+*******Shop CSS******
+**************************/
+
+h2.title {
+	color: $brand-color-primary;
+	font-family: 'Roboto', sans-serif;
+	font-size: 18px;
+	font-weight: 700;
+	margin: 0 15px;
+	text-transform: uppercase;
+	margin-bottom: 30px;
+	position: relative;
+}
+
+h2.title:after{
+	content: " ";
+	position: absolute;
+	border: 1px solid #f5f5f5;
+	bottom:8px;
+	left: 0;
+	width: 100%;
+	height: 0;
+	z-index: -2;
+}
+
+h2.title:before{
+	content: " ";
+	position: absolute;
+	background: $white;
+	bottom: -6px;
+	width: 220px;
+	height: 30px;
+	z-index: -1;
+	left: 50%;
+	margin-left: -110px;
+}
+
+.product-image-wrapper{
+	border:1px solid #F7F7F5;
+	overflow: hidden;
+	margin-bottom:30px;
+}
+
+.single-products {
+	position: relative;
+}
+
+.new, .sale {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.productinfo h2{
+	color: $brand-color-primary;
+	font-family: 'Roboto', sans-serif;
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.product-overlay h2{
+	color: $white;
+	font-family: 'Roboto', sans-serif;
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.productinfo p{
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	color: lighten($base-text-color, 10%);
+}
+
+.productinfo img{
+	width: 100%;
+}
+
+.productinfo{
+ position:relative;
+}
+
+.product-overlay {
+	background:$brand-color-primary;
+	top: 0;
+	display: none;
+	height: 0;
+	position: absolute;
+	transition: height 500ms ease 0s;
+	width: 100%;
+	display: block;
+}
+
+.single-products:hover .product-overlay {
+	display:block;
+	height:100%;
+}
+
+.product-overlay .overlay-content {
+	bottom: 0;
+	position: absolute;
+	bottom: 0;
+	text-align: center;
+	width: 100%;
+}
+
+.product-overlay .add-to-cart {
+	background:$white;
+	border: 0 none;
+	border-radius: 0;
+	color: $brand-color-primary;
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
+	margin-bottom: 25px;
+}
+
+.product-overlay .add-to-cart:hover {
+	background:$white;
+	color: $brand-color-primary;
+}
+
+.product-overlay p{
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	color: $white;
+}
+
+.add-to-cart {
+	background:lighten($brand-color-primary, 40%);
+	border: 0 none;
+	border-radius: 0;
+	color: lighten($base-text-color, 10%);
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
+	margin-bottom: 25px;
+}
+
+.add-to-cart:hover {
+	background: $brand-color-primary;
+	border: 0 none;
+	border-radius: 0;
+	color: $white;
+}
+
+.add-to{
+	margin-bottom: 10px;
+}
+
+.add-to-cart i{
+	margin-right:5px;
+}
+
+.add-to-cart:hover {
+	background: $brand-color-primary;
+	color: $white;
+}
+
+.choose {
+	border-top: 1px solid #F7F7F0;
+}
+
+.choose ul li a {
+	color: darken($brand-color-secondary, 30%);
+	font-family: 'Roboto', sans-serif;
+	font-size: 13px;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.choose ul li a i{
+	margin-right:5px;
+}
+
+.choose ul li a:hover{
+	background:none;
+	color:$brand-color-primary;
+}
+
+#advertisement {
+  padding-bottom: 45px;
+}
+
+#advertisement img {
+  width: 100%;
+}
+
+.pagination {
+  display: inline-block;
+  margin-bottom: 25px;
+  margin-top: 0;
+  padding-left: 15px;
+}
+
+.pagination  li:first-child  a, .pagination  li:first-child  span {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  margin-left: 0;
+}
+
+.pagination  li:last-child  a, .pagination  li:last-child  span {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.pagination  .active  a, .pagination  .active  span, .pagination  .active  a:hover, .pagination  .active  span:hover, .pagination  .active  a:focus, .pagination  .active  span:focus {
+  background-color: $brand-color-primary;
+  border-color: $brand-color-primary;
+  color: $white;
+  cursor: default;
+  z-index: 2;
+}
+
+.pagination  li  a, .pagination  li  span {
+  background-color: $brand-color-secondary;
+  border: 0;
+  float: left;
+  line-height: 1.42857;
+  margin-left: -1px;
+  padding: 6px 12px;
+  position: relative;
+  text-decoration: none;
+  margin-right: 5px;
+  color:#000;
+}
+
+.pagination  li  a:hover{
+	background:$brand-color-primary;
+	color:$white;
+}

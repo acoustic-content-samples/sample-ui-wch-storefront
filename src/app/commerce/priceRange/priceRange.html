@@ -1,0 +1,17 @@
+<div *ngIf="products.length > 0" class="price-range">
+	<h2>Price Range</h2>
+	<div class="well text-center">
+		<div *ngIf="isRangeSet()" class="clear">
+			<a (click)="clear()">
+				<span class="glyphicon glyphicon-remove">
+				</span>
+				Clear
+			</a>
+		</div>
+		<form [formGroup]="priceRangeForm" novalidate>
+			$<input type="text" class="range" formControlName="min">
+			to $<input type="text" class="range" formControlName="max">
+			<input type="button" class="go" (click)="go()" formControlName="submit" value="go"/>
+		</form>
+	</div>
+</div>

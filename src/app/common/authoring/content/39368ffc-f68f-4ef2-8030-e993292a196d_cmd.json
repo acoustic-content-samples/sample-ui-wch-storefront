@@ -1,0 +1,53 @@
+{
+  "id": "39368ffc-f68f-4ef2-8030-e993292a196d",
+  "rev": "40-85c28a5b1eb3fd9910f2a1ca8245f3c3",
+  "name": "contactUs",
+  "description": "",
+  "classification": "content",
+  "typeId": "35c70422-dd47-4318-a2e0-78e5c3a1326b",
+  "locale": "en-US",
+  "lastModified": "2017-06-08T14:11:58.447Z",
+  "lastModifierId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "created": "2017-04-18T18:15:22.759Z",
+  "creatorId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "tags": [],
+  "status": "ready",
+  "elements": {
+    "fax": {
+      "elementType": "text"
+    },
+    "widget": {
+      "elementType": "text",
+      "value": "temp-component"
+    },
+    "location": {
+      "elementType": "location",
+      "latitude": 61.7948,
+      "longitude": -149.2706
+    },
+    "email": {
+      "elementType": "text",
+      "value": "info@domain.com"
+    },
+    "title": {
+      "elementType": "text",
+      "value": "Contact Us"
+    },
+    "template": {
+      "elementType": "text",
+      "value": "email"
+    },
+    "mobile": {
+      "elementType": "text",
+      "value": "+2 95 01 88 821"
+    },
+    "company": {
+      "value": "E-Shopper",
+      "elementType": "text"
+    },
+    "address": {
+      "elementType": "text",
+      "value": "505 S Atlantic Ave Virginia Beach, VA"
+    }
+  }
+}

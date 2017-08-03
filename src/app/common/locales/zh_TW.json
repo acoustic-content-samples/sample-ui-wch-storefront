@@ -1,0 +1,20 @@
+{
+	"Canada": "加拿大",
+	"UK": "英國",
+	
+	"Account": "帳戶",
+	"Wishlist": "願望清單",
+	"Checkout": "結帳",
+	"Cart": "購物車",
+	"Login": "登入",
+	"Logout": "登出",
+
+	"Signup": "註冊",
+	"Could not log in": "無法登入",
+	"Could not register new user": "無法登錄新的使用者",
+	"Login to your account": "登入您的帳戶",
+	"Username is required": "使用者名稱是必要的",
+	"Email is required": "電子郵件是必要的",
+	"Password is required": "密碼是必要的"
+}
+

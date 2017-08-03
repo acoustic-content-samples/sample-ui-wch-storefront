@@ -1,0 +1,89 @@
+@import '../../common/variables';
+
+#slider {
+	padding-bottom: 45px;
+
+	.carousel-indicators li {
+		background: darken($white, 20%);
+	}
+
+	.carousel-indicators li.active {
+			background-color: $brand-color-primary;
+	}
+
+	.item {
+		padding-left: 100px;
+
+		h1 {
+			color: lighten($brand-color-tertiary, 30%);
+			font-family: abel;
+			font-size: 48px;
+			margin-top: 115px;
+			span {
+				color: $brand-color-primary;
+			}
+		}
+
+		h2 {
+			color: $base-text-color;
+			font-family: 'Roboto', sans-serif;
+			font-size: 28px;
+			font-weight: 700;
+			margin-bottom: 22px;
+			margin-top: 10px;
+		}
+
+		p {
+			color:$base-text-color;
+			font-size:16px;
+			font-weight:300;
+			font-family: 'Roboto', sans-serif;
+		}
+
+		button:hover {
+			background: $brand-color-primary;
+		}
+	}
+
+
+	.pricing {
+		position: absolute;
+		right: 40%;
+		top: 52%;
+	}
+
+	.get {
+		background: $brand-color-primary;
+		border: 0 none;
+		border-radius: 0;
+		color: $white;
+		font-family: 'Roboto', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		margin-top: 23px;
+	}
+
+	.carousel-control {
+		background-image: none;
+		color: darken($white, 20%);
+
+		&:hover {
+			color: $brand-color-primary;
+		}
+	}
+
+	.control-carousel {
+		position: absolute;
+		top: 50%;
+		font-size: 60px;
+		color: darken($white, 20%);
+
+		&:hover {
+			color: $brand-color-primary;
+		}
+	}
+
+	.right {
+		right: 0;
+	}
+}

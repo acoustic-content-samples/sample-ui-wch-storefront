@@ -1,0 +1,59 @@
+@import '../../../common/variables';
+
+/*************************
+*******Blog CSS******
+**************************/
+
+.title {
+	color: $brand-color-primary;
+	font-family: 'Roboto', sans-serif;
+	font-size: 18px;
+	font-weight: 700;
+	margin: 0 15px;
+	text-transform: uppercase;
+	margin-bottom: 30px;
+	position: relative;
+
+	&::after {
+		content: '';
+		position: absolute;
+		border: 1px solid $white;
+		bottom: 8px;
+		left: 0;
+		width: 100%;
+		height: 0;
+		z-index: -2;
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		background: $white;
+		bottom: -6px;
+		width: 220px;
+		height: 30px;
+		z-index: -1;
+		left: 50%;
+		margin-left: -110px;
+	}
+}
+
+.pagination-area {
+	margin-bottom: 45px;
+	margin-top: 45px;
+
+	.pagination .pagination-link {
+		background: $brand-color-secondary;
+		border: 0 none;
+		border-radius: 0;
+		color: lighten($base-text-color, 10%);
+		margin-right: 5px;
+		padding: 4px 12px;
+
+		&:hover,
+		&.active {
+			background:$brand-color-primary;
+			color: $white
+		}
+	}
+}

@@ -1,0 +1,1102 @@
+{
+    "models": {
+        "cart-OrderItemShippingInfo.userDataField": {
+            "id": "cart-OrderItemShippingInfo.userDataField",
+            "properties": {
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "key": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "com.ibm.commerce.rest.order.handler.ShippingInfoHandler$UpdateShippingInfoBodyDescription": {
+            "description": "Order update shipping information.",
+            "id": "com.ibm.commerce.rest.order.handler.ShippingInfoHandler$UpdateShippingInfoBodyDescription",
+            "properties": {
+                "x_calculationUsage": {
+                    "name": "x_calculationUsage",
+                    "description": "Calculation usage codes.",
+                    "type": "string",
+                    "required": true
+                },
+                "orderItem": {
+                    "name": "orderItem",
+                    "description": "list of order items",
+                    "type": "array",
+                    "items": {
+                        "$ref": "com.ibm.commerce.rest.order.handler.ShippingInfoHandler$UpdateShippingInfoBodyDescription$OrderItemBodyDescription"
+                    },
+                    "required": true
+                },
+                "shipModeId": {
+                    "name": "shipModeId",
+                    "description": "Shipping mode identifier.",
+                    "type": "string",
+                    "required": true
+                },
+                "shipAsComplete": {
+                    "name": "shipAsComplete",
+                    "description": "Option to ship the order as complete. Valid values include \"true\" and \"false\".",
+                    "type": "string",
+                    "required": true
+                },
+                "addressId": {
+                    "name": "addressId",
+                    "description": "Address identifier.",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.rest.order.handler.ShippingInfoHandler$UpdateShippingInfoBodyDescription$OrderItemBodyDescription": {
+            "description": "Order item update shipping information.",
+            "id": "com.ibm.commerce.rest.order.handler.ShippingInfoHandler$UpdateShippingInfoBodyDescription$OrderItemBodyDescription",
+            "properties": {
+                "shipInstructions": {
+                    "name": "shipInstructions",
+                    "description": "Shipping instructoins.",
+                    "type": "string",
+                    "required": false
+                },
+                "orderItemId": {
+                    "name": "orderItemId",
+                    "description": "Order item identifier.",
+                    "type": "string",
+                    "required": true
+                },
+                "physicalStoreId": {
+                    "name": "physicalStoreId",
+                    "description": "Physical mode identifier.",
+                    "type": "string",
+                    "required": false
+                },
+                "shipModeId": {
+                    "name": "shipModeId",
+                    "description": "Shipping mode identifier.",
+                    "type": "string",
+                    "required": false
+                },
+                "addressId": {
+                    "name": "addressId",
+                    "description": "Address identifier.",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "cart-ShippingAddress.attributes": {
+            "id": "cart-ShippingAddress.attributes",
+            "properties": {
+                "attrKey": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "attrValue": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "cart-OrderShippingInfo": {
+            "id": "cart-OrderShippingInfo",
+            "properties": {
+                "pysicalStoreId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "requestedShipDate": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "userDataField": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-OrderShippingInfo.userDataField"
+                    },
+                    "required": false
+                },
+                "shipModeId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "addressId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "Empty": {
+            "description": "Empty model. Used as default value when no model is specified.",
+            "id": "Empty",
+            "properties": {}
+        },
+        "cart-cartUpdate_item.orderExtendAttribute": {
+            "id": "cart-cartUpdate_item.orderExtendAttribute",
+            "properties": {
+                "attributeValue": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "attributeType": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "attributeName": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "cart-cartUpdate": {
+            "id": "cart-cartUpdate",
+            "properties": {
+                "Order": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-cartUpdate_item"
+                    },
+                    "required": false
+                }
+            }
+        },
+        "cart-shipping_info.userDataField": {
+            "id": "cart-shipping_info.userDataField",
+            "properties": {
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "key": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "cart-cartUpdate_item.userDataField": {
+            "id": "cart-cartUpdate_item.userDataField",
+            "properties": {
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "key": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType.externalIdentifier": {
+            "id": "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType.externalIdentifier",
+            "properties": {
+                "identifier": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "cart-ShippingInfoOrderItem": {
+            "id": "cart-ShippingInfoOrderItem",
+            "properties": {
+                "orderItemId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "userDataField": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-ShippingInfoOrderItem.userDataField"
+                    },
+                    "required": false
+                },
+                "orderItemShippingInfo": {
+                    "description": "",
+                    "type": "cart-OrderItemShippingInfo",
+                    "required": false
+                }
+            }
+        },
+        "cart-ShippingMode": {
+            "id": "cart-ShippingMode",
+            "properties": {
+                "carrier": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "shipModeCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "shipModeDescription": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "trackingURL": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "description": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "shipModeId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "language": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "storeId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "shipModeLanguage": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "cart-ShippingInfoOrderItem.userDataField": {
+            "id": "cart-ShippingInfoOrderItem.userDataField",
+            "properties": {
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "key": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "cart-cartUpdate_item.orderItem.itemAttributes": {
+            "id": "cart-cartUpdate_item.orderItem.itemAttributes",
+            "properties": {
+                "attrValue": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "attrName": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "cart-cartUpdate_item.orderItem": {
+            "id": "cart-cartUpdate_item.orderItem",
+            "properties": {
+                "UOM": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "quantity": {
+                    "format": "double",
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "productId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "itemAttributes": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-cartUpdate_item.orderItem.itemAttributes"
+                    },
+                    "required": false
+                },
+                "orderItemId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "fulfillmentCenterId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "fulfillmentCenterName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "userDataField": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-cartUpdate_item.orderItem.userDataField"
+                    },
+                    "required": false
+                },
+                "contractId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "orderItemExtendAttribute": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-cartUpdate_item.orderItem.orderItemExtendAttribute"
+                    },
+                    "required": false
+                },
+                "comment": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "partNumber": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType": {
+            "id": "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType",
+            "properties": {
+                "externalIdentifier": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType.externalIdentifier",
+                    "required": false
+                },
+                "distinguishedName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "uniqueID": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "cart-cartUpdate_item.orderItem.orderItemExtendAttribute": {
+            "id": "cart-cartUpdate_item.orderItem.orderItemExtendAttribute",
+            "properties": {
+                "attributeValue": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "attributeType": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "attributeName": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "cart-OrderItemShippingInfo": {
+            "id": "cart-OrderItemShippingInfo",
+            "properties": {
+                "shippingCarrierAccountNumber": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "requestedShipDate": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "userDataField": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-OrderItemShippingInfo.userDataField"
+                    },
+                    "required": false
+                },
+                "shipCarrAccntNum": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "shippingChargeType": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "shippingMode": {
+                    "description": "",
+                    "type": "cart-ShippingMode",
+                    "required": false
+                },
+                "isExpedited": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "shippingChargePolicyID": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "shipTieCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "shipInstruction": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "physicalStoreExternalId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "physicalStoreId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "shippingAddress": {
+                    "description": "",
+                    "type": "cart-ShippingAddress",
+                    "required": false
+                }
+            }
+        },
+        "cart-shipping_info": {
+            "id": "cart-shipping_info",
+            "properties": {
+                "orderId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "orderItem": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "type": "cart-ShippingInfoOrderItem"
+                    },
+                    "required": false
+                },
+                "userDataField": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-shipping_info.userDataField"
+                    },
+                    "required": false
+                },
+                "orderShippingInfo": {
+                    "description": "",
+                    "type": "cart-OrderShippingInfo",
+                    "required": false
+                },
+                "shipAsComplete": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "cart-cartUpdate_item.orderItem.userDataField": {
+            "id": "cart-cartUpdate_item.orderItem.userDataField",
+            "properties": {
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "key": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "cart-ShippingAddress": {
+            "id": "cart-ShippingAddress",
+            "properties": {
+                "personTitle": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "lastName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "country": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "zipCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "mobilePhone1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "city": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "postalCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone2": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "phone2Publish": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "language": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone1Publish": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "organizationUnitName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "geographicalShippingCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "addressId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "email2": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "email1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "organizationIdentifier": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.foundation.common.datatypes.OrganizationIdentifierType",
+                    "required": false
+                },
+                "businessTitle": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "fax2": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "state": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "fax1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "phone2Type": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "organizationName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "nickName": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "addressType": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "mobilePhone1Country": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "geographicalTaxCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "addressLine": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "required": false
+                },
+                "stateOrProvinceName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone1Type": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "bestCallingTime": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "firstName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "internalOfficeAddress": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "personIdentifier": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType",
+                    "required": false
+                },
+                "attributes": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-ShippingAddress.attributes"
+                    },
+                    "required": false
+                },
+                "middleName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "primary": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "cart-cartUpdate_item": {
+            "id": "cart-cartUpdate_item",
+            "properties": {
+                "orderComment": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "orderItem": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-cartUpdate_item.orderItem"
+                    },
+                    "required": false
+                },
+                "orderId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "userDataField": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-cartUpdate_item.userDataField"
+                    },
+                    "required": false
+                },
+                "orderExtendAttribute": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-cartUpdate_item.orderExtendAttribute"
+                    },
+                    "required": false
+                },
+                "orderDescription": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "shipAsComplete": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "cart-OrderShippingInfo.userDataField": {
+            "id": "cart-OrderShippingInfo.userDataField",
+            "properties": {
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "key": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "com.ibm.commerce.foundation.common.datatypes.OrganizationIdentifierType": {
+            "id": "com.ibm.commerce.foundation.common.datatypes.OrganizationIdentifierType",
+            "properties": {
+                "distinguishedName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "uniqueID": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        }
+    },
+    "apiVersion": "WC.TOOLKIT Enterprise Version : 8 Fix Pack : 0",
+    "swaggerVersion": "1.2",
+    "basePath": "http://@csx00621.canlab.ibm.com/wcs/resources",
+    "apis": [
+        {
+            "path": "/store/{storeId}/cart/@self/shipping_info",
+            "operations": [
+                {
+                    "summary": "Gets shipping information for the shopping cart.",
+                    "notes": "",
+                    "method": "GET",
+                    "responseClass": "cart-shipping_info",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "getShippingInfo",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "cart-shipping_info",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "pageNumber",
+                            "format": "int32",
+                            "description": "Page number, starting at 1. Valid values include positive integers of 1 and above. The \"pageSize\" must be specified for paging to work.",
+                            "type": "integer",
+                            "required": false
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "pageSize",
+                            "format": "int32",
+                            "description": "Page size. Used to limit the amount of data returned by a query. Valid values include positive integers of 1 and above. The \"pageNumber\" must be specified for paging to work.",
+                            "type": "integer",
+                            "required": false
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "langId",
+                            "description": "Language identifier. If not specified, the \"locale\" parameter will be used. If \"locale\" isn't specified, then the store default language shall be used.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "-1",
+                                "-2",
+                                "-3",
+                                "-4",
+                                "-5",
+                                "-6",
+                                "-7",
+                                "-8",
+                                "-10",
+                                "-20",
+                                "-21"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "locale",
+                            "description": "The locale to use. Example usage : locale=en_US. If the \"langId\" parameter is specified, the \"locale\" parameter will be ignored. If no locale is specified, the store default locale will be used.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "en_US",
+                                "fr_FR",
+                                "de_DE",
+                                "it_IT",
+                                "es_ES",
+                                "pt_BR",
+                                "zh_CN",
+                                "zh_TW",
+                                "ja_JP",
+                                "ru_RU",
+                                "ro_RO"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "forUser",
+                            "description": "User name to act on behalf of.",
+                            "type": "string",
+                            "required": false
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "forUserId",
+                            "description": "User identifier to act on behalf of.",
+                            "type": "string",
+                            "required": false
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 404,
+                            "message": "The specified resource couldn't be found."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/cart/@self/shipping_info",
+            "operations": [
+                {
+                    "summary": "Updates shipping information for the shopping cart.",
+                    "notes": "",
+                    "method": "PUT",
+                    "responseClass": "cart-cartUpdate",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "updateOrderShippingInfo",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "cart-cartUpdate",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "body",
+                            "description": "Request body.",
+                            "type": "com.ibm.commerce.rest.order.handler.ShippingInfoHandler$UpdateShippingInfoBodyDescription",
+                            "required": false
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "forUser",
+                            "description": "User name to act on behalf of.",
+                            "type": "string",
+                            "required": false
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "forUserId",
+                            "description": "User identifier to act on behalf of.",
+                            "type": "string",
+                            "required": false
+                        }
+                    ],
+                    "consumes": [
+                        "application/json",
+                        "application/xml"
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 404,
+                            "message": "The specified resource couldn't be found."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "resourcePath": "store/{storeId}/cart/@self/shipping_info",
+    "description": "This class provides RESTful services to get and update shipping information in the shopping cart."
+}

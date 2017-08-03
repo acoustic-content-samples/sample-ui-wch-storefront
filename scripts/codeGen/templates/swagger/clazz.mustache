@@ -1,0 +1,27 @@
+/* jshint ignore:start */
+//-----------------------------------------------------------------
+// Licensed Materials - Property of IBM
+//
+//
+// (C) Copyright IBM Corp. 2017
+//
+// US Government Users Restricted Rights - Use, duplication or
+// disclosure restricted by GSA ADP Schedule Contract with
+// IBM Corp.
+//-----------------------------------------------------------------
+
+/* beautify ignore:start */
+import { Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { {{&mustache}}{{resourceDomainName}}Service } from "./{{&mustache}}{{resourceDomainNameCamelCase}}.service";
+import { {{&moduleName}}Environment } from "../../../{{&mustache}}{{moduleNameCamelCase}}.environment";
+/* beautify ignore:end */
+
+export class {{&className}}Service extends {{&mustache}}{{resourceDomainName}}Service {
+
+	{{#methods}}
+		{{> method}}
+
+	{{/methods}}
+}
+/* jshint ignore:end */

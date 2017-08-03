@@ -1,0 +1,20 @@
+{
+	"Canada": "RJ",
+	"UK": "Reino Unido",
+	
+	"Account": "Conta",
+	"Wishlist": "Lista de Desejos",
+	"Checkout": "Registro de Saída",
+	"Cart": "Carrinho de Transporte",
+	"Login": "Efetuar login",
+	"Logout": "Encerramento de Sessão",
+
+	"Signup": "Inscrever",
+	"Could not log in": "Não foi possível fazer o login",
+	"Could not register new user": "Não foi possível registrar um novo usuário",
+	"Login to your account": "Efetuar login na sua conta",
+	"Username is required": "O nome de usuário é necessário",
+	"Email is required": "O e-mail é obrigatório",
+	"Password is required": "A senha é necessária"
+}
+

@@ -1,0 +1,43 @@
+<div class="header-bottom"><!--header-bottom-->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-9">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="mainmenu pull-left">
+					<ul class="nav navbar-nav collapse navbar-collapse">
+						<li class="mainmenu-item">
+							<a class="mainmenu-link" routerLink="/home" routerLinkActive="active">Home</a>
+						</li>
+						<li class="dropdown mainmenu-item">
+							<a class="mainmenu-link" routerLink="/nowhere" routerLinkActive="active">Shop<i class="fa fa-angle-down"></i></a>
+                            <ul role="menu" class="sub-menu">
+                                <li><a routerLink="/products" routerLinkActive="active">Products</a></li>
+								<li><a routerLink="/checkout" routerLinkActive="active">Checkout</a></li> 
+								<li><a routerLink="/cart" routerLinkActive="active">Cart</a></li> 
+								<li><a routerLink="/login" routerLinkActive="active">Login</a></li> 
+                            </ul>
+                        </li> 
+						<li class="mainmenu-item">
+							<a class="mainmenu-link" routerLink="/blog" routerLinkActive="active">Blog</a>
+                        </li>
+						<li class="mainmenu-item">
+							<a class="mainmenu-link" routerLink="/contact" routerLinkActive="active">Contact</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="pull-right">
+					<wc-search></wc-search>
+				</div>
+			</div>
+		</div>
+	</div>
+</div><!--/header-bottom-->

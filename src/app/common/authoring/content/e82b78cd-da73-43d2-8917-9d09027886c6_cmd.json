@@ -1,0 +1,42 @@
+{
+  "id": "e82b78cd-da73-43d2-8917-9d09027886c6",
+  "rev": "7-f48cafe9623bfdeb0bf6dd8dd3f45e39",
+  "name": "Girls Pink T Shirt arrived in store",
+  "description": "",
+  "classification": "content",
+  "typeId": "0c6ba657-7e9d-47bd-86a8-bc1dd318f2bc",
+  "locale": "en-US",
+  "lastModified": "2017-06-06T15:20:24.940Z",
+  "lastModifierId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "created": "2017-06-06T15:19:49.713Z",
+  "creatorId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "tags": [],
+  "keywords": [],
+  "status": "ready",
+  "elements": {
+    "image": {
+      "elementType": "image",
+      "renditions": {
+        "default": {
+          "renditionId": "r=c3aedba8182df9a1cafbef3778c7602e&a=f21da434-5f94-480b-b967-ce87bd420207",
+          "source": "/authoring/v1/resources/c3aedba8182df9a1cafbef3778c7602e"
+        },
+        "list": {
+          "renditionId": "0ba81ac2-9556-43e4-a963-2324de7fa06a",
+          "source": "/authoring/v1/resources/c3aedba8182df9a1cafbef3778c7602e?resize=700px:320px&crop=700:200;0,33"
+        }
+      },
+      "asset": {
+        "id": "f21da434-5f94-480b-b967-ce87bd420207",
+        "resourceUri": "/authoring/v1/resources/c3aedba8182df9a1cafbef3778c7602e",
+        "fileName": "blog-two.jpg",
+        "fileSize": 197291,
+        "mediaType": "image/jpeg"
+      }
+    },
+    "post": {
+      "elementType": "text",
+      "value": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+    }
+  }
+}

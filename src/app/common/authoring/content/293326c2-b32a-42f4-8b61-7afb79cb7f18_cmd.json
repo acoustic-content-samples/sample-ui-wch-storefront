@@ -1,0 +1,25 @@
+{
+  "id": "293326c2-b32a-42f4-8b61-7afb79cb7f18",
+  "rev": "7-654ef019c5ff15c044c01c241d378896",
+  "name": "return",
+  "description": "",
+  "classification": "content",
+  "typeId": "60716007-4e99-49c6-af11-1c2a59d60cee",
+  "locale": "en-US",
+  "lastModified": "2017-05-02T11:08:36.718Z",
+  "lastModifierId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "created": "2017-04-20T11:55:24.818Z",
+  "creatorId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "tags": [],
+  "status": "ready",
+  "elements": {
+    "title": {
+      "elementType": "text",
+      "value": "Our Policy"
+    },
+    "body": {
+      "elementType": "text",
+      "value": "If for any reason you are not completely satisfied with your order, simply contact customer service for instructions on how to return your order for a full refund. If and when you are ready to place another order, we will be happy to serve you again."
+    }
+  }
+}

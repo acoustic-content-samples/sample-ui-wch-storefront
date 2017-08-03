@@ -1,0 +1,48 @@
+@import '../../common/variables';
+
+.price-range{
+  margin-top:30px;
+}
+
+.well {
+  background-color: $white;
+  border: 1px solid #F7F7F0;
+  border-radius: 4px;
+  box-shadow: none;
+  margin-bottom: 20px;
+  min-height: 20px;
+  padding: 35px;
+}
+
+h2 {
+  color: $brand-color-primary;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 auto 30px;
+  text-align: center;
+  text-transform: uppercase;
+  position: relative;
+  z-index:3;
+}
+
+.range {
+  width: 55px;
+  margin: 2px;
+}
+
+.go {
+  vertical-align: middle;
+  border-radius: 12px;
+  font-size: 0.9em;
+  width: 25px;
+  height: 25px;
+  padding: 2px;
+  border: none;
+  color: $white;
+  background-color: $brand-color-primary;
+}
+
+.clear {
+  text-align: left;
+}

@@ -1,0 +1,20 @@
+{
+  "scale": 0.8083140877598153,
+  "locationY": 33,
+  "height": 200,
+  "locationX": 0,
+  "rev": "1-c20cc690acac613f7ab67dbb44270b8d",
+  "id": "0ba81ac2-9556-43e4-a963-2324de7fa06a",
+  "classification": "rendition",
+  "asset": {
+    "mediaType": "image/jpeg",
+    "height": 396,
+    "fileName": "blog-two.jpg",
+    "id": "f21da434-5f94-480b-b967-ce87bd420207",
+    "resource": "c3aedba8182df9a1cafbef3778c7602e",
+    "fileSize": 197291,
+    "width": 866
+  },
+  "width": 700,
+  "created": "2017-06-06T15:20:11.112Z"
+}

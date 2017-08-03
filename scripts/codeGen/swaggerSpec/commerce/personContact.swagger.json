@@ -1,0 +1,1051 @@
+{
+    "models": {
+        "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType.externalIdentifier": {
+            "id": "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType.externalIdentifier",
+            "properties": {
+                "identifier": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "java.util.Map$Entry": {
+            "id": "java.util.Map$Entry",
+            "properties": {
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "key": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "Empty": {
+            "description": "Empty model. Used as default value when no model is specified.",
+            "id": "Empty",
+            "properties": {}
+        },
+        "person-singleContact.userDataField": {
+            "id": "person-singleContact.userDataField",
+            "properties": {
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "key": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "person-contact": {
+            "id": "person-contact",
+            "properties": {
+                "contact": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "person-contact.contact"
+                    },
+                    "required": false
+                },
+                "userId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "addressId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "person-contact.contact.userDataField": {
+            "id": "person-contact.contact.userDataField",
+            "properties": {
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "key": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "com.ibm.commerce.foundation.common.datatypes.OrganizationIdentifierType": {
+            "id": "com.ibm.commerce.foundation.common.datatypes.OrganizationIdentifierType",
+            "properties": {
+                "distinguishedName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "uniqueID": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType": {
+            "id": "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType",
+            "properties": {
+                "externalIdentifier": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType.externalIdentifier",
+                    "required": false
+                },
+                "distinguishedName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "uniqueID": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "person-contact.contact": {
+            "id": "person-contact.contact",
+            "properties": {
+                "lastName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "zipCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "country": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "personTitle": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "mobilePhone1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "city": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone2": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "language": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone2Publish": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone1Publish": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "organizationUnitName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "geographicalShippingCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "addressId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "email2": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "email1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "organizationIdentifier": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.foundation.common.datatypes.OrganizationIdentifierType",
+                    "required": false
+                },
+                "businessTitle": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "fax2": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "fax1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "state": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone2Type": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "organizationName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "addressType": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "nickName": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "mobilePhone1Country": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "userDataField": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "person-contact.contact.userDataField"
+                    },
+                    "required": false
+                },
+                "geographicalTaxCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "addressLine": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "required": false
+                },
+                "phone1Type": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "bestCallingTime": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "firstName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "internalOfficeAddress": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "personIdentifier": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType",
+                    "required": false
+                },
+                "attributes": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "java.util.Map$Entry"
+                    },
+                    "required": false
+                },
+                "middleName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "primary": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.rest.member.handler.PersonContactHandler$UserIdentifier": {
+            "description": "User identitifier.",
+            "id": "com.ibm.commerce.rest.member.handler.PersonContactHandler$UserIdentifier",
+            "properties": {
+                "userId": {
+                    "name": "userId",
+                    "description": "The user identifier.",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "person-singleContact": {
+            "id": "person-singleContact",
+            "properties": {
+                "personTitle": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "lastName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "country": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "zipCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "mobilePhone1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "city": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone2": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "phone2Publish": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "language": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone1Publish": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "organizationUnitName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "geographicalShippingCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "addressId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "phone1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "email2": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "email1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "organizationIdentifier": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.foundation.common.datatypes.OrganizationIdentifierType",
+                    "required": false
+                },
+                "businessTitle": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "fax2": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "state": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "fax1": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "phone2Type": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "organizationName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "nickName": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "addressType": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "mobilePhone1Country": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                },
+                "userDataField": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "person-singleContact.userDataField"
+                    },
+                    "required": false
+                },
+                "geographicalTaxCode": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "addressLine": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "required": false
+                },
+                "phone1Type": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "bestCallingTime": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "firstName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "internalOfficeAddress": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "personIdentifier": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.foundation.common.datatypes.PersonIdentifierType",
+                    "required": false
+                },
+                "attributes": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "java.util.Map$Entry"
+                    },
+                    "required": false
+                },
+                "middleName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "primary": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.rest.member.handler.PersonContactHandler$AddressIdentifier": {
+            "description": "Address identitifier.",
+            "id": "com.ibm.commerce.rest.member.handler.PersonContactHandler$AddressIdentifier",
+            "properties": {
+                "addressId": {
+                    "name": "addressId",
+                    "description": "The address identifier.",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        }
+    },
+    "apiVersion": "WC.TOOLKIT Enterprise Version : 8 Fix Pack : 0",
+    "swaggerVersion": "1.2",
+    "basePath": "http://@csx00621.canlab.ibm.com/wcs/resources",
+    "apis": [
+        {
+            "path": "/store/{storeId}/person/@self/contact",
+            "operations": [
+                {
+                    "summary": "Gets the contacts in a person's address book. If the addressType optional query parameter is passed in, the returned contacts are filtered by addressType.",
+                    "notes": "",
+                    "method": "GET",
+                    "responseClass": "person-contact",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "getAllPersonContact",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "person-contact",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "addressType",
+                            "description": "The address type.",
+                            "type": "string",
+                            "required": false
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/person/@self/contact/byAddressId/{addressId}",
+            "operations": [
+                {
+                    "summary": "Gets a person contact by address ID.",
+                    "notes": "",
+                    "method": "GET",
+                    "responseClass": "person-singleContact",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "findPersonContactById",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "person-singleContact",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "addressId",
+                            "description": "The address identifier.",
+                            "type": "string",
+                            "required": true
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 404,
+                            "message": "The specified resource couldn't be found."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/person/@self/contact/{nickName}",
+            "operations": [
+                {
+                    "summary": "Gets a person contact by nick name.",
+                    "notes": "",
+                    "method": "GET",
+                    "responseClass": "person-singleContact",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "findPersonContactByNickName",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "person-singleContact",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "nickName",
+                            "description": "The contact name saved in addressBook by registered shopper.",
+                            "type": "string",
+                            "required": true
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 404,
+                            "message": "The specified resource couldn't be found."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/person/@self/contact",
+            "operations": [
+                {
+                    "summary": "Creates a new contact in a person's address book.",
+                    "notes": "",
+                    "method": "POST",
+                    "responseClass": "com.ibm.commerce.rest.member.handler.PersonContactHandler$UserIdentifier",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "addPersonContact",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "com.ibm.commerce.rest.member.handler.PersonContactHandler$UserIdentifier",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "body",
+                            "description": "Request body.",
+                            "type": "person-contact",
+                            "required": false
+                        }
+                    ],
+                    "consumes": [
+                        "application/json",
+                        "application/xml"
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 201,
+                            "message": "The requested resource has been created."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/person/@self/contact/{nickName}",
+            "operations": [
+                {
+                    "summary": "Updates the contact in the address book identified by nickName.",
+                    "notes": "",
+                    "method": "PUT",
+                    "responseClass": "com.ibm.commerce.rest.member.handler.PersonContactHandler$AddressIdentifier",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "updatePersonContact",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "com.ibm.commerce.rest.member.handler.PersonContactHandler$AddressIdentifier",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "nickName",
+                            "description": "The contact name saved in addressBook by registered shopper.",
+                            "type": "string",
+                            "required": true
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "body",
+                            "description": "Request body.",
+                            "type": "person-contact",
+                            "required": false
+                        }
+                    ],
+                    "consumes": [
+                        "application/json",
+                        "application/xml"
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 404,
+                            "message": "The specified resource couldn't be found."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/person/@self/contact/{nickName}",
+            "operations": [
+                {
+                    "summary": "Deletes the contact in the address book identified by nickName.",
+                    "notes": "",
+                    "method": "DELETE",
+                    "responseClass": "Empty",
+                    "secureCallMandatory": true,
+                    "partialAuthenticationAllowed": false,
+                    "nickname": "deletePersonContact",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "Empty",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "nickName",
+                            "description": "The contact name saved in addressBook by registered shopper.",
+                            "type": "string",
+                            "required": true
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 404,
+                            "message": "The specified resource couldn't be found."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "resourcePath": "store/{storeId}/person/@self/contact",
+    "description": "This class provides RESTful services to get contact details, register a person as a member, and update a member."
+}

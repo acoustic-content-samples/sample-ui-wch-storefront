@@ -1,0 +1,76 @@
+<div class="header-middle"><!--header-middle-->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="logo pull-left">
+					<a routerLink="/home" routerLinkActive="active"><img class="logo" [src]="logoSrc" alt="" /></a>
+				</div>
+				<div class="btn-group pull-right">
+					<div class="btn-group">
+						<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+							USA
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a routerLink="/nowhere" translate>Canada</a></li>
+							<li><a routerLink="/nowhere" translate>UK</a></li>
+						</ul>
+					</div>
+					
+					<div class="btn-group">
+						<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+							DOLLAR
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a routerLink="/nowhere" translate>Canadian Dollar</a></li>
+							<li><a routerLink="/nowhere" translate>Pound</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-8">
+				<div class="shop-menu pull-right">
+					<ul class="nav navbar-nav">
+						<li class="shop-menu-item">
+							<a class="shop-menu-link" routerLink="/nowhere">
+								<i class="fa fa-user"></i>
+								<span translate>Account</span>
+							</a>
+						</li>
+						<li class="shop-menu-item">
+							<a class="shop-menu-link" routerLink="/nowhere">
+								<i class="fa fa-star"></i>
+								<span translate>Wishlist</span>
+							</a>
+						</li>
+						<li class="shop-menu-item">
+							<a class="shop-menu-link" routerLink="/checkout" routerLinkActive="active">
+								<i class="fa fa-crosshairs"></i>
+								<span translate>Checkout</span>
+							</a>
+						</li>
+						<li class="shop-menu-item">
+							<a class="shop-menu-link" routerLink="/cart" routerLinkActive="active">
+								<i class="fa fa-shopping-cart"></i>
+								<span translate>Cart</span>
+							</a>
+						</li>
+						<li *ngIf="!isLoggedIn" class="shop-menu-item">
+							<a class="shop-menu-link" routerLink="/login" routerLinkActive="active">
+								<i class="fa fa-lock"></i>
+								<span translate>Login</span>
+							</a>
+						</li>
+						<li *ngIf="isLoggedIn" class="shop-menu-item">
+							<a class="shop-menu-link" href="" (click)="logout()">
+								<i class="fa fa-lock"></i>
+								<span translate>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div><!--/header-middle-->

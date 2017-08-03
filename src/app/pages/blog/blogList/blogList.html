@@ -1,0 +1,33 @@
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<side-nav></side-nav>
+			</div>
+			<div class="col-sm-9">
+				<div class="blog-post-area">
+					<blog-list-entry *ngFor="let post of pages[currentPageNumber]" [post]="post"></blog-list-entry>
+					<div class="pagination-area">
+						<ul class="pagination">
+							<li *ngIf="currentPageNumber != 0">
+								<a routerLink="/nowhere" (click)="goToPage(currentPageNumber-1)" class="pagination-link">
+									<i class="fa fa-angle-double-left"></i>
+								</a>
+							</li>
+							<li *ngFor="let page of pages; index as i">
+								<a routerLink="/nowhere" (click)="goToPage(i)" [ngClass]="{'active': isCurrentPage(i)}" class="pagination-link">
+									{{i+1}}
+								</a>
+							</li>
+							<li *ngIf="currentPageNumber != pages.length - 1">
+								<a routerLink="/nowhere" (click)="goToPage(currentPageNumber+1)" class="pagination-link">
+									<i class="fa fa-angle-double-right"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

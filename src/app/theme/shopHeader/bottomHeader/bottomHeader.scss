@@ -1,0 +1,100 @@
+@import '../../../common/variables';
+
+.header-bottom {
+	padding: 30px 0;
+}
+
+.navbar-collapse.collapse {
+	padding-left: 0;
+}
+
+.mainmenu .mainmenu-item {
+	padding: 0 15px;
+
+	&:first-child {
+		padding-left: 0;
+	}
+
+	.mainmenu-link {
+		color: lighten($base-text-color, 10%);
+		font-size: 17px;
+		font-weight: 300;
+		padding: 0;
+		padding-bottom: 10px;
+
+		&:hover,
+		&.active {
+			background: none;
+			color: lighten($brand-color-primary, 10%);
+		}
+	}
+}
+
+
+
+/*  Dropdown menu*/
+
+.navbar-header 
+.navbar-toggle .icon-bar {
+		background-color: $white;
+}
+
+
+.nav.navbar-nav > li:hover > ul.sub-menu{
+	display: block;
+	animation: fadeInUp 400ms;
+}
+
+ul.sub-menu {
+	position: absolute;
+	top: 30px;
+	left: 0;
+	background: rgba(0, 0, 0, 0.6);
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 220px;
+	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+	display: none;
+	z-index: 999;
+}
+
+.dropdown ul.sub-menu li .active{
+	color: lighten($brand-color-primary, 10%);
+	padding-left: 0;
+}
+
+
+.navbar-nav li ul.sub-menu li{
+	padding: 10px 20px 0 ;
+}
+
+.navbar-nav li ul.sub-menu li:last-child{
+	padding-bottom: 20px;
+}
+
+.navbar-nav li ul.sub-menu li a{
+	color: $white;
+}
+
+.navbar-nav li ul.sub-menu li a:hover{
+		color: lighten($brand-color-primary, 10%);
+}
+
+.fa-angle-down{
+	padding-left: 5px; 
+}
+
+@-webkit-keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(20px);
+		transform: translateY(20px);
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+}

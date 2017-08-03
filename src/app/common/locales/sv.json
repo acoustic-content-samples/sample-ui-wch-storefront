@@ -1,0 +1,20 @@
+{
+	"Canada": "Kanada",
+	"UK": "Storbritannien",
+	
+	"Account": "Konto",
+	"Wishlist": "Önskelista",
+	"Checkout": "Utcheckning",
+	"Cart": "Shoppingvagn",
+	"Login": "Inloggning",
+	"Logout": "Logga ut",
+
+	"Signup": "Registrera",
+	"Could not log in": "Det gick inte att logga in",
+	"Could not register new user": "Det gick inte att registrera ny användare",
+	"Login to your account": "Logga in till ditt konto",
+	"Username is required": "Användarnamn krävs",
+	"Email is required": "E-post krävs",
+	"Password is required": "Lösenord krävs"
+}
+

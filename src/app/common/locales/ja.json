@@ -1,0 +1,20 @@
+{
+	"Canada": "カナダ",
+	"UK": "UK",
+	
+	"Account": "アカウント",
+	"Wishlist": "買い物候補リスト",
+	"Checkout": "清算",
+	"Cart": "カート",
+	"Login": "ログイン",
+	"Logout": "ログアウト",
+
+	"Signup": "登録",
+	"Could not log in": "ログインできませんでした",
+	"Could not register new user": "新規ユーザーを登録できませんでした",
+	"Login to your account": "アカウントにログイン",
+	"Username is required": "ユーザー名は必須です",
+	"Email is required": "E メールは必須です",
+	"Password is required": "パスワードは必須です"
+}
+

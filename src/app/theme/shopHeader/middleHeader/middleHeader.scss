@@ -1,0 +1,72 @@
+@import '../../../common/variables';
+
+.row {
+	border-bottom: 1px solid lighten($brand-color-secondary, 20%);
+	margin: 0;
+	padding: 20px 0;
+
+	.col-sm-4,
+	.col-sm-8 {
+		padding-left: 0;
+	}
+
+}
+
+.usa {
+	border-radius: 0;
+	color: lighten($brand-color-tertiary, 10%);
+	font-size: 12px;
+	margin-right: 20px;
+	padding: 2px 15px;
+
+	&:hover {
+		background: $brand-color-primary;
+		color: $white;
+		border-color: $brand-color-primary;
+	}
+
+	&:active,
+	&.active {
+		background: none repeat scroll 0 0 $brand-color-primary;
+		box-shadow: inherit;
+		outline: 0 none;
+	}
+}
+
+.btn-group.open .dropdown-toggle {
+	background: rgba(0, 0, 0, 0);
+	box-shadow: none;
+}
+
+.dropdown-menu  li  a:hover,
+.dropdown-menu  li  a:focus {
+	background-color: $brand-color-primary;
+	color: $white;
+	text-decoration: none;
+}
+
+.shop-menu {
+	.shop-menu-item {
+		padding: 0 15px;
+
+		&:last-child {
+			padding-right: 0;
+		}
+
+		.shop-menu-link {
+			color: lighten($base-text-color, 10%);
+			font-weight: 300;
+			padding:0;
+			margin-top: 10px;
+
+			&:hover {;
+				color: $brand-color-primary;
+				background-color: transparent;
+			}
+
+			.fa {
+				margin-right: 3px;
+			}
+		}
+	}
+}

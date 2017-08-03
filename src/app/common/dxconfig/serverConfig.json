@@ -1,0 +1,12 @@
+{
+	"contentHubID": "",
+	"contentHubDomainName": "",
+	"commerceSearchDomainName": "",
+	"commerceSearchSecurePort":"",
+	"commerceSearchContextPath":"",
+	"commerceTransactionDomainName": "",
+	"commerceTransactionSecurePort": "",
+	"commerceTransactionContextPath":"",
+	"commerceStoreID": "",
+	"commerceCatalogID": ""
+}

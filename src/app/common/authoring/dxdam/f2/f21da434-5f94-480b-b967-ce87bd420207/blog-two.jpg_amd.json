@@ -1,0 +1,68 @@
+{
+  "mediaType": "image/jpeg",
+  "name": "blog-two.jpg",
+  "path": "/dxdam/f2/f21da434-5f94-480b-b967-ce87bd420207/blog-two.jpg",
+  "digest": "8AzmZLDtigvBVjh/7NmQrw==",
+  "assetType": "image",
+  "lastModified": "2017-06-06T15:19:58.335Z",
+  "description": "",
+  "tags": {
+    "values": [
+      "classification:person",
+      "classification:pink color",
+      "classification:light brown color",
+      "face:Female"
+    ],
+    "declined": [],
+    "analysis": "complete",
+    "suggested": [
+      "classification:person",
+      "classification:pink color",
+      "classification:light brown color",
+      "face:Female"
+    ]
+  },
+  "altText": "",
+  "categoryIds": [],
+  "fileName": "blog-two.jpg",
+  "creatorId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "rev": "2-e1fa1d062e449339797ba42d64b81aae",
+  "cognitive": {
+    "classifications": [
+      "person",
+      "pink color",
+      "light brown color"
+    ],
+    "faces": [
+      {
+        "gender": "Female"
+      }
+    ],
+    "colors": {
+      "vibrant": "#d28042",
+      "muted": "#a85350",
+      "darkVibrant": "#920c20",
+      "darkMuted": "#745464",
+      "lightVibrant": "#eaac7e",
+      "lightMuted": "#fcfbfa"
+    },
+    "status": "complete"
+  },
+  "id": "f21da434-5f94-480b-b967-ce87bd420207",
+  "resource": "c3aedba8182df9a1cafbef3778c7602e",
+  "fileSize": 197291,
+  "status": "ready",
+  "lastModifierId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "renditions": {
+    "default": {
+      "id": "r=c3aedba8182df9a1cafbef3778c7602e&a=f21da434-5f94-480b-b967-ce87bd420207",
+      "source": "/authoring/v1/resources/c3aedba8182df9a1cafbef3778c7602e"
+    }
+  },
+  "metadata": {
+    "width": 866,
+    "height": 396
+  },
+  "classification": "asset",
+  "created": "2017-06-06T15:19:54.163Z"
+}

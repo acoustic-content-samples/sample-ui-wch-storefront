@@ -1,0 +1,98 @@
+{
+  "mediaType": "image/jpeg",
+  "name": "blog-three.jpg",
+  "path": "/dxdam/ad/adc627b5-684f-4d3d-b60c-13b7eb970436/blog-three.jpg",
+  "digest": "TTUWhu4S8IURarKuN5sWyw==",
+  "assetType": "image",
+  "lastModified": "2017-06-06T15:20:53.639Z",
+  "description": "",
+  "tags": {
+    "values": [
+      "classification:black color",
+      "classification:makeup",
+      "classification:lipstick",
+      "classification:woman",
+      "classification:female",
+      "classification:young girl",
+      "classification:coal black color",
+      "classification:girl",
+      "classification:person",
+      "face:18-24",
+      "classification:hair",
+      "classification:toiletry",
+      "classification:cosmetic"
+    ],
+    "declined": [],
+    "analysis": "complete",
+    "suggested": [
+      "classification:hair",
+      "classification:person",
+      "classification:young girl",
+      "classification:girl",
+      "classification:woman",
+      "classification:female",
+      "classification:lipstick",
+      "classification:makeup",
+      "classification:cosmetic",
+      "classification:toiletry",
+      "classification:black color",
+      "classification:coal black color",
+      "face:18-24"
+    ]
+  },
+  "altText": "",
+  "categoryIds": [],
+  "fileName": "blog-three.jpg",
+  "creatorId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "rev": "2-4e6f9611de299de260aaee7f663d9821",
+  "cognitive": {
+    "classifications": [
+      "hair",
+      "person",
+      "young girl",
+      "girl",
+      "woman",
+      "female",
+      "lipstick",
+      "makeup",
+      "cosmetic",
+      "toiletry",
+      "black color",
+      "coal black color"
+    ],
+    "faces": [
+      {
+        "age": {
+          "minimum": 18,
+          "maximum": 24
+        }
+      }
+    ],
+    "colors": {
+      "vibrant": "#68c4f0",
+      "muted": "#8f655e",
+      "darkVibrant": "#643424",
+      "darkMuted": "#513533",
+      "lightVibrant": "#f6bca4",
+      "lightMuted": "#ccafb1"
+    },
+    "status": "complete"
+  },
+  "id": "adc627b5-684f-4d3d-b60c-13b7eb970436",
+  "resource": "30819063106fce72d80fecbc3cabfcc4",
+  "fileSize": 273949,
+  "status": "ready",
+  "lastModifierId": "dbfbb7bd-1a04-41d8-8122-c050c84c055d",
+  "renditions": {
+    "default": {
+      "id": "r=30819063106fce72d80fecbc3cabfcc4&a=adc627b5-684f-4d3d-b60c-13b7eb970436",
+      "source": "/authoring/v1/resources/30819063106fce72d80fecbc3cabfcc4"
+    }
+  },
+  "metadata": {
+    "width": 866,
+    "height": 396
+  },
+  "classification": "asset",
+  "created": "2017-06-06T15:20:50.888Z"
+}

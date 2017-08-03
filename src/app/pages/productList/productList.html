@@ -1,0 +1,21 @@
+<section id="advertisement">
+	<div class="container">
+		<img src="../../common/images/shop/advertisement.jpg" alt="">
+	</div>
+</section>
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<side-nav></side-nav>
+			</div>
+				
+			<div class="col-sm-9 padding-right">
+				<div class="features_items"><!--features_items-->
+					<h2 class="title text-center">Featured Items</h2>
+					<item-container *ngFor="let item of filteredItems" [item]="item"></item-container>
+				</div><!--features_items-->
+			</div>
+		</div>
+	</div>
+</section>

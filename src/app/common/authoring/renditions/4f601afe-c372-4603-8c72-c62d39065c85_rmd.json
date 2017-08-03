@@ -1,0 +1,20 @@
+{
+  "scale": 0.8083140877598153,
+  "locationY": 60,
+  "height": 200,
+  "locationX": 0,
+  "rev": "1-e5e53384323d9ce73c6989d531dcb355",
+  "id": "4f601afe-c372-4603-8c72-c62d39065c85",
+  "classification": "rendition",
+  "asset": {
+    "mediaType": "image/jpeg",
+    "height": 396,
+    "fileName": "blog-three.jpg",
+    "id": "adc627b5-684f-4d3d-b60c-13b7eb970436",
+    "resource": "30819063106fce72d80fecbc3cabfcc4",
+    "fileSize": 273949,
+    "width": 866
+  },
+  "width": 700,
+  "created": "2017-06-06T15:20:53.638Z"
+}

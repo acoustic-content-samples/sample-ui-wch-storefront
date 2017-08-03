@@ -1,0 +1,41 @@
+<div *ngIf="product" class="product-detail container">
+    <div class="row">
+        <div class="product-image col-md-6">
+            <img class="img-responsive center-block" src="{{currentSelection.sku.fullImage}}" title="{{product.shortDescription}}" />
+        </div>
+        <div class="product-attribute col-md-6">
+            <div class="product-description h4">{{product.name}}</div>
+            <div class="product-description"><span>SKU: {{currentSelection.sku.partNumber}}</span></div>
+            <ng-container *ngFor="let price of product.price">
+                <div class="product-description" *ngIf="price.usage === 'Offer'">
+                    <span>{{price.currency}}: </span><span>{{price.value}}</span>
+                </div>
+            </ng-container>
+            <div class="container-fluid">
+                <form #productForm="ngForm" (ngSubmit)="onSubmit()">
+                    <div [hidden]="!invalidSKU"
+                        class="alert alert-danger">
+                    Selection not available, choose a different combination.
+                    </div>
+                    <ng-container *ngFor="let att of product.availableAttributes">
+                        <div class="form-group" *ngIf="att.usage === 'Defining'">
+                            <label for="{{att.identifier}}">{{att.name}}</label>
+                            <select class="form-control" name="{{att.identifier}}" id="{{att.identifier}}" required (change)="onAttributeChange()" [(ngModel)]="currentSelection.selectedAttributes[att.identifier]">
+                                <option *ngFor="let value of att.values" [value]="value.identifier">{{value.identifier}}</option>
+                            </select>
+                        </div>
+                    </ng-container>
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" required [(ngModel)]="currentSelection.quantity" name="quantity" >
+                    </div>
+                     <div [hidden]="currentSelection.quantity > 0"
+                        class="alert alert-danger">
+                        Quantity must be greater or equal to 1.
+                    </div>
+                    <button type="submit" class="btn btn-default add-to-cart" [disabled]="!productForm.form.valid || invaildSKU || currentSelection.quantity < 1"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

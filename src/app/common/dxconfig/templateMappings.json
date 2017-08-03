@@ -1,0 +1,25 @@
+{
+	"mappings": [
+		{
+			"name": "contact",
+			"typeName": "static-page-Contact",
+			"templatePath": "/templates/contactUs.handlebars",
+			"templateEngine": "handlebars",
+			"urlTemplate": "{templateLocation}/{name}.html"
+		},
+		{
+			"name": "simple",
+			"typeName": "static-page-Simple",
+			"templatePath": "/templates/simplePage.handlebars",
+			"templateEngine": "handlebars",
+			"urlTemplate": "{templateLocation}/{name}.html"
+		},
+		{
+			"name": "blog",
+			"typeName": "Blog-Post",
+			"templatePath": "/templates/blogSingle.handlebars",
+			"templateEngine": "handlebars",
+			"urlTemplate": "{templateLocation}/{name}.html"
+		}
+	]
+}

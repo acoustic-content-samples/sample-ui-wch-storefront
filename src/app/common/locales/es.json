@@ -1,0 +1,20 @@
+{
+	"Canada": "Canadá",
+	"UK": "Reino Unido",
+	
+	"Account": "Cuenta",
+	"Wishlist": "Lista de deseos",
+	"Checkout": "Paso por caja",
+	"Cart": "Cesta",
+	"Login": "Inicio de sesión",
+	"Logout": "Finalizar sesión",
+
+	"Signup": "Registrarse",
+	"Could not log in": "No se ha podido iniciar sesión",
+	"Could not register new user": "No se ha podido registrar un nuevo usuario",
+	"Login to your account": "Inicie la sesión en su cuenta",
+	"Username is required": "El nombre de usuario es necesario",
+	"Email is required": "La dirección de correo electrónico es necesaria",
+	"Password is required": "La contraseña es necesaria"
+}
+
