@@ -98,3 +98,7 @@ Using mock data
 1. top categories
 2. product with partNumber `AuroraWMDRS-1` and `AuroraWMDRS-001` under category Women/dresses
 3. shopping cart page and guest checkout flow.
+
+Screenshots
+-------------
+https://developer.ibm.com/customer-engagement/2017/07/31/new-sample-hosting-storefront-watson-content-hub/
