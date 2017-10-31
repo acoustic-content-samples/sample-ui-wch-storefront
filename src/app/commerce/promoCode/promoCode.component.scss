@@ -1,0 +1,27 @@
+@import '../../common/variables';
+
+a {
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+input {
+    margin-left: 5px;
+}
+
+.apply {
+  background: $brand-color-primary;
+  border-radius: 0;
+  color: $white;
+  margin-top: 18px;
+  border: none;
+  padding: 5px 15px;
+  vertical-align: baseline;
+  margin-left: 10px;
+}
+
+.promo-code-container {
+    margin: 5px 0px;
+}

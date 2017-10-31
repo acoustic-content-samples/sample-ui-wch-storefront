@@ -1,0 +1,467 @@
+{
+    "models": {
+        "com.ibm.commerce.order.facade.datatypes.ChannelType": {
+            "id": "com.ibm.commerce.order.facade.datatypes.ChannelType",
+            "properties": {
+                "channelIdentifer": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.order.facade.datatypes.ChannelType.channelIdentifer",
+                    "required": false
+                },
+                "userData": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.order.facade.datatypes.ChannelType.userData",
+                    "required": false
+                },
+                "description": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.order.facade.datatypes.ChannelType.description",
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.rest.order.handler.AssignedPromotionCodeHandler$ApplyPromotionCodeBody": {
+            "description": "Body of a request to apply a promotion code to a shopping cart.",
+            "id": "com.ibm.commerce.rest.order.handler.AssignedPromotionCodeHandler$ApplyPromotionCodeBody",
+            "properties": {
+                "promoCode": {
+                    "name": "promoCode",
+                    "description": "The promotion code.",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "cart-assigned_promotion_code": {
+            "id": "cart-assigned_promotion_code",
+            "properties": {
+                "orderId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "buyerPONumber": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "promotionCode": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-assigned_promotion_code.promotionCode"
+                    },
+                    "required": false
+                },
+                "channel": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.order.facade.datatypes.ChannelType",
+                    "required": false
+                },
+                "externalOrderID": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "customerOrderNumber": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "quoteID": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "quoteIdentifier": {
+                    "description": "",
+                    "$ref": "com.ibm.commerce.foundation.common.datatypes.QuoteIdentifierType",
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.foundation.common.datatypes.QuoteIdentifierType": {
+            "id": "com.ibm.commerce.foundation.common.datatypes.QuoteIdentifierType",
+            "properties": {
+                "uniqueID": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "externalQuoteID": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "Empty": {
+            "description": "Empty model. Used as default value when no model is specified.",
+            "id": "Empty",
+            "properties": {}
+        },
+        "com.ibm.commerce.order.facade.datatypes.ChannelType.userData": {
+            "id": "com.ibm.commerce.order.facade.datatypes.ChannelType.userData",
+            "properties": {
+                "userDataField": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "com.ibm.commerce.order.facade.datatypes.ChannelType.userData.userDataField"
+                    },
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.rest.order.handler.AssignedPromotionCodeHandler$RemovePromotionCodeResponse": {
+            "description": "Body of a response to remove a promotion code from a shopping cart.",
+            "id": "com.ibm.commerce.rest.order.handler.AssignedPromotionCodeHandler$RemovePromotionCodeResponse",
+            "properties": {
+                "orderId": {
+                    "name": "orderId",
+                    "description": "The order identifier.",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "com.ibm.commerce.rest.order.handler.AssignedPromotionCodeHandler$ApplyPromotionCodeResponse": {
+            "description": "Body of a response to apply a promotion code to a shopping cart.",
+            "id": "com.ibm.commerce.rest.order.handler.AssignedPromotionCodeHandler$ApplyPromotionCodeResponse",
+            "properties": {
+                "orderId": {
+                    "name": "orderId",
+                    "description": "The order identifier.",
+                    "type": "string",
+                    "required": true
+                },
+                "promoCode": {
+                    "name": "promoCode",
+                    "description": "The promotion code.",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "com.ibm.commerce.order.facade.datatypes.ChannelType.channelIdentifer": {
+            "id": "com.ibm.commerce.order.facade.datatypes.ChannelType.channelIdentifer",
+            "properties": {
+                "channelName": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "uniqueID": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "cart-assigned_promotion_code.promotionCode": {
+            "id": "cart-assigned_promotion_code.promotionCode",
+            "properties": {
+                "code": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "associatedPromotion": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "cart-assigned_promotion_code.promotionCode.associatedPromotion"
+                    },
+                    "required": false
+                }
+            }
+        },
+        "cart-assigned_promotion_code.promotionCode.associatedPromotion": {
+            "id": "cart-assigned_promotion_code.promotionCode.associatedPromotion",
+            "properties": {
+                "description": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "promotionId": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.order.facade.datatypes.ChannelType.description": {
+            "id": "com.ibm.commerce.order.facade.datatypes.ChannelType.description",
+            "properties": {
+                "language": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "com.ibm.commerce.order.facade.datatypes.ChannelType.userData.userDataField": {
+            "id": "com.ibm.commerce.order.facade.datatypes.ChannelType.userData.userDataField",
+            "properties": {
+                "value": {
+                    "description": "",
+                    "type": "string",
+                    "required": false
+                },
+                "key": {
+                    "description": "",
+                    "type": "string",
+                    "required": true
+                }
+            }
+        }
+    },
+    "apiVersion": "unknown null Version : 0 Fix Pack : 0",
+    "swaggerVersion": "1.2",
+    "basePath": "https://@aba137.watsoncommerce.ibm.com/wcs/resources",
+    "apis": [
+        {
+            "path": "/store/{storeId}/cart/@self/assigned_promotion_code",
+            "operations": [
+                {
+                    "summary": "Gets assigned promotion codes for the shopping cart.",
+                    "notes": "",
+                    "method": "GET",
+                    "responseClass": "cart-assigned_promotion_code",
+                    "secureCallMandatory": false,
+                    "partialAuthenticationAllowed": true,
+                    "nickname": "getAssignedPromotioncodeInfo",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "cart-assigned_promotion_code",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 404,
+                            "message": "The specified resource couldn't be found."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/cart/@self/assigned_promotion_code",
+            "operations": [
+                {
+                    "summary": "Applies promotion codes to the shopping cart.",
+                    "notes": "",
+                    "method": "POST",
+                    "responseClass": "com.ibm.commerce.rest.order.handler.AssignedPromotionCodeHandler$ApplyPromotionCodeResponse",
+                    "secureCallMandatory": false,
+                    "partialAuthenticationAllowed": true,
+                    "nickname": "applyPromotioncode",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "com.ibm.commerce.rest.order.handler.AssignedPromotionCodeHandler$ApplyPromotionCodeResponse",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "body",
+                            "description": "The request body for applying promotion codes to the shopping cart.",
+                            "type": "com.ibm.commerce.rest.order.handler.AssignedPromotionCodeHandler$ApplyPromotionCodeBody",
+                            "required": true
+                        }
+                    ],
+                    "consumes": [
+                        "application/json",
+                        "application/xml"
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 201,
+                            "message": "The requested resource has been created."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/store/{storeId}/cart/@self/assigned_promotion_code/{promoCode}",
+            "operations": [
+                {
+                    "summary": "Removes promotion codes from the shopping cart.",
+                    "notes": "",
+                    "method": "DELETE",
+                    "responseClass": "com.ibm.commerce.rest.order.handler.AssignedPromotionCodeHandler$RemovePromotionCodeResponse",
+                    "secureCallMandatory": false,
+                    "partialAuthenticationAllowed": true,
+                    "nickname": "removePromotionCode",
+                    "produces": [
+                        "application/json",
+                        "application/xml",
+                        "application/xhtml+xml",
+                        "application/atom+xml"
+                    ],
+                    "type": "com.ibm.commerce.rest.order.handler.AssignedPromotionCodeHandler$RemovePromotionCodeResponse",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "storeId",
+                            "description": "The store identifier.",
+                            "type": "string",
+                            "required": true,
+                            "enum": [
+                                "0",
+                                "10001",
+                                "10501",
+                                "11001",
+                                "1"
+                            ]
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "promoCode",
+                            "description": "The promotion code.",
+                            "type": "string",
+                            "required": true
+                        },
+                        {
+                            "paramType": "query",
+                            "allowMultiple": false,
+                            "name": "responseFormat",
+                            "description": "The response format. If the request has an input body, that body must also use the format specified in \"responseFormat\". Valid values include \"json\" and \"xml\" without the quotes. If the responseFormat isn't specified, the \"accept\" HTTP header shall be used to determine the format of the response. If the \"accept\" HTTP header isn't specified as well, the default response format shall be in json.",
+                            "type": "string",
+                            "required": false,
+                            "enum": [
+                                "xml",
+                                "json"
+                            ]
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "The requested completed successfully."
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad request. Some of the inputs provided to the request aren't valid."
+                        },
+                        {
+                            "code": 401,
+                            "message": "Not authenticated. The user session isn't valid."
+                        },
+                        {
+                            "code": 403,
+                            "message": "The user isn't authorized to perform the specified request."
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal server error. Additional details will be contained on the server logs."
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "resourcePath": "store/{storeId}/cart/@self/assigned_promotion_code",
+    "description": "This class provides RESTful services to add, get, update, and delete assigned promotion codes for the current shopping cart."
+}

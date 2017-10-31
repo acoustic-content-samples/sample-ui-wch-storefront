@@ -1,0 +1,119 @@
+<section id="address">
+    <div *ngIf="allowEdit; else elseBlock" class="row row-fit">
+        <form id="addressSaveForm" name="addressSaveForm" (ngSubmit)="addressSaveForm.form.valid && performSave()" #addressSaveForm="ngForm">
+            <div class="form-group row">
+                <div *ngIf="_addr.newAddr" class="col-sm-6">
+                    <input type="text" id="nickName" name="nickName" class="form-control" placeholder="{{'NickNamePlaceholder'|translate}}" [(ngModel)]="_addr.nickName" #nickName="ngModel" required />
+                </div>
+                <div class="col-sm-6">
+                    <select [disabled]="!editMode" class="form-control" id="addressType" name="addressType" [(ngModel)]="_addr.addressType" required>
+                        <option value="" selected disabled translate>AddressType</option>
+                        <option *ngFor="let type of addrTypes" [value]="type" translate>{{type}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <input [disabled]="!editMode" type="text" id="firstName" name="firstName" class="form-control" placeholder="{{'FirstName'|translate}}" [(ngModel)]="_addr.firstName" #firstName="ngModel" required />
+                </div>
+                <div class="col-sm-6">
+                    <input [disabled]="!editMode" type="text" id="lastName" name="lastName" class="form-control" placeholder="{{'LastName'|translate}}" [(ngModel)]="_addr.lastName" #lastName="ngModel" required />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <input [disabled]="!editMode" type="text" id="address0" name="address0" class="form-control" placeholder="{{'StreetAddress'|translate}}" [(ngModel)]="_addr.addressLine[0]" #address0="ngModel" required />
+                </div>
+                <div class="col-sm-6">
+                    <input [disabled]="!editMode" type="text" id="address1" name="address1" class="form-control" placeholder="{{'StreetAddressLine2'|translate}}" [(ngModel)]="_addr.addressLine[1]" #address1="ngModel" required />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <input [disabled]="!editMode" type="text" id="city" name="city" class="form-control" placeholder="{{'City'|translate}}" [(ngModel)]="_addr.city" #city="ngModel" required />
+                </div>
+                <div class="col-sm-6">
+                    <select [disabled]="!editMode" class="form-control" id="countryList" name="countryList" [(ngModel)]="_addr.country" (change)="adjustStateProv()" required>
+                        <option value="" selected disabled translate>CountryRegion</option>
+                        <option *ngFor="let country of countries" [value]="country.code">{{country.displayName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <select *ngIf="countryDescs&&countryDescs[_addr.country]&&countryDescs[_addr.country].states.length>0" [disabled]="!editMode || !countryDescs[_addr.country].states.length" class="form-control" id="stateList" name="stateList" [(ngModel)]="_addr.state" required>
+                        <option value="" selected disabled translate>StateProvince</option>
+                        <option *ngFor="let state of countryDescs[_addr.country].states" [value]="state.code">{{state.displayName}}</option>
+                    </select>
+                    <input *ngIf="countryDescs&&countryDescs[_addr.country]&&countryDescs[_addr.country].states.length==0" [disabled]="!editMode" type="text" id="stateText" name="stateText" class="form-control" placeholder="{{'StateProvince'|translate}}" [(ngModel)]="_addr.state" #state="ngModel" required />
+                </div>
+                <div class="col-sm-6">
+                    <input [disabled]="!editMode" type="text" id="zipCode" name="zipCode" class="form-control" placeholder="{{'ZipPostalPlaceholder'|translate}}" [(ngModel)]="_addr.zipCode" #zipCode="ngModel" required />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <input [disabled]="!editMode" type="email" id="email1" name="email1" class="form-control" placeholder="{{'EmailPlaceholder'|translate}}" [(ngModel)]="_addr.email1" #email1="ngModel" required />
+                </div>
+                <div class="col-sm-6">
+                    <input [disabled]="!editMode" type="text" id="phone1" name="phone1" class="form-control" placeholder="{{'PhonePlaceholder'|translate}}" [(ngModel)]="_addr.phone1" #phone1="ngModel" required />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6 text-center">
+                    <button type="submit" [disabled]="!editMode||!addressSaveForm.form.valid||saveProcessing" class="btn btn-primary" translate>Save</button>
+                    <label *ngIf="saveProcessing" class="image-processing"></label>
+                </div>
+                <div class="col-sm-6 text-center">
+                    <button (click)="setEditStatus(false,_addr.nickName)" [disabled]="!editMode||saveProcessing" class="btn btn-primary" translate>Cancel</button>
+                </div>
+            </div>
+            <div *ngIf="addressSaveForm.submitted && saveErrorMsg" class="row">
+                <div class="alert alert-danger" role="alert" translate>{{saveErrorMsg}}</div>
+            </div>
+        </form>
+    </div>
+    <ng-template #elseBlock>
+        <div *ngIf="_addr.firstName||_addr.lastName" class="row">
+            <div class="col-sm-6">
+                <span *ngIf="_addr.firstName">{{_addr.firstName}} </span>{{_addr.lastName}}
+            </div>
+        </div>
+        <h3 translate>{{title}}</h3>
+        <div class="row">
+            <div [ngClass]="{'col-sm-offset-3':_addr.addressType,'col-sm-3':_addr.addressType,'col-sm-6':!_addr.addressType}">
+                <span *ngIf="_addr.addressLine&&_addr.addressLine[0]">
+                    {{_addr.addressLine[0]}}
+                </span>
+                <span *ngIf="_addr.addressLine&&_addr.addressLine[1]">
+                    <br/>{{_addr.addressLine[1]}}
+                </span>
+                <span *ngIf="_addr.addressLine&&_addr.addressLine[2]">
+                    <br/>{{_addr.addressLine[2]}}
+                </span>
+                <span *ngIf="_addr.city||_addr.state">
+                    <br/>{{_addr.city}} {{_addr.state}}
+                </span>
+                <span *ngIf="countryDescs&&countryDescs[_addr.country]">
+                    <br/>{{countryDescs[_addr.country].displayName}}
+                </span>
+                <span *ngIf="_addr.zipCode">
+                    <br/>{{_addr.zipCode}}
+                </span>
+            </div>
+        </div>
+        <div *ngIf="_addr.addressType" class="row">
+            <div class="col-sm-3 bold-text" translate>AddressType</div>
+            <div class="col-sm-3" translate>{{_addr.addressType}}</div>
+        </div>
+        <h3 translate>ContactInfo</h3>
+        <div *ngIf="_addr.phone1" class="row">
+            <div class="col-sm-3 bold-text" translate>Phone</div>
+            <div class="col-sm-3">{{_addr.phone1}}</div>
+        </div>
+        <div *ngIf="_addr.email1" class="row">
+            <div class="col-sm-3 bold-text" translate>Email</div>
+            <div class="col-sm-3">{{_addr.email1}}</div>
+        </div>
+    </ng-template>
+</section>

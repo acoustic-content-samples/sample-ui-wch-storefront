@@ -1,0 +1,89 @@
+@import '../../common/variables';
+
+/*************************
+*******login component CSS******
+**************************/
+
+
+.login-form h2, .signup-form h2,  .guest-checkout h2 {
+	color: lighten($base-text-color, 10%);
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+	font-weight: 300;
+	margin-bottom: 30px;
+}
+
+.login-form form input, .signup-form form input {
+	background: $brand-color-secondary;
+	border: medium none;
+	color: lighten($base-text-color, 10%);
+	display: block;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	font-weight: 300;
+	height: 40px;
+	margin-bottom: 10px;
+	outline: medium none;
+	padding-left: 10px;
+	width: 100%;
+}
+
+.login-form form span{
+	line-height: 25px;
+}
+
+.login-form form span input {
+	width: 15px;
+	float: left;
+	height: 15px;
+	margin-right: 5px;
+}
+
+.login-form form button, .signup-form form button, .guest-checkout form button {
+	float: left;
+	background: $brand-color-primary;
+	border: medium none;
+	border-radius: 0;
+	color: $white;
+	display: block;
+	font-family: 'Roboto', sans-serif;
+	padding: 6px 25px;
+}
+
+.login-form label input {
+	border: medium none;
+	display: inline-block;
+	height: 0;
+	margin-bottom: 0;
+	outline: medium none;
+	padding-left: 0;
+}
+
+.or {
+	background: $brand-color-primary;
+	border-radius: 40px;
+	color: $white;
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	height: 50px;
+	line-height: 50px;
+	margin-top: 75px;
+	text-align: center;
+	width: 50px;
+}
+
+.login-error {
+	margin-bottom: 15px;
+	color: crimson;
+}
+
+.login-loading {
+	float: left;
+	margin-top: 9px;
+	margin-left: 15px;
+}
+
+.guest-checkout {
+	float: left;
+	margin-top: 20px;
+}

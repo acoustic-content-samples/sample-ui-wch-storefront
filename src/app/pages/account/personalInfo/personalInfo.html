@@ -1,0 +1,126 @@
+<section id="personalInfo">
+    <div class="container">
+		<div class="row">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a routerLink="/home" translate>Home</a></li>
+                    <li><a routerLink="/account" translate>Account</a></li>
+                    <li class="active" translate>PersonalInfo</li>
+                </ol>
+            </div>
+		</div>
+		<div class="row">
+            <div *ngIf="success" class="col-sm-offset-3 alert alert-success alert-dismissable text-center">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <span translate>PInfoUpdateSuccessful</span>
+            </div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<account-side-nav></account-side-nav>
+			</div>
+			<div class="col-sm-9">
+				<h2 class="title text-center" translate>PersonalInfo</h2>
+				<form id="personalInfoForm" name="personalInfoForm" (ngSubmit)="personalInfoForm.form.valid && updatePersonalInfo()" #personalInfoForm="ngForm">
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="text" id="firstName" name="firstName" class="form-control" placeholder="{{'FirstName'|translate}}" [(ngModel)]="user.firstName" #firstName="ngModel" />
+						</div>
+						<div class="col-sm-6">
+							<input type="text" id="lastName" name="lastName" class="form-control" placeholder="{{'LastName'|translate}}" [(ngModel)]="user.lastName" #lastName="ngModel" required />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="text" id="address0" name="address0" class="form-control" placeholder="{{'StreetAddress'|translate}}" [(ngModel)]="user.address1" #address0="ngModel" required />
+						</div>
+						<div class="col-sm-6">
+							<input type="text" id="address1" name="address1" class="form-control" placeholder="{{'StreetAddressLine2'|translate}}" [(ngModel)]="user.address2" #address1="ngModel" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="text" id="city" name="city" class="form-control" placeholder="{{'City'|translate}}" [(ngModel)]="user.city" #city="ngModel" required />
+						</div>
+						<div class="col-sm-6">
+							<select class="form-control" id="countryList" name="countryList" [(ngModel)]="user.country" (change)="adjustStateProv()" required>
+								<option value="" selected disabled translate>CountryRegion</option>
+								<option *ngFor="let country of countries" [value]="country.code">{{country.displayName}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<select *ngIf="countryDescs&&countryDescs[user.country]&&countryDescs[user.country].states.length>0" [disabled]="!countryDescs[user.country].states.length" class="form-control" id="stateList" name="stateList" [(ngModel)]="user.state" required>
+								<option value="" selected disabled translate>StateProvince</option>
+								<option *ngFor="let state of countryDescs[user.country].states" [value]="state.code">{{state.displayName}}</option>
+							</select>
+							<input *ngIf="countryDescs&&countryDescs[user.country]&&countryDescs[user.country].states.length==0" type="text" id="stateText" name="stateText" class="form-control" placeholder="{{'StateProvince'|translate}}" [(ngModel)]="user.state" #state="ngModel" required />
+						</div>
+						<div class="col-sm-6">
+							<input type="text" id="zipCode" name="zipCode" class="form-control" placeholder="{{'ZipPostalPlaceholder'|translate}}" [(ngModel)]="user.zipCode" #zipCode="ngModel" required />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="email" id="email1" name="email1" class="form-control" placeholder="{{'EmailPlaceholder'|translate}}" [(ngModel)]="user.email1" #email1="ngModel" required />
+						</div>
+						<div class="col-sm-6">
+							<input type="text" id="phone1" name="phone1" class="form-control" placeholder="{{'PhonePlaceholder'|translate}}" [(ngModel)]="user.phone1" #phone1="ngModel" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<select class="form-control" id="prefCurrList" name="prefCurrList" [(ngModel)]="user.preferredCurrency">
+								<option value="" selected disabled translate>PrefCurrency</option>
+								<option *ngFor="let prefCurr of currencies" [value]="prefCurr.additionalValue[0].value">{{prefCurr.primaryValue.value}}</option>
+							</select>
+						</div>
+						<div class="col-sm-6">
+							<select class="form-control" id="genderList" name="genderList" [(ngModel)]="user.gender">
+								<option value="" selected disabled translate>Gender</option>
+								<option *ngFor="let gender of genderList" [value]="gender.name">{{gender.name}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<span>Birthday: </span>
+							<a href="#/sp/privacy">Privacy Policy</a>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-2">
+							<select class="form-control" id="birthYear" name="birthYear" [(ngModel)]="user.birthYear">
+								<option value="" selected disabled translate>BirthYear</option>
+								<option *ngFor="let birthYear of birthYears" [value]="birthYear">{{birthYear}}</option>
+							</select>
+						</div>
+						<div class="col-sm-2">
+							<select class="form-control" id="birthMonth" name="birthMonth" [(ngModel)]="user.birthMonth">
+								<option value="" selected disabled translate>BirthMonth</option>
+								<option *ngFor="let birthMonth of birthMonths" [value]="birthMonth">{{birthMonth}}</option>
+							</select>
+						</div>
+						<div class="col-sm-2">
+							<select class="form-control" id="birthDate" name="birthDate" [(ngModel)]="user.birthDate">
+								<option value="" selected disabled translate>BirthDate</option>
+								<option *ngFor="let birthDate of birthDates" [value]="birthDate">{{birthDate}}</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<div class="col-sm-12 text-center">
+							<button type="submit" [disabled]="!personalInfoForm.form.valid || updateProcessing" class="btn btn-primary" translate>Update</button>
+							<label *ngIf="updateProcessing" class="image-processing"></label>
+						</div>
+					</div>
+					<div *ngIf="personalInfoForm.submitted && updateErrorMsg" class="row">
+						<div class="alert alert-danger" role="alert" translate>{{updateErrorMsg}}</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section><!--/#personalInfo-page-->

@@ -7,10 +7,11 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
-*/
+ */
 
 /* beautify ignore:start */
-import { Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
+import { URLSearchParams } from '@angular/http';
+import { HttpResponse, HttpParams, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs/Observable';
 import { TransactionService } from "./transaction.service";
 import { CommerceEnvironment } from "../../../commerce.environment";
@@ -32,7 +33,7 @@ export class GuestIdentityService extends TransactionService {
      ** `@property {string} storeId (required)` The child property of `pathParameters`. If not specified in `pathParameters`, the same named property in `parameters` will be used. The store identifier.
      ** `@property {string} responseFormat ` The response format. If the request has an input body, that body must also use the format specified in "responseFormat". Valid values include "json" and "xml" without the quotes. If the responseFormat isn't specified, the "accept" HTTP header shall be used to determine the format of the response. If the "accept" HTTP header isn't specified as well, the default response format shall be in json.
      */
-    login(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    login(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -49,13 +50,13 @@ export class GuestIdentityService extends TransactionService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -67,7 +68,7 @@ export class GuestIdentityService extends TransactionService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json', 'application/xml', 'application/xhtml+xml', 'application/atom+xml'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -85,23 +86,23 @@ export class GuestIdentityService extends TransactionService {
         //allow use of param with or without underscore
         parameters['responseFormat'] = parameters['responseFormat'] || parameters['responseFormat'];
         if (parameters['responseFormat'] !== undefined) {
-            queryParameters.set('responseFormat', parameters['responseFormat']);
+            queryParameters = queryParameters.set('responseFormat', parameters['responseFormat']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -115,20 +116,19 @@ export class GuestIdentityService extends TransactionService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };
@@ -147,7 +147,7 @@ export class GuestIdentityService extends TransactionService {
      ** `@property {string} storeId (required)` The child property of `pathParameters`. If not specified in `pathParameters`, the same named property in `parameters` will be used. The store identifier.
      ** `@property {string} responseFormat ` The response format. If the request has an input body, that body must also use the format specified in "responseFormat". Valid values include "json" and "xml" without the quotes. If the responseFormat isn't specified, the "accept" HTTP header shall be used to determine the format of the response. If the "accept" HTTP header isn't specified as well, the default response format shall be in json.
      */
-    logout(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    logout(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -164,13 +164,13 @@ export class GuestIdentityService extends TransactionService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -182,7 +182,7 @@ export class GuestIdentityService extends TransactionService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json', 'application/xml', 'application/xhtml+xml', 'application/atom+xml'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -200,23 +200,23 @@ export class GuestIdentityService extends TransactionService {
         //allow use of param with or without underscore
         parameters['responseFormat'] = parameters['responseFormat'] || parameters['responseFormat'];
         if (parameters['responseFormat'] !== undefined) {
-            queryParameters.set('responseFormat', parameters['responseFormat']);
+            queryParameters = queryParameters.set('responseFormat', parameters['responseFormat']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -230,20 +230,19 @@ export class GuestIdentityService extends TransactionService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };

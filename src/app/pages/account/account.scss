@@ -1,0 +1,21 @@
+@import '../../common/variables';
+
+/*************************
+*******account page CSS******
+**************************/
+
+#account-page .component-border {
+    border-top: 1px solid #E6E4DF;
+    margin-bottom: 15px;
+}
+
+#account-page h3 {
+    color: lighten($base-text-color, 10%);
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+#account-page a {
+    font-weight: bold;
+}

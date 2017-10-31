@@ -12,18 +12,20 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import { LoginComponent } from "./login.component";
+import { LoginPageComponent } from "./login.component";
+import { CommerceModule } from '../../commerce/commerce.module';
 
 @NgModule({
 	imports: [
 		RouterModule.forChild([
-			{ path: '', component: LoginComponent }
+			{ path: '', component: LoginPageComponent }
 		]),
 		CommonModule,
-		FormsModule
+		FormsModule,
+		CommerceModule
 	],
 	declarations: [
-		LoginComponent
+		LoginPageComponent
 	]
 })
 export class LoginModule {}

@@ -27,7 +27,7 @@ copy.forEach(item => fsextra.copy(item.src, item.dest, function (err) {
 }));
 
 module.exports = {
-	devtool: 'cheap-module-source-map',
+	devtool: 'eval-source-map',
 	entry: {
 		app: [path.resolve(__dirname, 'src/main.ts')]
 	},

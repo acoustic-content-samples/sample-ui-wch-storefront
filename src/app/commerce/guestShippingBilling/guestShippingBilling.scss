@@ -1,0 +1,46 @@
+form {
+    margin-top: 25px;
+}
+
+form input, form select {
+    margin-bottom: 15px;
+    float: none;
+}
+
+.form-title {
+    font-size: 15px;
+}
+
+.BillingForm {
+    padding-top: 30px;
+}
+
+.denotes-required-fields {
+    height: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.asterix{
+    color: red;
+    margin-right: 2px;
+}
+
+.copy-address input[type="checkbox"]{
+    margin-left: 0px;
+    height: 20px;
+}
+
+.button-group {
+    margin-bottom: 50px;
+    float: right;
+}
+
+.button-group button {
+    background: #2d74da;
+    border-radius: 0px;
+    color: white;
+    width: 100px;
+    margin-left: 15px;
+}
+

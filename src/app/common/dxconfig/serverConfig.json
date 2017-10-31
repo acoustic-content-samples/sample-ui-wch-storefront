@@ -2,11 +2,15 @@
 	"contentHubID": "",
 	"contentHubDomainName": "",
 	"commerceSearchDomainName": "",
-	"commerceSearchSecurePort":"",
-	"commerceSearchContextPath":"",
+	"commerceSearchSecurePort":"443",
+	"commerceSearchContextPath":"/search/resources",
 	"commerceTransactionDomainName": "",
-	"commerceTransactionSecurePort": "",
-	"commerceTransactionContextPath":"",
-	"commerceStoreID": "",
-	"commerceCatalogID": ""
+	"commerceTransactionSecurePort": "443",
+	"commerceTransactionContextPath":"/wcs/resources",
+	"commerceStoreID": "1",
+	"commerceCatalogID": "10502",
+	"logger":{
+		"level": 2,
+		"store": false
+	}
 }

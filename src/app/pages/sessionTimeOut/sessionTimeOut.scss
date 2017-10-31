@@ -1,0 +1,39 @@
+@import '../../common/variables';
+
+/*************************
+*******Session Timeout CSS******
+**************************/
+
+.logo-session-timeout {
+  margin-top: 60px;
+}
+
+.content-session-timeout h1 {
+  color: $base-text-color;
+  font-family: 'Roboto', sans-serif;
+  font-size: 41px;
+  font-weight: 300;
+}
+
+.content-session-timeout img {
+ margin:0 auto;
+}
+
+.content-session-timeout p {
+  color: $base-text-color;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+}
+
+.content-session-timeout  h2 {
+  margin-top:50px;
+}
+
+.content-session-timeout h2 a {
+  background: $brand-color-primary;
+  color: $white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 44px;
+  font-weight: 300;
+  padding: 8px 40px;
+}

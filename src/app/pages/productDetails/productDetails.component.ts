@@ -9,7 +9,9 @@
 */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
+import { Logger } from "angular2-logger/core";
 import { CartTransactionService } from "../../commerce/services/componentTransaction/cart.transaction.service";
 
 @Component({
@@ -21,7 +23,8 @@ export class ProductDetailsComponent implements OnInit {
 	invalidSKU: boolean;
 	product: any = {
 		price: [{}],
-		attributes: [{values:[{}]}]
+		attributes: [{values:[{}]}],
+		fullImage: ""
 	};
 	currentSelection: any = {
 		sku: {
@@ -33,13 +36,14 @@ export class ProductDetailsComponent implements OnInit {
 
 	constructor(
 		private cartTransactionService: CartTransactionService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private logger: Logger
 	) {}
 
 	ngOnInit () {
 		this.route.params.subscribe(params => {
 			this.cartTransactionService.getProduct(params.id).then(product => {
-				console.log(product);
+				this.logger.info( this.constructor.name + " getProduct: %o", product );
 				this.initializeProduct(product);
 			});
 		});
@@ -50,19 +54,34 @@ export class ProductDetailsComponent implements OnInit {
     }
 
 	onSubmit() {
-        this.cartTransactionService
-			.addToCart(this.currentSelection.quantity, this.currentSelection.sku.uniqueID)
-			.then(res=>alert(res));
-
+        this.cartTransactionService.addToCart(this.currentSelection.quantity, this.currentSelection.sku.uniqueID).then(res => {
+			this.logger.info( this.constructor.name + " addToCart: %o", res );
+		}).catch( error => {
+            alert(this._parseErrorMsg(error, "Could not add the product to cart"))
+        })
     }
 
 	private initializeProduct(product: any){
 		if ( product ) {
-            this.product = JSON.parse( JSON.stringify( product ) );
-            this.product.availableAttributes = JSON.parse( JSON.stringify( product.attributes ) );
-            this.currentSelection.sku = this.product.sKUs[0];
+			this.product = JSON.parse( JSON.stringify( product ) );
+			if ( product.attributes ) {
+				this.product.availableAttributes = JSON.parse( JSON.stringify( product.attributes ) );
+			}
+			// Product
+			if (this.product.sKUs && this.product.sKUs.length > 0) {
+				this.currentSelection.sku = this.product.sKUs[0];
+				this.initializeSelectedAttributes();
+			}
+			else {
+				this.currentSelection.sku = this.product;
+				this.currentSelection.selectedAttributes = {};
+				if (this.currentSelection.sku.attributes) {
+					for ( let att of this.currentSelection.sku.attributes ) {
+						this.currentSelection.selectedAttributes[att.identifier] = att.values[0].identifier;
+					}
+				}
+			}
             this.currentSelection.quantity = 1;
-            this.initializeSelectedAttributes();
         }
 	}
 
@@ -88,10 +107,16 @@ export class ProductDetailsComponent implements OnInit {
                 match = match && this.currentSelection.selectedAttributes[key] === values[key];
             }
             if ( match ) {
-                this.currentSelection.sku = sku;
+				this.currentSelection.sku = sku;
                 return true;
             }
         }
         return false;
     }
+
+	private _parseErrorMsg(error:HttpErrorResponse,fallback:string): string {
+		const eBody=error.error,
+		      rc=eBody.errors&&eBody.errors.length&&eBody.errors[0].errorMessage?eBody.errors[0].errorMessage:fallback;
+		return rc;
+	}
 }

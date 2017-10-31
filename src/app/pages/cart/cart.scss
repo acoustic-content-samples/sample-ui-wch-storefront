@@ -4,10 +4,6 @@
 *******Cart CSS******
 **************************/
 
-#do_action {
-  margin-bottom: 50px;
-}
-
 .breadcrumbs {
   position: relative;
 }
@@ -84,7 +80,6 @@
   font-family: 'Roboto',sans-serif;
   font-size: 20px;
   font-weight: normal;
-
 }
 
 #cart_items .cart_info .cart_description p {
@@ -170,7 +165,7 @@
   border: 1px solid #E6E4DF;
   color: lighten($base-text-color, 10%);
   padding: 30px 25px 30px 0;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
 
 .total_area span {
@@ -178,10 +173,8 @@
 }
 
 .total_area ul li {
-  background:#E6E4DF;
   color: lighten($base-text-color, 10%);
   margin-top: 10px;
-  padding: 7px 20px;
   list-style: none;
 }
 
@@ -221,8 +214,6 @@
   margin-right: 10px
 }
 
-.user_info > li > span {
-}
 
 .user_info input, select, textarea {
   background: $brand-color-secondary;
@@ -256,4 +247,22 @@
 
 .check_out {
   margin-left: 20px
+}
+
+.checkout-options {
+  margin-bottom: 50px;
+}
+
+.checkout-options .container{
+  h2 {
+    background: none repeat scroll 0 0 $brand-color-secondary;
+    color: $base-text-color;
+    padding: 10px 25px;
+    font-size: 20px;
+    margin-bottom: 35px;
+  }
+
+  .registered-checkout {
+    float: right;
+  }
 }

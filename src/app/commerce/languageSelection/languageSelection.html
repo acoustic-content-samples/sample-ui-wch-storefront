@@ -1,0 +1,8 @@
+<div class="btn-group" id="languageSelection">
+	<select class="btn btn-default dropdown-toggle" id="supportedLangList" name="supportedLangList" [(ngModel)]="selectedLanguage" (change)="changeLang()">
+		<option value="" selected disabled translate>Language</option>
+		<option *ngFor="let supportedLang of supportedLanguages" [value]="supportedLang.additionalValue[2].value" translate>{{supportedLang.primaryValue.value}}</option>
+		<!-- DUMMY FRENCH LANGUAGE HOLDER -->
+		<option value="fr">French</option>
+	</select>	
+</div>

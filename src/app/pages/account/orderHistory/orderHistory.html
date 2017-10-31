@@ -1,0 +1,23 @@
+<section id="order_history">
+	<div class="container">
+		<div class="row">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+					<li><a routerLink="/home" translate>Home</a></li>
+					<li><a routerLink="/account" translate>Account</a></li>
+					<li class="active" translate>{{ordDisplay[listType]}}</li>
+				</ol>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<account-side-nav></account-side-nav>
+			</div>
+			<div class="col-sm-9">
+				<h2 class="title text-center" translate>{{ordDisplay[listType]}}</h2>
+				<order-list [listType]="listType"></order-list>
+			</div>
+		</div>
+	</div>
+</section>
+<!--/#order_history-->

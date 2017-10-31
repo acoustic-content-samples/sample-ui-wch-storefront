@@ -8,18 +8,36 @@
  * specific language governing permissions and limitations under the License.
 */
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http } from "@angular/http";
 
 @Injectable()
 export class ConfigService {
 
 	public configJSON: any;
 
+	public servicesConfig: any;
+
+	public static loggerOptions: any;
+
+	private sessionId: number;
+
 	constructor(private http: Http) { }
 
 	init(): Promise<any> {
-		return this.http.get('dxconfig/serverConfig.json').toPromise().then(res => {
+		return this.http.get('/dxconfig/serverConfig.json').toPromise().then(res => {
 			this.configJSON = res.json();
+			ConfigService.loggerOptions = this.configJSON.logger;
+			return this.http.get('/dxconfig/servicesConfig.json').toPromise().then(res => {
+				this.servicesConfig = res.json();
+			});
 		});
 	}
+
+	getSessionId(): number{
+		let numOfDigits = 8;
+		if (!this.sessionId){
+			this.sessionId = Math.floor(Math.pow(10, numOfDigits-1) + Math.random() * 9 * Math.pow(10, numOfDigits-1));
+		}
+		return this.sessionId;
+	};
 }

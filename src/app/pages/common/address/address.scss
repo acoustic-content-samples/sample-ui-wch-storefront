@@ -1,0 +1,17 @@
+@import '../../../common/variables';
+
+#address h3 {
+	color: lighten($base-text-color, 10%);
+	font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+#address .bold-text {
+    font-weight: bold;
+}
+
+#address .row-fit {
+    margin-left:0px;
+    margin-right:0px;
+}

@@ -1,0 +1,60 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-sm-offset-1">
+			<div class="row">
+				<div class="login-form"><!--login form-->
+					<h2 translate>Login to your account</h2>
+					<form name="form1" (ngSubmit)="loginForm.form.valid && login()" #loginForm="ngForm">
+						<div *ngIf="loginForm.submitted && loginErrorMsg" class="login-error" role="alert" translate>{{loginErrorMsg}}</div>
+						<input type="text" class="form-control" id="username1" name="username1" placeholder="{{'EmailPlaceholder'|translate}}" [(ngModel)]="user.username1" #username1="ngModel" required />
+						<div *ngIf="loginForm.submitted && !username1.valid" class="login-error" role="alert" translate>Username is required</div>
+						<input type="password" class="form-control" id="password1" name="password1" placeholder="{{'PasswordPlaceholder'|translate}}" [(ngModel)]="user.password1" #password1="ngModel" required />
+						<div *ngIf="loginForm.submitted && !password1.valid" class="login-error" role="alert" translate>Password is required</div>
+						<!--span>
+							<input type="checkbox" class="checkbox">
+							Keep me signed in
+						</span-->
+						<button type="submit" [disabled]="!loginForm.form.valid || loginLoading" class="btn btn-default" translate>Login</button>
+						<img *ngIf="loginLoading" class="login-loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+					</form>
+				</div><!--/login form-->
+			</div>
+			<div class="row spacer">
+				<a routerLink="/forgotPassword" routerLinkActive="active">
+					<span translate>ForgotPassword</span>
+				</a>
+			</div>
+		</div>
+		<div class="col-sm-1">
+			<h2 class="or">OR</h2>
+		</div>
+		<div class="col-sm-4">
+			<div class="signup-form"><!--sign up form-->
+				<h2 translate>NewUserSignUp</h2>
+
+				<form name="form2" (ngSubmit)="registerForm.form.valid && register()" #registerForm="ngForm">
+					<div *ngIf="registerForm.submitted && registerErrorMsg" class="login-error" role="alert" translate>{{registerErrorMsg}}</div>
+
+					<input type="email" class="form-control" id="username2" name="username2" placeholder="{{'EmailPlaceholder'|translate}}" [(ngModel)]="user.username2" #username2="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
+					<div *ngIf="username2.dirty && !username2.valid && username2.hasError('required')" class="login-error" role="alert" translate>Email is required</div>
+					<div *ngIf="username2.dirty && username2.touched && !username2.valid && username2.hasError('pattern')" class="login-error" role="alert" translate>Email format is invalid</div>
+
+					<input type="password" class="form-control" id="password2" name="password2" placeholder="{{'PasswordPlaceholder'|translate}}" [(ngModel)]="user.password2" #password2="ngModel" required />
+					<div *ngIf="password2.dirty && !password2.valid && password2.hasError('required')" class="login-error" role="alert" translate>Password is required</div>
+
+					<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="{{'ConfirmSignupPasswordPlaceholder'|translate}}" [(ngModel)]="user.confirmPassword" #confirmPassword="ngModel" required />
+					<div *ngIf="confirmPassword.dirty && !confirmPassword.valid && confirmPassword.hasError('required')" class="login-error" role="alert" translate>ConfirmPasswordReqd</div>
+
+					<button type="submit" [disabled]="!registerForm.form.valid || registerLoading" class="btn btn-default" translate>Signup</button>
+					<img *ngIf="registerLoading" class="login-loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+				</form>
+			</div><!--/sign up form-->
+			<div class="guest-checkout" *ngIf="useForCheckout">
+				<h2 translate>GuestCheckoutHeader</h2>
+				<form name="guest-checkout-form">
+					<button class="btn btn-default " [routerLink]="['/checkout']" translate>ContinueAsGuestBtn</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,44 @@
+@import '../../../common/variables';
+
+.order_list {
+    border: 1px solid #E6E4DF;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.order_list .order_list_headers {
+    background: $brand-color-primary;
+    color: $white;
+    font-size: 16px;
+    font-weight: normal;
+    padding-left: 30px;
+}
+
+.order_list thead tr {
+    height: 51px;
+}
+
+.order_list tr {
+    border-bottom: 1px solid#F7F7F0;
+}
+
+.order_list tr:last-child {
+    border-bottom: 0;
+}
+
+.order_list table tr td {
+    border-top: 0 none;
+    vertical-align: inherit;
+}
+
+.order_list .order-action {
+    background: $brand-color-primary;
+    border: 0 none;
+    border-radius: 0;
+    color: $white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}

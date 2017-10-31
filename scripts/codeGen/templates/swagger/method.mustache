@@ -13,7 +13,7 @@
  {{#parameters}}{{^isSingleton}} ** `@property {{^isBodyParameter}}{{=<% %>=}}{<%&type%>}<%={{ }}=%>{{/isBodyParameter}}{{#isBodyParameter}}{any}{{/isBodyParameter}} {{&camelCaseName}} {{#required}}(required){{/required}}` {{#isPathParameter}}The child property of `pathParameters`. If not specified in `pathParameters`, the same named property in `parameters` will be used. {{/isPathParameter}}{{&description}}{{/isSingleton}}
 {{/parameters}}
  */
-{{&methodName}}(parameters: any, headers?: any, url?: string ): Observable<Response> {
+{{&methodName}}(parameters: any, headers?: any, url?: string ): Observable<HttpResponse<any>> {
     let useMocks = false;
     //Set domain based on profile.
     if (url && url === 'mocks') {
@@ -30,14 +30,14 @@
     }
     let form = {};
     let body = {};
-    let header: Headers;
-    let queryParameters = new URLSearchParams();
+    let header: HttpHeaders;
+    let queryParameters = new HttpParams();
     let formParams = new URLSearchParams();
     if ( typeof headers === 'undefined' || headers === null ) {
-        header = new Headers();
+        header = new HttpHeaders();
     }
     else {
-        header = new Headers( headers );
+        header = new HttpHeaders( headers );
     }
     if(parameters === undefined) {
         parameters = {};
@@ -50,34 +50,45 @@
 	{{#headers}}
         headerValues['{{&name}}'] = [{{&value}}];
         for (let val of headerValues['{{&name}}']){
-		    header.append('{{&name}}', val);
+		    header = header.append('{{&name}}', val);
         }
 	{{/headers}}
 
     {{#parameters}}
 
-        //allow use of param with or without underscore
-        parameters['{{&camelCaseName}}'] = parameters['{{&camelCaseName}}'] || parameters['{{&name}}'];
         {{#isQueryParameter}}
             {{#isSingleton}}
-                queryParameters.set('{{&name}}', '{{&singleton}}');
+            {{#required}}
+                queryParameters = queryParameters.set('{{&name}}', '{{&singleton}}');
+            {{/required}}
+            {{^required}}
+                //allow use of param with or without underscore
+                parameters['{{&camelCaseName}}'] = parameters['{{&camelCaseName}}'] || parameters['{{&name}}'];
+                if(parameters['{{&camelCaseName}}'] !== undefined){
+                    queryParameters = queryParameters.set('{{&name}}', parameters['{{&camelCaseName}}']);
+                }
+            {{/required}}
             {{/isSingleton}}
             {{^isSingleton}}
                 {{#isPatternType}}
                     Object.keys(parameters).forEach(function(parameterName) {
                         if(new RegExp('{{&pattern}}').test(parameterName)){
-                            queryParameters.set(parameterName, parameters[parameterName]);
+                            queryParameters = queryParameters.set(parameterName, parameters[parameterName]);
                         }
                     });
                 {{/isPatternType}}
                 {{^isPatternType}}
+                //allow use of param with or without underscore
+                parameters['{{&camelCaseName}}'] = parameters['{{&camelCaseName}}'] || parameters['{{&name}}'];
                 if(parameters['{{&camelCaseName}}'] !== undefined){
-                    queryParameters.set('{{&name}}', parameters['{{&camelCaseName}}']);
+                    queryParameters = queryParameters.set('{{&name}}', parameters['{{&camelCaseName}}']);
                 }
                 {{/isPatternType}}
             {{/isSingleton}}
         {{/isQueryParameter}}
         {{#isPathParameter}}
+            //allow use of param with or without underscore
+            parameters['{{&camelCaseName}}'] = parameters['{{&camelCaseName}}'] || parameters['{{&name}}'];
             parameters.pathParameters['{{&camelCaseName}}'] = parameters.pathParameters['{{&camelCaseName}}'] || parameters.pathParameters['{{&name}}'];
             if (parameters.pathParameters['{{&camelCaseName}}'] === undefined){
                 parameters.pathParameters['{{&camelCaseName}}'] = parameters['{{&camelCaseName}}'];
@@ -87,16 +98,20 @@
 
         {{#isHeaderParameter}}
             {{#isSingleton}}
-                header.append('{{&name}}', '{{&singleton}}');
+                header = header.append('{{&name}}', '{{&singleton}}');
             {{/isSingleton}}
             {{^isSingleton}}
+                //allow use of param with or without underscore
+                parameters['{{&camelCaseName}}'] = parameters['{{&camelCaseName}}'] || parameters['{{&name}}'];
                 if(parameters['{{&camelCaseName}}'] !== undefined){
-                    header.append('{{&name}}', parameters['{{&camelCaseName}}']);
+                    header = header.append('{{&name}}', parameters['{{&camelCaseName}}']);
                 }
             {{/isSingleton}}
         {{/isHeaderParameter}}
 
         {{#isBodyParameter}}
+            //allow use of param with or without underscore
+            parameters['{{&camelCaseName}}'] = parameters['{{&camelCaseName}}'] || parameters['{{&name}}'];
             if(parameters['{{&camelCaseName}}'] !== undefined){
                 body = parameters['{{&camelCaseName}}'];
             }
@@ -107,6 +122,8 @@
                 form['{{&name}}'] = '{{&singleton}}';
             {{/isSingleton}}
             {{^isSingleton}}
+                //allow use of param with or without underscore
+                parameters['{{&camelCaseName}}'] = parameters['{{&camelCaseName}}'] || parameters['{{&name}}'];
                 if(parameters['{{&camelCaseName}}'] !== undefined){
                     form['{{&name}}'] = parameters['{{&camelCaseName}}'];
                 }
@@ -132,7 +149,7 @@
         Object.keys(parameters.$queryParameters)
         .forEach(function(parameterName){
             var parameter = parameters.$queryParameters[parameterName];
-            queryParameters.set(parameterName,parameter);
+            queryParameters = queryParameters.set(parameterName,parameter);
         });
     }
 

@@ -38,8 +38,11 @@ export class AppComponent implements OnInit {
 
 		this.router.events.subscribe(evt => {
 			if (evt instanceof NavigationEnd) {
-				window.scrollTo(0, 0);
-			}
+				if (window.screen.width >= 500) {
+					//won't scroll to the top in mobile mode
+                    window.scrollTo(0, 0);
+                }
+            }
 		})
 	}
 }

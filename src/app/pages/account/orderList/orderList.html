@@ -1,0 +1,104 @@
+<div *ngIf="processed" class="alert alert-success alert-dismissable text-center">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <span translate>{{processed}}</span>
+</div>
+<table class="table-responsive table-condensed order_list">
+    <thead>
+        <tr class="order_list_headers">
+            <ng-container *ngIf="ordTypes.history===listType">
+                <td translate>Order Number</td>
+                <td translate>Order Date</td>
+                <td translate>Status</td>
+                <td translate>TotalPrice</td>
+            </ng-container>
+            <ng-container *ngIf="ordTypes.recurring===listType">
+                <td translate>Order Number</td>
+                <td translate>OrderScheduled</td>
+                <td translate>NextOrder</td>
+                <td translate>Status</td>
+                <td translate>TotalPrice</td>
+            </ng-container>
+            <ng-container *ngIf="ordTypes.subscription===listType">
+                <td translate>Subscription</td>
+                <td translate>NextOrder</td>
+                <td translate>ExpiryDate</td>
+                <td translate>Status</td>
+                <td translate>Price</td>
+            </ng-container>
+            <td translate>Action</td>
+        </tr>
+    </thead>
+    <tbody *ngIf="!loading">
+        <tr *ngFor="let order of orders">
+            <ng-container *ngIf="order&&ordTypes.history===listType">
+                <td>
+                    <a [routerLink]="['/account/orderDetails', order.orderId]">{{order.orderId}}</a>
+                </td>
+                <td>
+                    <p>{{order.placedDate | date}}</p>
+                </td>
+                <td>
+                    <p translate>{{getOrderStatusDescription(order.orderStatus)}}</p>
+                </td>
+                <td>
+                    <p>{{order.grandTotal | currency:order.grandTotalCurrency:true:'1.2-2'}}</p>
+                </td>
+                <td>
+                    <button class="btn btn-default order-action" (click)="reOrder(order)" translate>ReOrder</button>
+                    <button *ngIf="isCancellable(order)" class="btn btn-default order-action" (click)="cancelOrder(order)" translate>Cancel</button>
+                </td>
+            </ng-container>
+            <ng-container *ngIf="order&&ordTypes.recurring===listType">
+                <td>
+                    <a [routerLink]="['/account/orderDetails', order.purchaseDetails.parentOrderIdentifier.parentOrderId]">{{order.purchaseDetails.parentOrderIdentifier.parentOrderId}}</a>
+                </td>
+                <td>
+                    <p [translateParams]="{interval:order.subscriptionInfo.fulfillmentSchedule.frequencyInfo.frequency.value}" translate>{{getFrequency(order)}}</p>
+                </td>
+                <td>
+                    <p>{{getNextOrderDate(order)|date}}</p>
+                </td>
+                <td>
+                    <p translate>{{getOrderStatusDescription(order.state)}}</p>
+                </td>
+                <td>
+                    <p>{{order.subscriptionInfo.paymentInfo.totalCost.value|currency:order.subscriptionInfo.paymentInfo.totalCost.currency:true:'1.2-2'}}</p>
+                </td>
+                <td>
+                    <button class="btn btn-default order-action" (click)="reOrder(order)" translate>ReOrder</button>
+                    <button *ngIf="isCancellable(order)" class="btn btn-default order-action" (click)="cancelOrder(order)" translate>CancelRecurring</button>
+                </td>
+            </ng-container>
+            <ng-container *ngIf="order&&ordTypes.subscription===listType&&order._item">
+                <td>
+                    <a [routerLink]="['/product', order._item.partNumber]">{{order._item.name}}</a>
+                </td>
+                <td>
+                    <p>{{getNextOrderDate(order)|date}}</p>
+                </td>
+                <td>
+                    <p>{{getExpiryDate(order)|date}}</p>
+                </td>
+                <td>
+                    <p translate>{{getOrderStatusDescription(order.state)}}</p>
+                </td>
+                <td>
+                    <p>{{order.subscriptionInfo.paymentInfo.totalCost.value|currency:order.subscriptionInfo.paymentInfo.totalCost.currency:true:'1.2-2'}}</p>
+                </td>
+                <td>
+                    <button class="btn btn-default order-action" (click)="reOrder(order)" translate>Renew</button>
+                    <button *ngIf="isCancellable(order)" class="btn btn-default order-action" (click)="cancelOrder(order)" translate>CancelSubscription</button>
+                </td>
+            </ng-container>
+        </tr>
+    </tbody>
+</table>
+<pagination *ngIf="!acctSmry"
+    (goPage)="goToPage($event)"
+    (goNext)="onNext()"
+    (goPrev)="onPrev()"
+    [pagesToShow]="3"
+    [pageNumber]="pageNumber"
+    [pageSize]="pageSize"
+    [total]="total">
+</pagination>

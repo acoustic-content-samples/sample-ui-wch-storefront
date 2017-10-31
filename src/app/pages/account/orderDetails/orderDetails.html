@@ -1,0 +1,150 @@
+<section id="order_details">
+	<div class="container">
+		<div class="row">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+					<li><a routerLink="/home" translate>Home</a></li>
+					<li><a routerLink="/account" translate>Account</a></li>
+					<li class="active" translate>Order Details</li>
+				</ol>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2">
+				<account-side-nav></account-side-nav>
+			</div>
+			<div *ngIf="order" class="col-sm-10">
+				<div class="row">
+					<h2 class="title text-center" translate>Order Details</h2>
+				</div>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="summary_of_charge">
+							<form #reOrderForm="ngForm" (ngSubmit)="onSubmit()">
+								<ul>
+									<li translate>Order Number <span class="value">{{ order.orderId }}</span></li>
+									<li translate>Order Date <span class="value">{{ order.placedDate | date}}</span></li>
+									<li translate>Ship as complete <span class="value">{{ order.shipAsComplete }}</span></li>
+								</ul>
+								<button class="btn btn-default order-action" (click)="reOrder(order.orderId)"><span translate>Re-Order</span></button>
+								<button *ngIf="isCancellable(order.orderStatus)" class="btn btn-default order-action" (click)="cancelOrder(order.orderId)"><span translate>Cancel</span></button>
+
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4">
+						<h3 translate>Ship to:</h3>
+						<div class="order_detail_shipping">
+							<address [address]="order.orderItem[0]"></address>
+					        <div *ngIf="order.orderItem[0]" class="row">
+					            <div class="col-sm-6 boldText" translate>Shipping method: </div>
+            					<div class="col-sm-6">{{order.orderItem[0].shipModeDescription}}</div>
+        					</div>
+
+					        <div *ngIf="order" class="row">
+					            <div class="col-sm-6 boldText" translate>Ship as complete: </div>
+            					<div class="col-sm-6">
+									<div *ngIf="order.shipAsComplete == 'true'; then ShipAsComplete else NotShipAsComplete"></div>
+									<ng-template #ShipAsComplete>
+										<span translate>Yes</span>
+									</ng-template>
+									<ng-template #NotShipAsComplete>
+										<span  translate>No</span>
+									</ng-template>
+								</div>
+        					</div>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<h3 translate>Bill to:</h3>
+						<div class="order_detail_billing">
+							<address [address]="order.paymentInstruction[0]"></address>
+					        <div *ngIf="order.paymentInstruction[0]" class="row">
+					            <div class="col-sm-6 boldText" translate>Payment method: </div>
+            					<div class="col-sm-6">
+									<span *ngIf="order.paymentInstruction[0].piDescription; else NoPaymentInstruction">
+										{{ order.paymentInstruction[0].piDescription }}
+									</span>
+									<ng-template #NoPaymentInstruction>
+										<span translate>Information not available</span>
+									</ng-template>
+								</div>
+        					</div>
+					        <div *ngIf="order.orderItem[0]" class="row">
+					            <div class="col-sm-6 boldText" translate>Amount: </div>
+            					<div class="col-sm-6">{{ order.paymentInstruction[0].piAmount | currency:order.paymentInstruction[0].piCurrency:true:'1.2-2' }}</div>
+        					</div>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<h3 translate>Summary of charges:</h3>
+						<div class="summary_of_charge">
+							<ul>
+								<li translate>Merchandise <span class="value">{{ order.totalProductPrice | currency:order.totalProductPriceCurrency:true:'1.2-2' }}</span></li>
+								<li translate>Discount Adjustments <span class="value"> {{ order.totalAdjustment | currency:order.totalAdjustmentCurrency:true:'1.2-2' }} </span></li>
+								<li translate>Tax <span class="value">{{ order.totalProductPrice | currency:order.totalProductPriceCurrency:true:'1.2-2' }}</span></li>
+								<li translate>Shipping & Handling <span class="value"> {{ order.totalShippingCharge | currency:order.totalShippingChargeCurrency:true:'1.2-2' }} </span></li>
+								<li translate>Shipping Tax <span class="value"> {{ order.totalShippingTax | currency:order.totalShippingTaxCurrency:true:'1.2-2' }} </span></li>
+								<li class="total_label" translate>Total <span class="total_value">{{ order.grandTotal | currency:order.grandTotalCurrency:true:'1.2-2' }} </span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<button type="button" class="btn btn-default order-summary" data-toggle="collapse" data-target="#OrderSummary"><span class="pull-left"><i class="fa fa-plus"></i> Order Summary</span></button>
+					<div id="OrderSummary" class="table-responsive order_info collapse">
+						<table class="table table-condensed">
+							<thead>
+								<tr class="order_menu">
+									<td class="image" translate>Product</td>
+									<td class="shippping_info" translate>Shipping Info</td>
+									<td class="availabiilty" translate>Availability</td>
+									<td class="quantity" translate>Quantity</td>
+									<td class="each" translate>Each</td>
+									<td class="total" translate>Total</td>
+								</tr>
+							</thead>
+							<tbody *ngIf="order">
+								<tr *ngFor="let item of order.orderItem">
+									<ng-container *ngIf="item">
+										<td class="order_product">
+											<item-summary [itemId]="item.productId"></item-summary>
+										</td>
+										<td class="order_shipping_info">
+											<label class="order_label" translate>Expedite: </label>
+											<div *ngIf="item.isExpedited == 'true'; then Expedited else NotExpedited"></div>
+											<ng-template #Expedited>
+												<span translate>Yes</span>
+											</ng-template>
+											<ng-template #NotExpedited>
+												<span translate>No</span>
+											</ng-template>
+										</td>
+										<td class="order_availabiilty">
+											<p>{{item.orderItemInventoryStatus}}</p>
+										</td>
+										<td class="order_quantity">
+											<p>{{item.quantity}}</p>
+										</td>
+										<td class="order_item_price">
+											<p>{{item.unitPrice | currency:item.currency:true:'1.2-2'}}</p>
+										</td>
+										<td class="order_total_price">
+											<p>{{item.orderItemPrice | currency:item.currency:true:'1.2-2'}}</p>
+										</td>
+									</ng-container>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="row">
+					<button type="button" class="btn btn-default order-print" (click)="print()"><span class="pull-left" translate><i class="fa fa-print"></i> Print</span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+

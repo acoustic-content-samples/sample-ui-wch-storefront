@@ -15,6 +15,7 @@ import { FormsModule } from "@angular/forms";
 import { ThemeModule } from '../../theme/theme.module';
 
 import { ProductDetailsComponent } from './productDetails.component';
+import { BundleComponentsComponent } from './bundleComponents.component';
 import { ReviewsModule } from './reviews/reviews.module';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ReviewsModule } from './reviews/reviews.module';
 	],
 	declarations: [
 		ProductDetailsComponent,
+		BundleComponentsComponent
 	],
 	exports: [
 		ProductDetailsComponent

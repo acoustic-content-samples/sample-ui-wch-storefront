@@ -1,0 +1,45 @@
+<!--#account-page-->
+<div id="account-page" class="container">
+   	<div class="bg">
+		<div class="row">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+					<li><a routerLink="/home" translate>Home</a></li>
+					<li class="active" translate>Account</li>
+				</ol>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<account-side-nav></account-side-nav>
+			</div>
+			<div class="col-sm-9">
+				<div class="row">
+					<h2 class="title text-center" translate>MyAccountSummary</h2>
+					<br>
+					<h5 class="title"><span translate>Welcome</span>, {{user.disp}}</h5>
+				</div>
+				<div class="row component-border">
+					<address *ngIf="prsnInfo!==undefined" [address]="prsnInfo" [title]="'PersonalInfo'"></address>
+					<a *ngIf="prsnInfo!==undefined" routerLink="/account/personalInfo" translate>Edit</a>
+				</div>
+				<div class="row component-border">
+					<h3 translate>RecentOrderHistory</h3>
+					<order-list [acctSmry]="true"></order-list>
+					<a routerLink="/account/orderHistory" translate>ViewAllOrders</a>
+				</div>
+				<div class="row component-border">
+					<h3 translate>RecentRecurringOrders</h3>
+					<order-list [acctSmry]="true" [listType]="ordTypes.recurring"></order-list>
+					<a [routerLink]="['/account/orderHistory', ordTypes.recurring]" translate>ViewAllRecurringOrders</a>
+				</div>
+				<div class="row component-border">
+					<h3 translate>RecentSubscriptions</h3>
+					<order-list [acctSmry]="true" [listType]="ordTypes.subscription"></order-list>
+					<a [routerLink]="['/account/orderHistory', ordTypes.subscription]" translate>ViewAllSubscriptions</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--/#account-page-->

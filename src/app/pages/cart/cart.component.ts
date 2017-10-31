@@ -9,6 +9,7 @@
 */
 import { Component, OnInit } from '@angular/core';
 import { CartTransactionService } from "../../commerce/services/componentTransaction/cart.transaction.service";
+import { AuthenticationTransactionService } from '../../commerce/services/componentTransaction/authentication.transaction.service';
 
 @Component( {
 	selector: 'cart',
@@ -16,9 +17,12 @@ import { CartTransactionService } from "../../commerce/services/componentTransac
 	templateUrl: './cart.html'
 } )
 export class CartComponent implements OnInit {
+	isLoggedIn: boolean = false;
 	private _cart: any;
+	
 	constructor(
-		private cartTransactionService: CartTransactionService
+		private cartTransactionService: CartTransactionService,
+		private authService: AuthenticationTransactionService
 	) { }
 
 	set cart( cart: any ) {
@@ -26,7 +30,6 @@ export class CartComponent implements OnInit {
 			this._cart = cart;
 		}
 		else {
-			//
 			this._cart = { ...this._cart, ...cart };
 		}
 		this.cartTransactionService.normalizeCart(this._cart);
@@ -36,11 +39,11 @@ export class CartComponent implements OnInit {
 		return this._cart;
 	}
 
-	private initializeCart() {
+	public initializeCart() {
 		this.cartTransactionService.getCart()
 			.then(
 			response => {
-				this.cart = response.json()
+				this.cart = response.body
 			}
 			);
 	}
@@ -65,6 +68,7 @@ export class CartComponent implements OnInit {
 
 	ngOnInit() {
 		this.initializeCart();
+		this.isLoggedIn = this.authService.isLoggedIn();
 	}
 
 }

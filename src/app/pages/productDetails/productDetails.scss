@@ -102,10 +102,13 @@
 
 .view-product img {
 	border: 1px solid #F7F7F0;
-	height: 380px;
-	width: 100%;
+	width: 400px
 }
 
+.product-main {
+	border: 1px solid #F7F7F0;
+	width: 400px
+}
 .view-product h3 {
 	background: $brand-color-primary;
 	bottom: 0;
@@ -144,7 +147,7 @@
 }
 
 .product-information {
-	border: 1px solid #F7F7F0;
+
 	overflow: hidden;
 	padding-bottom: 60px;
 	padding-left: 60px;
@@ -327,4 +330,82 @@
 
 .recommended-item-control i:hover {
 	background: #ccccc6;
+}
+
+.component-details {
+	overflow: hidden;
+}
+
+.view-component img {
+	width: 160px;
+}
+
+.view-component h2 {
+	background: $brand-color-primary;
+	bottom: 0;
+	color: $white;
+	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+	font-weight: 700;
+	margin-bottom: 0;
+	padding: 8px 20px;
+	position: absolute;
+	right: 0;
+}
+
+
+
+.component-information {
+	overflow: hidden;
+	padding-bottom: 30px;
+	padding-left: 30px;
+	padding-top: 30px;
+	position: relative;
+}
+
+.component-information h3 {
+	color: $base-text-color;
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	margin-top: 0;
+}
+
+.component-information p {
+	color: lighten($base-text-color, 10%);
+	font-family: 'Roboto', sans-serif;
+	margin-bottom: 5px;
+}
+
+.component-information span {
+	display: inline-block;
+	margin-bottom: 8px;
+	margin-top: 18px;
+}
+
+.component-information span span {
+	color: $brand-color-primary;
+	float: left;
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+	font-weight: 400;
+	margin-right: 20px;
+	margin-top: 0px;
+}
+.component-information span input {
+	border: 1px solid #DEDEDC;
+	color: lighten($base-text-color, 10%);
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	height: 33px;
+	outline: medium none;
+	text-align: center;
+	width: 50px;
+}
+
+.component-information span label {
+	color: lighten($base-text-color, 10%);
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	margin-right: 5px;
 }

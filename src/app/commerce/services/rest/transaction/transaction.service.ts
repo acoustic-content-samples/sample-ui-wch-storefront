@@ -8,52 +8,77 @@
  * specific language governing permissions and limitations under the License.
 */
 import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptionsArgs } from '@angular/http';
+import { HttpClient, HttpResponse, HttpErrorResponse } from "@angular/common/http";
+import { Logger } from "angular2-logger/core";
 import { Observable } from 'rxjs/Observable';
 import { CommerceEnvironment } from "../../../commerce.environment";
 import { StorefrontUtils } from "../../../../common/storefrontUtils.service";
 
 @Injectable()
 export class TransactionService {
-    private requestOptions: RequestOptionsArgs;
-    constructor( private http: Http, private storefrontUtils: StorefrontUtils ) {
+    private serviceCounter = 0;
+
+    constructor( private http: HttpClient, private storefrontUtils: StorefrontUtils, private logger: Logger ) { }
+
+    protected handleError( error: HttpErrorResponse, requestOptions: any ): Observable<HttpResponse<any>> {
+        if ( this.logger.level < 4 ) {
+            this.logger.info( this.constructor.name + " handleError: " + error.message );
+        }
+        this.logger.debug( this.constructor.name + " handleError: " + JSON.stringify( error ) + " request options: " + JSON.stringify( requestOptions ) );
+        return Observable.throw( error );
     }
-    protected handleError( error: Response ): Observable<Response> {
-        let errorObject = error.json();
-        let isGenericUserError: boolean = errorObject.errors
-            .reduce(( chain: boolean, e: any ) => {
-                return chain || ( e.errorKey as string === CommerceEnvironment.errors.genericUserError );
-            }, false );
-        if ( isGenericUserError ) {
-            let options = {
-                method: 'POST',
-                params: {
-                    updateCookies: true
-                },
-                withCredentials: true
+
+    protected invokeService( options: any ): Observable<HttpResponse<any>> {
+        // handle generic user in listed services that require valid user (guest or registered)
+        let serviceName: string = "/" + options.url.split("/").pop();
+        let reqServiceList: string[] = this.storefrontUtils.restRequiringUser;
+        if ( reqServiceList.indexOf(serviceName) > -1 ) {
+            if ( sessionStorage.getItem( 'currentUser' ) === null ) {
+                //url for guest user identity
+                let url = this.getRequestUrl() + `/store/${this.storefrontUtils.commerceStoreId}/guestidentity`;
+                return this.http.request<any>( 'POST', url, {
+                    withCredentials: true,
+                    observe: "response"
+                } ).flatMap(
+                    (res) => {
+                        if (res.body){
+                            this.logger.info( this.constructor.name + " guestLogin: %o", res );
+                            let user = res.body;
+                            user.isGuest = true;
+                            sessionStorage.setItem('currentUser', btoa(JSON.stringify(user)));
+                            return this.invokeService( options );
+                        }
+                    }
+                );
             }
-            //url for guest user identity
-            let url = this.getRequestUrl() + `/store/${this.storefrontUtils.commerceStoreId}/guestidentity`;
-            return this.http.request( url, options ).flatMap(
-                () => {
-                    return this.invokeService( this.requestOptions );
-                }
-            );
         }
-        else {
-            return Observable.throw( error );
+            
+        let currentUserCache = sessionStorage.getItem( 'currentUser' );
+        let currentUser = null;
+        if ( currentUserCache !== null ) {
+            currentUser = JSON.parse( atob( currentUserCache ) );
         }
+        if ( currentUser && currentUser.WCTrustedToken && currentUser.WCToken ) {
+            options.headers = options.headers.set( 'WCTrustedToken', currentUser.WCTrustedToken );
+            options.headers = options.headers.set( 'WCToken', currentUser.WCToken );
+        }
+        options.headers = options.headers.set( 'X-RequestId', this.getRequestId() );
+        this.logger.debug( this.constructor.name + " invokeService: " + JSON.stringify( options ) );
+        return this.http.request<any>( options.method, options.url, {
+            body: options.body,
+            headers: options.headers,
+            params: options.params,
+            observe: "response",
+            withCredentials: true
+        } ).catch(( res: HttpErrorResponse ) => this.handleError( res, options ) );
     }
 
-    protected invokeService( options: RequestOptionsArgs ): Observable<Response> {
-        this.requestOptions = options;
-        options.withCredentials = true;
-        return this.http.request( options.url, options )
-            .catch( res => this.handleError( res ) );
-    }
-
-    protected getRequestUrl(){
-        let commerceSecurePort = this.storefrontUtils.commerceTransactionSecurePort === "443"? "" : ":" + this.storefrontUtils.commerceTransactionSecurePort;
+    protected getRequestUrl() {
+        let commerceSecurePort = this.storefrontUtils.commerceTransactionSecurePort === "443" ? "" : ":" + this.storefrontUtils.commerceTransactionSecurePort;
         return `https://${this.storefrontUtils.commerceTransactionDomainName}${commerceSecurePort}${this.storefrontUtils.commerceTransactionContextPath}`;
+    }
+
+    private getRequestId(): string {
+        return this.storefrontUtils.sessionId + "_" + ( this.serviceCounter++ ) + "_" + this.constructor.name;
     }
 }

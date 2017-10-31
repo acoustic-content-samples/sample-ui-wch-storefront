@@ -8,7 +8,6 @@
  * specific language governing permissions and limitations under the License.
 */
 import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { ProductViewService } from "./rest/search/productView.service";
@@ -39,18 +38,18 @@ export class ProductService{
 				parameters['categoryId'] = byTerm;
 				return this.productViewService.findProductsByCategory(parameters)
 					.toPromise()
-					.then(response => response.json().catalogEntryView as any[]);
+					.then(response => response.body.catalogEntryView as any[]);
 			case 'byId':
 				parameters['productId'] = byTerm;
 				return this.productViewService.findProductById(parameters)
 					.toPromise()
-					.then(response => response.json().catalogEntryView as any[]);
+					.then(response => response.body.catalogEntryView as any[]);
 			default :
 			//bySearchTerm
 				parameters.pathParameters['searchTerm'] = byTerm;
 				return this.productViewService.findProductsBySearchTerm(parameters)
 					.toPromise()
-					.then(response => response.json().catalogEntryView as any[]);
+					.then(response => response.body.catalogEntryView as any[]);
 		}
 	}
 
@@ -70,6 +69,6 @@ export class ProductService{
 			'catalogid': catalogId
 		};
 		return this.productViewService.findProductByPartNumber(parameters).toPromise()
-			.then( response => response.json().catalogEntryView[0] as any );
+			.then( response => response.body.catalogEntryView[0] as any );
 	}
 }

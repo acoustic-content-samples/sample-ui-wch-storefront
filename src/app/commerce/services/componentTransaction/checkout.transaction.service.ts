@@ -8,7 +8,7 @@
  * specific language governing permissions and limitations under the License.
 */
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
+import { HttpResponse } from "@angular/common/http";
 
 import { CartTransactionService } from "./cart.transaction.service";
 import { PaymentInstructionService } from "../rest/transaction/paymentInstruction.service";
@@ -26,7 +26,7 @@ export class CheckoutTransactionService {
         private storefrontUtils: StorefrontUtils
     ) { }
 
-    getCart(): Promise<Response> {
+    getCart(): Promise<HttpResponse<any>> {
         return this.cartTransactionService.getCart();
     }
 
@@ -37,8 +37,15 @@ export class CheckoutTransactionService {
     prepareOrderWithAddressAndShipping( checkout: any, piamount: number ): Promise<any> {
         let amount = piamount;
         return this.addAddressForPerson( checkout )
-            .then( response => { this.updateShippingInfo( checkout, response.json() ) } )
-            .then( response => this.addPaymentInstruction( checkout, amount ) )
+            .then( response => this.updateShippingInfo( checkout, response.body ))
+            .then( response => this.addPaymentInstruction( checkout, amount, response.body ))
+            .then( response => this.prepareOrder() );
+    }
+
+    prepareOrderWithShipping(checkout : any, piamount: number, address : any): Promise<any>{
+        let amount = piamount;
+        return this.updateShippingInfo( checkout, address ) 
+            .then( response => this.addPaymentInstruction( checkout, amount, response.body ))
             .then( response => this.prepareOrder() );
     }
 
@@ -73,17 +80,17 @@ export class CheckoutTransactionService {
         return this.shippingInfoService.updateOrderShippingInfo( param, undefined ).toPromise();
     }
 
-    addPaymentInstruction( checkout: any, amount: number ): Promise<any> {
+    addPaymentInstruction( checkout: any, amount: number, order : any ): Promise<any> {
         let param = {
             body: {
-                "orderId": ".",
+                "orderId": order.orderId,
                 "piAmount": amount.toString(),
                 "billing_address_id": checkout.address.addressId,
                 "payMethodId": "COD"
             },
             storeId: this.storefrontUtils.commerceStoreId
         };
-        //hard coded to paylater
+        //hard coded to cash on delivery
         return this.paymentInstructionService.addPaymentInstruction( param, undefined ).toPromise();
     }
 

@@ -7,10 +7,11 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
-*/
+ */
 
 /* beautify ignore:start */
-import { Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
+import { URLSearchParams } from '@angular/http';
+import { HttpResponse, HttpParams, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs/Observable';
 import { TransactionService } from "./transaction.service";
 import { CommerceEnvironment } from "../../../commerce.environment";
@@ -33,7 +34,7 @@ export class PaymentInstructionService extends TransactionService {
      ** `@property {string} responseFormat ` The response format. If the request has an input body, that body must also use the format specified in "responseFormat". Valid values include "json" and "xml" without the quotes. If the responseFormat isn't specified, the "accept" HTTP header shall be used to determine the format of the response. If the "accept" HTTP header isn't specified as well, the default response format shall be in json.
      ** `@property {string} currency ` The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.
      */
-    getPaymentInfo(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    getPaymentInfo(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -50,13 +51,13 @@ export class PaymentInstructionService extends TransactionService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -68,7 +69,7 @@ export class PaymentInstructionService extends TransactionService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json', 'application/xml', 'application/xhtml+xml', 'application/atom+xml'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -86,29 +87,29 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['responseFormat'] = parameters['responseFormat'] || parameters['responseFormat'];
         if (parameters['responseFormat'] !== undefined) {
-            queryParameters.set('responseFormat', parameters['responseFormat']);
+            queryParameters = queryParameters.set('responseFormat', parameters['responseFormat']);
         }
 
         //allow use of param with or without underscore
         parameters['currency'] = parameters['currency'] || parameters['currency'];
         if (parameters['currency'] !== undefined) {
-            queryParameters.set('currency', parameters['currency']);
+            queryParameters = queryParameters.set('currency', parameters['currency']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -122,20 +123,19 @@ export class PaymentInstructionService extends TransactionService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };
@@ -157,7 +157,7 @@ export class PaymentInstructionService extends TransactionService {
      ** `@property {string} responseFormat ` The response format. If the request has an input body, that body must also use the format specified in "responseFormat". Valid values include "json" and "xml" without the quotes. If the responseFormat isn't specified, the "accept" HTTP header shall be used to determine the format of the response. If the "accept" HTTP header isn't specified as well, the default response format shall be in json.
      ** `@property {string} currency ` The currency code to use. Example usage : currency=USD. If no currency code is specified, the store default currency shall be used.
      */
-    getPunchoutPaymentInfo(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    getPunchoutPaymentInfo(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -174,13 +174,13 @@ export class PaymentInstructionService extends TransactionService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -192,7 +192,7 @@ export class PaymentInstructionService extends TransactionService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json', 'application/xml', 'application/xhtml+xml', 'application/atom+xml'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -210,7 +210,7 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['orderId'] = parameters['orderId'] || parameters['orderId'];
         if (parameters['orderId'] !== undefined) {
-            queryParameters.set('orderId', parameters['orderId']);
+            queryParameters = queryParameters.set('orderId', parameters['orderId']);
         }
 
         if (parameters['orderId'] === undefined) {
@@ -220,7 +220,7 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['piId'] = parameters['piId'] || parameters['piId'];
         if (parameters['piId'] !== undefined) {
-            queryParameters.set('piId', parameters['piId']);
+            queryParameters = queryParameters.set('piId', parameters['piId']);
         }
 
         if (parameters['piId'] === undefined) {
@@ -230,29 +230,29 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['responseFormat'] = parameters['responseFormat'] || parameters['responseFormat'];
         if (parameters['responseFormat'] !== undefined) {
-            queryParameters.set('responseFormat', parameters['responseFormat']);
+            queryParameters = queryParameters.set('responseFormat', parameters['responseFormat']);
         }
 
         //allow use of param with or without underscore
         parameters['currency'] = parameters['currency'] || parameters['currency'];
         if (parameters['currency'] !== undefined) {
-            queryParameters.set('currency', parameters['currency']);
+            queryParameters = queryParameters.set('currency', parameters['currency']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -266,20 +266,19 @@ export class PaymentInstructionService extends TransactionService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };
@@ -299,7 +298,7 @@ export class PaymentInstructionService extends TransactionService {
      ** `@property {string} responseFormat ` The response format. If the request has an input body, that body must also use the format specified in "responseFormat". Valid values include "json" and "xml" without the quotes. If the responseFormat isn't specified, the "accept" HTTP header shall be used to determine the format of the response. If the "accept" HTTP header isn't specified as well, the default response format shall be in json.
      ** `@property {any} body ` body data required for rest method
      */
-    addPaymentInstruction(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    addPaymentInstruction(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -316,13 +315,13 @@ export class PaymentInstructionService extends TransactionService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -334,7 +333,7 @@ export class PaymentInstructionService extends TransactionService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json', 'application/xml', 'application/xhtml+xml', 'application/atom+xml'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -352,12 +351,11 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['responseFormat'] = parameters['responseFormat'] || parameters['responseFormat'];
         if (parameters['responseFormat'] !== undefined) {
-            queryParameters.set('responseFormat', parameters['responseFormat']);
+            queryParameters = queryParameters.set('responseFormat', parameters['responseFormat']);
         }
 
         //allow use of param with or without underscore
         parameters['body'] = parameters['body'] || parameters['body'];
-
         if (parameters['body'] !== undefined) {
             body = parameters['body'];
         }
@@ -366,16 +364,16 @@ export class PaymentInstructionService extends TransactionService {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -389,20 +387,19 @@ export class PaymentInstructionService extends TransactionService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };
@@ -422,7 +419,7 @@ export class PaymentInstructionService extends TransactionService {
      ** `@property {string} responseFormat ` The response format. If the request has an input body, that body must also use the format specified in "responseFormat". Valid values include "json" and "xml" without the quotes. If the responseFormat isn't specified, the "accept" HTTP header shall be used to determine the format of the response. If the "accept" HTTP header isn't specified as well, the default response format shall be in json.
      ** `@property {any} body ` Request body.
      */
-    updatePaymentInstruction(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    updatePaymentInstruction(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -439,13 +436,13 @@ export class PaymentInstructionService extends TransactionService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -457,7 +454,7 @@ export class PaymentInstructionService extends TransactionService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json', 'application/xml', 'application/xhtml+xml', 'application/atom+xml'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -475,12 +472,11 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['responseFormat'] = parameters['responseFormat'] || parameters['responseFormat'];
         if (parameters['responseFormat'] !== undefined) {
-            queryParameters.set('responseFormat', parameters['responseFormat']);
+            queryParameters = queryParameters.set('responseFormat', parameters['responseFormat']);
         }
 
         //allow use of param with or without underscore
         parameters['body'] = parameters['body'] || parameters['body'];
-
         if (parameters['body'] !== undefined) {
             body = parameters['body'];
         }
@@ -489,16 +485,16 @@ export class PaymentInstructionService extends TransactionService {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -512,20 +508,19 @@ export class PaymentInstructionService extends TransactionService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };
@@ -545,7 +540,7 @@ export class PaymentInstructionService extends TransactionService {
      ** `@property {string} paymentInstructionId (required)` The child property of `pathParameters`. If not specified in `pathParameters`, the same named property in `parameters` will be used. Payment instruction identifier to delete.
      ** `@property {string} responseFormat ` The response format. If the request has an input body, that body must also use the format specified in "responseFormat". Valid values include "json" and "xml" without the quotes. If the responseFormat isn't specified, the "accept" HTTP header shall be used to determine the format of the response. If the "accept" HTTP header isn't specified as well, the default response format shall be in json.
      */
-    deletePaymentInstruction(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    deletePaymentInstruction(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -562,13 +557,13 @@ export class PaymentInstructionService extends TransactionService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -580,7 +575,7 @@ export class PaymentInstructionService extends TransactionService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json', 'application/xml', 'application/xhtml+xml', 'application/atom+xml'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -610,23 +605,23 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['responseFormat'] = parameters['responseFormat'] || parameters['responseFormat'];
         if (parameters['responseFormat'] !== undefined) {
-            queryParameters.set('responseFormat', parameters['responseFormat']);
+            queryParameters = queryParameters.set('responseFormat', parameters['responseFormat']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -640,20 +635,19 @@ export class PaymentInstructionService extends TransactionService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };
@@ -672,7 +666,7 @@ export class PaymentInstructionService extends TransactionService {
      ** `@property {string} storeId (required)` The child property of `pathParameters`. If not specified in `pathParameters`, the same named property in `parameters` will be used. The store identifier.
      ** `@property {string} responseFormat ` The response format. If the request has an input body, that body must also use the format specified in "responseFormat". Valid values include "json" and "xml" without the quotes. If the responseFormat isn't specified, the "accept" HTTP header shall be used to determine the format of the response. If the "accept" HTTP header isn't specified as well, the default response format shall be in json.
      */
-    deleteAllPaymentInstructions(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    deleteAllPaymentInstructions(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -689,13 +683,13 @@ export class PaymentInstructionService extends TransactionService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -707,7 +701,7 @@ export class PaymentInstructionService extends TransactionService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json', 'application/xml', 'application/xhtml+xml', 'application/atom+xml'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -725,23 +719,23 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['responseFormat'] = parameters['responseFormat'] || parameters['responseFormat'];
         if (parameters['responseFormat'] !== undefined) {
-            queryParameters.set('responseFormat', parameters['responseFormat']);
+            queryParameters = queryParameters.set('responseFormat', parameters['responseFormat']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -755,20 +749,19 @@ export class PaymentInstructionService extends TransactionService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };
@@ -788,7 +781,7 @@ export class PaymentInstructionService extends TransactionService {
      ** `@property {string} responseFormat ` The response format. If the request has an input body, that body must also use the format specified in "responseFormat". Valid values include "json" and "xml" without the quotes. If the responseFormat isn't specified, the "accept" HTTP header shall be used to determine the format of the response. If the "accept" HTTP header isn't specified as well, the default response format shall be in json.
      ** `@property {string} profileName ` Profile name. Profiles determine the subset of data to be returned by a query.
      */
-    getSensitiveDataMaskByPlainString(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    getSensitiveDataMaskByPlainString(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -805,13 +798,13 @@ export class PaymentInstructionService extends TransactionService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -823,7 +816,7 @@ export class PaymentInstructionService extends TransactionService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json', 'application/xml', 'application/xhtml+xml', 'application/atom+xml'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -841,29 +834,29 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['responseFormat'] = parameters['responseFormat'] || parameters['responseFormat'];
         if (parameters['responseFormat'] !== undefined) {
-            queryParameters.set('responseFormat', parameters['responseFormat']);
+            queryParameters = queryParameters.set('responseFormat', parameters['responseFormat']);
         }
 
         //allow use of param with or without underscore
         parameters['profileName'] = parameters['profileName'] || parameters['profileName'];
         if (parameters['profileName'] !== undefined) {
-            queryParameters.set('profileName', parameters['profileName']);
+            queryParameters = queryParameters.set('profileName', parameters['profileName']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -877,20 +870,19 @@ export class PaymentInstructionService extends TransactionService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };
@@ -911,7 +903,7 @@ export class PaymentInstructionService extends TransactionService {
      ** `@property {string} piId (required)` The payment instruction identifier.
      ** `@property {string} responseFormat ` The response format. If the request has an input body, that body must also use the format specified in "responseFormat". Valid values include "json" and "xml" without the quotes. If the responseFormat isn't specified, the "accept" HTTP header shall be used to determine the format of the response. If the "accept" HTTP header isn't specified as well, the default response format shall be in json.
      */
-    repay(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    repay(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -928,13 +920,13 @@ export class PaymentInstructionService extends TransactionService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -946,7 +938,7 @@ export class PaymentInstructionService extends TransactionService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json', 'application/xml', 'application/xhtml+xml', 'application/atom+xml'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -964,7 +956,7 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['orderId'] = parameters['orderId'] || parameters['orderId'];
         if (parameters['orderId'] !== undefined) {
-            queryParameters.set('orderId', parameters['orderId']);
+            queryParameters = queryParameters.set('orderId', parameters['orderId']);
         }
 
         if (parameters['orderId'] === undefined) {
@@ -974,7 +966,7 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['piId'] = parameters['piId'] || parameters['piId'];
         if (parameters['piId'] !== undefined) {
-            queryParameters.set('piId', parameters['piId']);
+            queryParameters = queryParameters.set('piId', parameters['piId']);
         }
 
         if (parameters['piId'] === undefined) {
@@ -984,23 +976,23 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['responseFormat'] = parameters['responseFormat'] || parameters['responseFormat'];
         if (parameters['responseFormat'] !== undefined) {
-            queryParameters.set('responseFormat', parameters['responseFormat']);
+            queryParameters = queryParameters.set('responseFormat', parameters['responseFormat']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -1014,20 +1006,19 @@ export class PaymentInstructionService extends TransactionService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };
@@ -1046,7 +1037,7 @@ export class PaymentInstructionService extends TransactionService {
      ** `@property {string} storeId (required)` The child property of `pathParameters`. If not specified in `pathParameters`, the same named property in `parameters` will be used. The store identifier.
      ** `@property {string} responseFormat ` The response format. If the request has an input body, that body must also use the format specified in "responseFormat". Valid values include "json" and "xml" without the quotes. If the responseFormat isn't specified, the "accept" HTTP header shall be used to determine the format of the response. If the "accept" HTTP header isn't specified as well, the default response format shall be in json.
      */
-    punchoutPaymentCallBack(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    punchoutPaymentCallBack(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -1063,13 +1054,13 @@ export class PaymentInstructionService extends TransactionService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -1081,7 +1072,7 @@ export class PaymentInstructionService extends TransactionService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json', 'application/xml', 'application/xhtml+xml', 'application/atom+xml'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -1099,23 +1090,23 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['responseFormat'] = parameters['responseFormat'] || parameters['responseFormat'];
         if (parameters['responseFormat'] !== undefined) {
-            queryParameters.set('responseFormat', parameters['responseFormat']);
+            queryParameters = queryParameters.set('responseFormat', parameters['responseFormat']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -1129,20 +1120,19 @@ export class PaymentInstructionService extends TransactionService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };
@@ -1163,7 +1153,7 @@ export class PaymentInstructionService extends TransactionService {
      ** `@property {string} paymentMethod (required)` payment_method
      ** `@property {string} responseFormat ` The response format. If the request has an input body, that body must also use the format specified in "responseFormat". Valid values include "json" and "xml" without the quotes. If the responseFormat isn't specified, the "accept" HTTP header shall be used to determine the format of the response. If the "accept" HTTP header isn't specified as well, the default response format shall be in json.
      */
-    fetchPaymentToken(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    fetchPaymentToken(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -1180,13 +1170,13 @@ export class PaymentInstructionService extends TransactionService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -1198,7 +1188,7 @@ export class PaymentInstructionService extends TransactionService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json', 'application/xml', 'application/xhtml+xml', 'application/atom+xml'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -1216,7 +1206,7 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['paymentToken'] = parameters['paymentToken'] || parameters['payment_token'];
         if (parameters['paymentToken'] !== undefined) {
-            queryParameters.set('payment_token', parameters['paymentToken']);
+            queryParameters = queryParameters.set('payment_token', parameters['paymentToken']);
         }
 
         if (parameters['paymentToken'] === undefined) {
@@ -1226,7 +1216,7 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['paymentMethod'] = parameters['paymentMethod'] || parameters['payment_method'];
         if (parameters['paymentMethod'] !== undefined) {
-            queryParameters.set('payment_method', parameters['paymentMethod']);
+            queryParameters = queryParameters.set('payment_method', parameters['paymentMethod']);
         }
 
         if (parameters['paymentMethod'] === undefined) {
@@ -1236,23 +1226,23 @@ export class PaymentInstructionService extends TransactionService {
         //allow use of param with or without underscore
         parameters['responseFormat'] = parameters['responseFormat'] || parameters['responseFormat'];
         if (parameters['responseFormat'] !== undefined) {
-            queryParameters.set('responseFormat', parameters['responseFormat']);
+            queryParameters = queryParameters.set('responseFormat', parameters['responseFormat']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -1266,20 +1256,19 @@ export class PaymentInstructionService extends TransactionService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };

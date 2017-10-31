@@ -9,6 +9,7 @@
 */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { AuthenticationTransactionService } from '../../../commerce/services/componentTransaction/authentication.transaction.service';
 
@@ -30,13 +31,16 @@ export class MiddleHeaderComponent implements OnInit {
 		this.authSub = this.authService.authUpdate.subscribe(status => this.isLoggedIn = status);
 	}
 
-	logout() {
+	private logout() {
 		this.authService.logout().then(res => {
 			// navigate home after a successful logout
 			this.router.navigate(['/home']);
-		}).catch(error => {
-			console.error('Could not logout because of error: %o', error);
-		});
+		}).catch(e=>this.handleError(e,"Unable to logout successfully"));
+	}
+
+	private handleError(error:HttpErrorResponse,fallback:string) {
+		const eBody=error.error;
+		return eBody.errors&&eBody.errors.length&&eBody.errors[0].errorMessage?eBody.errors[0].errorMessage:fallback;
 	}
 
 	ngOnDestroy() {

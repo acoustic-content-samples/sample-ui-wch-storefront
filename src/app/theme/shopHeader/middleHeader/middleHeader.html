@@ -6,16 +6,7 @@
 					<a routerLink="/home" routerLinkActive="active"><img class="logo" [src]="logoSrc" alt="" /></a>
 				</div>
 				<div class="btn-group pull-right">
-					<div class="btn-group">
-						<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-							USA
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu">
-							<li><a routerLink="/nowhere" translate>Canada</a></li>
-							<li><a routerLink="/nowhere" translate>UK</a></li>
-						</ul>
-					</div>
+					<language-selection></language-selection>
 					
 					<div class="btn-group">
 						<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
@@ -32,8 +23,8 @@
 			<div class="col-sm-8">
 				<div class="shop-menu pull-right">
 					<ul class="nav navbar-nav">
-						<li class="shop-menu-item">
-							<a class="shop-menu-link" routerLink="/nowhere">
+						<li *ngIf="isLoggedIn" class="shop-menu-item">
+							<a class="shop-menu-link" routerLink="/account" routerLinkActive="active">
 								<i class="fa fa-user"></i>
 								<span translate>Account</span>
 							</a>

@@ -1,0 +1,9 @@
+<label>Promotional code</label>
+<input [(ngModel)]="promoCode" placeholder="Enter promotional code">
+<button class="btn btn-default apply" (click)="applyPromotionCode()">Apply</button>
+<!--Promo Code applied-->
+<div class="promo-code-container">
+    <a *ngFor="let code of appliedPromoCodes"  (click)="removePromotionCode(code)"> 
+        Remove {{code}}
+    </a>
+</div>

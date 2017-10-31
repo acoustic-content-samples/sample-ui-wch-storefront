@@ -8,27 +8,27 @@
  * specific language governing permissions and limitations under the License.
 */
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
-import { ResponseOptions } from '@angular/http';
+import { HttpResponse } from "@angular/common/http";
 
 import 'rxjs/add/operator/toPromise';
 
 import { CartService } from "../rest/transaction/cart.service";
 import { ProductService } from "../product.service";
-import { GuestIdentityService } from "../rest/transaction/guestIdentity.service";
+import { AssignedPromotionCodeService } from "../rest/transaction/assignedPromotionCode.service";
 import { StorefrontUtils } from "../../../common/storefrontUtils.service";
+import { AuthenticationTransactionService } from '../../../commerce/services/componentTransaction/authentication.transaction.service';
 
 @Injectable()
 export class CartTransactionService {
-    guestLoggedin: boolean = false;
     constructor(
         private productService: ProductService,
         private cartService: CartService,
-        private guestIdentityService: GuestIdentityService,
-        private storefrontUtils: StorefrontUtils
+        private storefrontUtils: StorefrontUtils,
+        private assignedPromotionCode: AssignedPromotionCodeService,
+        private authService: AuthenticationTransactionService
     ) { }
 
-    getCart(): Promise<Response> {
+    getCart(): Promise<HttpResponse<any>> {
         let parameters = {
             "sortOrderItemBy": "orderItemID",
             "storeId": this.storefrontUtils.commerceStoreId
@@ -47,15 +47,15 @@ export class CartTransactionService {
         }
     }
 
-    preCheckout( param: any ): Promise<Response> {
+    preCheckout( param: any ): Promise<HttpResponse<any>> {
         return this.cartService.preCheckout( param, undefined ).toPromise();
     }
 
-    checkout( parameters: any ): Promise<Response> {
+    checkout( parameters: any ): Promise<HttpResponse<any>> {
         return this.cartService.checkOut( parameters, undefined ).toPromise();
     }
 
-    findProductByPartNumber( partNumber: string ): Promise<Response> {
+    findProductByPartNumber( partNumber: string ): Promise<HttpResponse<any>> {
         return this.productService
             .findProductByPartNumber( partNumber, this.storefrontUtils.commerceStoreId, this.storefrontUtils.commerceCatalogId )
     }
@@ -68,7 +68,33 @@ export class CartTransactionService {
         return this.productService.findProductsById( this.storefrontUtils.commerceStoreId, id );
     }
 
-    updateOrderItem( cart: any ): Promise<Response> {
+    applyPromotionCode ( promoCode : string) : Promise<HttpResponse<any>> {
+        let param = {
+            "storeId": this.storefrontUtils.commerceStoreId,
+            "body": {
+                "promoCode": promoCode
+            }
+        };
+        return this.assignedPromotionCode.applyPromotioncode(param, undefined).toPromise();
+    }
+
+    removePromotionCode( promoCode: string ) : Promise<HttpResponse<any>>{
+        let param = {
+            "storeId": this.storefrontUtils.commerceStoreId,
+            "promoCode": promoCode
+        };
+        return this.assignedPromotionCode.removePromotionCode(param, undefined).toPromise();
+    }
+
+    getPromotionCode() : Promise<HttpResponse<any>> {
+        let param = {
+            storeId: this.storefrontUtils.commerceStoreId
+        }
+
+        return this.assignedPromotionCode.getAssignedPromotioncodeInfo(param, undefined).toPromise();
+    }
+
+    updateOrderItem( cart: any ): Promise<HttpResponse<any>> {
         let param = {
             storeId: this.storefrontUtils.commerceStoreId
         };
@@ -115,37 +141,47 @@ export class CartTransactionService {
                 "x_calculateOrder": "1",
             }
         };
-        return this.guestLogin()
-            .then(
-            response => {
-                return this.cartService.addOrderItem( param, undefined ).toPromise();
-            }
-            );
+
+        return this.cartService.addOrderItem( param, undefined ).toPromise();
     }
 
-
-
-    guestLogin(): Promise<Response> {
-        this.guestLoggedin = true;
-        let options = new ResponseOptions({
-            body: '{"guestLoggedin": “true”}'
-        });
-        if ( this.guestLoggedin ) {
-           return new Promise(( resolve ) => { resolve( new Response(options)) } );
-        }
-        else {
-            let guestParam = {
-                storeId: this.storefrontUtils.commerceStoreId,
-                $queryParameters: {
-                    updateCookies: true,
-                }
+    addMutlipleToCart( quantities: number[], productIds: string[] ): Promise<any> {
+        let param = {
+            "storeId": this.storefrontUtils.commerceStoreId,
+            "body": {
+                "x_inventoryValidation": "true",
+                "orderId": ".",
+                "orderItem": [{}],
+                "x_calculateOrder": "1",
             }
-            return this.guestIdentityService.login( guestParam, undefined, undefined )
-                .toPromise().then( response => {
-                    this.guestLoggedin = true;
-                    return response;
-                } );
+        };
+        for (let i in productIds) {
+            param.body.orderItem[i] = {
+                "quantity": quantities[i].toString(),
+                "productId": productIds[i]
+            }
         }
+        return this.cartService.addOrderItem( param, undefined ).toPromise();
+    }
+
+    copyOrder( fromOrderId: string): Promise<any> {
+        let param = {
+            "storeId": this.storefrontUtils.commerceStoreId,
+            "body": {
+                "fromOrderId_1": fromOrderId,
+                "toOrderId": ".**.",
+                "copyOrderItemId_1": "*"
+            }
+        };
+        return this.cartService.copyOrder( param, undefined ).toPromise().then(r => this.getCart().then( rr=> this.updateOrderItem(rr.body)));
+    }
+
+    cancelOrder( orderId: string): Promise<any> {
+        let param = {
+            "storeId": this.storefrontUtils.commerceStoreId,
+            "orderId": orderId
+        };
+        return this.cartService.cancelOrder( param, undefined ).toPromise();
     }
 
     private updateItem( item: any, catEnt: any ) {

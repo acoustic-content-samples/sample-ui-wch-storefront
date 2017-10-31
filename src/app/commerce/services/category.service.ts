@@ -31,7 +31,7 @@ export class CategoryService {
             this.topPromise = this.categoryViewService.findTopCategories(parameters).toPromise()
 
                 .then((response) => {
-                    return response.json().catalogGroupView as any[];
+                    return response.body.catalogGroupView as any[];
                 });
 
             return this.topPromise;

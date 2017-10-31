@@ -8,29 +8,45 @@
  * specific language governing permissions and limitations under the License.
 */
 import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { StorefrontUtils } from "../../../../common/storefrontUtils.service";
+import { HttpClient, HttpResponse, HttpErrorResponse } from "@angular/common/http";
+import { Logger } from "angular2-logger/core";
 
 @Injectable()
 export class SearchService {
-    private requestOptions: RequestOptionsArgs;
-    constructor( private http: Http, private storefrontUtils: StorefrontUtils ) {
-    }
-    protected handleError( error: Response ): Observable<Response> {
+    private serviceCounter: number = 0;
 
-            return Observable.throw( error );
+    constructor( private http: HttpClient, private storefrontUtils: StorefrontUtils, private logger: Logger ) {
     }
-
-    protected invokeService( options: RequestOptionsArgs ): Observable<Response> {
-        this.requestOptions = options;
-        options.withCredentials = true;
-        return this.http.request( options.url, options )
-            .catch( res => this.handleError( res ) );
+    protected handleError( error: HttpErrorResponse, requestOptions: any ): Observable<HttpResponse<any>> {
+        if ( this.logger.level < 4 ) {
+            this.logger.info( this.constructor.name + " handleError: " + error.message );
+        }
+        this.logger.debug(this.constructor.name + " handleError: " + JSON.stringify(error) + " request options: " + JSON.stringify(requestOptions));
+        return Observable.throw( error );
     }
 
-    protected getRequestUrl(){
-        let commerceSearchSecurePort = this.storefrontUtils.commerceSearchSecurePort === "443"? "" : ":" + this.storefrontUtils.commerceSearchSecurePort;
+    protected invokeService( options: any ): Observable<HttpResponse<any>> {
+        options.headers = options.headers.set('X-RequestId', this.getRequestId());
+        this.logger.debug( this.constructor.name + " invokeService: " + JSON.stringify( options ) );
+        return this.http.request<any>( options.method, options.url, {
+            body: options.body,
+            headers: options.headers,
+            params: options.params,
+            observe: "response",
+            withCredentials: true
+        } ).catch(( res: HttpErrorResponse ) => this.handleError( res, options ) );
+    }
+
+    protected getRequestUrl() {
+        let commerceSearchSecurePort = this.storefrontUtils.commerceSearchSecurePort === "443" ? "" : ":" + this.storefrontUtils.commerceSearchSecurePort;
         return `https://${this.storefrontUtils.commerceSearchDomainName}${commerceSearchSecurePort}${this.storefrontUtils.commerceSearchContextPath}`;
+    }
+
+    private getRequestId(): string{
+        let counter = this.serviceCounter;
+        this.serviceCounter = this.serviceCounter + 1;
+        return this.storefrontUtils.sessionId + "_" + counter + "_" + this.constructor.name;
     }
 }

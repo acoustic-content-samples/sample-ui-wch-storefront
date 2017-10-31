@@ -24,6 +24,10 @@ export class StorefrontUtils {
 	public readonly commerceSearchContextPath: string = `${this.configService.configJSON.commerceSearchContextPath}`;
 	public readonly commerceStoreId: string = `${this.configService.configJSON.commerceStoreID}`;
 	public readonly commerceCatalogId: string = `${this.configService.configJSON.commerceCatalogID}`;
+	public readonly sessionId: number;
+	public readonly restRequiringUser: string[] = this.configService.servicesConfig.restRequiringUser;
 
-	constructor(private configService: ConfigService) { }
+	constructor(private configService: ConfigService) {
+		this.sessionId = this.configService.getSessionId();
+	}
 }

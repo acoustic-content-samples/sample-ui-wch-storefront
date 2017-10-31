@@ -9,7 +9,7 @@
 */
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommerceService } from '../services/commerce.service';
-import {Router, NavigationEnd, NavigationStart} from '@angular/router';
+import {Router, NavigationEnd} from '@angular/router';
 
 import 'rxjs/add/operator/filter';
 import { ISubscription } from 'rxjs/Subscription';
@@ -20,28 +20,23 @@ import { ISubscription } from 'rxjs/Subscription';
 	styleUrls: ['category.scss'],
 	templateUrl: 'category.html'
 })
-export class CategoryComponent implements OnInit, OnDestroy{
-    public categories: any[] = [];
+export class CategoryComponent implements OnInit{
+    categories: any[] = [];
     private subscription: ISubscription;
 
     //@Input() parentCategory: string;
     constructor(private commerceService: CommerceService,
     private route: Router) {
 
-	}
+    }
 
     ngOnInit() {
-		this.commerceService.getItems(null)
-			.then((cat: any) => {
-				this.categories = cat;
-			}).catch((error: any) => {
-			console.error('Error getting categories: %o', error);
-		});
-
+        this.commerceService.getItems(null)
+                .then((cat: any) => {
+                    this.categories = cat;
+                }).catch((error: any) => {
+					console.error('Error getting categories: %o', error);
+                });
     }
-
-    ngOnDestroy() {
-    }
-
 
 }

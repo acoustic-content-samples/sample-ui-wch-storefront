@@ -1,0 +1,47 @@
+<section id="addressBook">
+    <div class="container">
+        <div class="row">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a routerLink="/home" translate>Home</a></li>
+                    <li><a routerLink="/account" translate>Account</a></li>
+                    <li class="active" translate>AddressBook</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div *ngIf="success" class="col-sm-offset-3 alert alert-success alert-dismissable text-center">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <span *ngIf="addrDesc[modAddrNickName]" [translateParams]="addrDesc[modAddrNickName]" translate>SaveSuccessful</span>
+                <span *ngIf="!addrDesc[modAddrNickName]" [translateParams]="{nickName:modAddrNickName}" translate>DeleteSuccessful</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <account-side-nav></account-side-nav>
+            </div>
+            <div class="col-sm-9">
+                <h2 class="title text-center" translate>AddressBook</h2>
+                <div class="row">
+                    <form class="form-group form-inline">
+                        <div class="form-group">
+                            <select [disabled]="editMode" class="form-control" id="addrList" name="addrList" [(ngModel)]="selectedAddr" required>
+                                <option *ngFor="let addr of addrList" [value]="addr.nickName">{{addr.nickName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button [disabled]="editMode" (click)="addNew()" class="btn btn-primary" translate>CreateNewAddress</button>
+                        </div>
+                        <div *ngIf="addrDesc[selectedAddr] && !addrDesc[selectedAddr].newAddr" class="form-group">
+                            <button [disabled]="editMode" (click)="edit()" class="btn btn-primary" translate>EditAddress</button>
+                        </div>
+                        <div *ngIf="addrDesc[selectedAddr] && !addrDesc[selectedAddr].defAddr && !addrDesc[selectedAddr].newAddr" class="form-group">
+                            <button [disabled]="editMode" (click)="delete()" class="btn btn-primary" translate>DeleteAddress</button>
+                        </div>
+                    </form>
+                    <address *ngIf="selectedAddr!==undefined&&dispDesc[selectedAddr]" (reflectEditMode)="setEditMode($event)" [address]="dispDesc[selectedAddr]" [editMode]="editMode" [allowEdit]="true"></address>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

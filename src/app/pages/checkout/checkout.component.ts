@@ -8,6 +8,9 @@
  * specific language governing permissions and limitations under the License.
 */
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { GuestShippingBillingComponent } from '../../commerce/guestShippingBilling/guestShippingBilling.component';
+import { AuthenticationTransactionService } from '../../commerce/services/componentTransaction/authentication.transaction.service';
 import { CheckoutTransactionService } from "../../commerce/services/componentTransaction/checkout.transaction.service";
 
 @Component( {
@@ -19,19 +22,25 @@ export class CheckoutComponent implements OnInit {
     private _cart: any;
     private _checkout: any;
 
+    isGuest : boolean;
+    currentPage : string;
+
     constructor(
-        private checkoutTransactionService: CheckoutTransactionService
+        private checkoutTransactionService: CheckoutTransactionService,
+        private authenticationTransactionService : AuthenticationTransactionService,
+        private route: Router
     ) {}
 
     ngOnInit() {
         this.initializeCheckoutObject();
         this.initializeCart();
+        this.isGuest = !this.authenticationTransactionService.isLoggedIn();
     }
 
     initializeCart() {
         this.checkoutTransactionService.getCart()
             .then( response => {
-                this.cart = response.json();
+                this.cart = response.body;
             } );
     }
 
@@ -59,8 +68,25 @@ export class CheckoutComponent implements OnInit {
         this.checkoutTransactionService.normalizeCart( cart );
         this._cart = cart;
     }
+
     get cart(): any {
         return this._cart;
+    }
+
+    getShippingAddressAndId(addressList : any){
+        let address, addressId;
+        if (addressList.length && addressList[1] && addressList[1].useSameAddress){
+            this.checkout.address = addressList[0].data;
+            return addressList[0].response;
+        } 
+        this.checkout.address = addressList[1].data;
+        return addressList[1].response;
+    }
+
+    onSaveGuestAddress(event : any) {
+        let addressId = this.getShippingAddressAndId(event);
+        this.checkoutTransactionService.prepareOrderWithShipping(this.checkout, this.cart.grandTotal, addressId)
+        .then(response =>  this.checkout.step++ );
     }
 
     next() {

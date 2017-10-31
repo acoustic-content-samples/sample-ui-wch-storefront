@@ -1,0 +1,24 @@
+{
+    "cacheConfig_comment": "define the REST services that the framework should cache the results for",
+    "cacheConfig": [
+        {
+            "url": "/store/{storeId}/categoryview/@top"
+        },
+        {
+            "url": "search/resources/store/{storeId}/productview/byCategory",
+            "parameters": [
+                {
+                    "name": "langId",
+                    "value": "-1"
+                },
+                {
+                    "name": "test",
+                    "value": "test",
+                    "negate": true
+                }
+            ]
+        }
+    ],
+    "restRequiringUser_comment": "define the REST services that the framework needs to ensure there exists a guest or registered user before executing the particular service",
+    "restRequiringUser": [ "/cart", "/checkout" ]
+}

@@ -12,6 +12,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClient } from "@angular/common/http";
+import { Logger, Options as LoggerOptions} from "angular2-logger/core";
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -21,13 +23,18 @@ import { AppComponent } from './app.component';
 import { ThemeModule } from './theme/theme.module';
 import { PagesModule } from './pages/pages.module';
 import { ConfigService } from './common/config.service';
+import { CachingInterceptor } from "./common/util/caching.interceptor";
+import { HttpErrorInterceptor } from "./common/util/http.error.interceptor";
+import { StoreConfigurationsCache } from "./common/util/storeConfigurations.cache";
 
 import 'core-js/es6';
 import 'core-js/es7/reflect';
-
 import 'zone.js/dist/zone';
+import { HttpSessionCache } from "./common/util/http.session.cache";
+import { AuthenticationTransactionService } from "./commerce/services/componentTransaction/authentication.transaction.service";
+import { LoggerOptions as AppLoggerOptions} from "./common/logger.options";
 
-export function HttpLoaderFactory (http: Http) {
+export function HttpLoaderFactory (http: HttpClient) {
 	return new TranslateHttpLoader(http, 'locales/');
 }
 
@@ -38,12 +45,13 @@ export function HttpLoaderFactory (http: Http) {
 		ThemeModule,
 		PagesModule,
 		HttpModule,
+		HttpClientModule,
 		RouterModule,
 		TranslateModule.forRoot({
 			loader: {
 				provide: TranslateLoader,
 				useFactory: HttpLoaderFactory,
-				deps: [ Http ]
+				deps: [ HttpClient ]
 			}
 		})
 	],
@@ -51,13 +59,32 @@ export function HttpLoaderFactory (http: Http) {
 		AppComponent,
 	],
 	providers: [
-    	ConfigService,
+		ConfigService,
 		{
 			provide: APP_INITIALIZER,
 			useFactory: (configService: ConfigService) => () => configService.init(),
 			deps: [ ConfigService, Http ],
 			multi: true
-		}
+		},
+		AppLoggerOptions,
+		{
+			provide: LoggerOptions,
+			useClass: AppLoggerOptions
+		},
+        Logger,
+		HttpSessionCache,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: CachingInterceptor,
+			multi: true,
+		},
+		AuthenticationTransactionService,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: HttpErrorInterceptor,
+			multi: true,
+		},
+		StoreConfigurationsCache
 	],
 	bootstrap: [ AppComponent ]
 })

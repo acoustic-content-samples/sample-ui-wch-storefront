@@ -48,46 +48,81 @@
 							<img src="../../common/images/product-details/new.jpg" class="newarrival" alt="" />
 							<h2>{{product.name}}</h2>
 							<p>SKU: {{currentSelection.sku.partNumber}}</p>
+							<p>{{product.shortDescription}}</p>
 							<star-rating rating="2.3"></star-rating>
 							<div>
 								<span>
-									<ng-container *ngFor="let price of product.price">
+									<ng-container *ngFor="let price of currentSelection.sku.price">
 										<span *ngIf="price.usage === 'Offer'">{{price.currency}} ${{price.value}}</span>
 								</ng-container>
 								</span>
 							</div>
-							<div class="container-fluid">
-								<form #productForm="ngForm" (ngSubmit)="onSubmit()">
-									<div [hidden]="!invalidSKU" class="alert alert-danger">
-										Selection not available, choose a different combination.
-									</div>
-									<ng-container *ngFor="let att of product.availableAttributes">
-										<div class="form-group" *ngIf="att.usage === 'Defining'">
-											<label for="{{att.identifier}}">{{att.name}}</label>
-											<select class="form-control" name="{{att.identifier}}" id="{{att.identifier}}" required (change)="onAttributeChange()" [(ngModel)]="currentSelection.selectedAttributes[att.identifier]">
-												<option *ngFor="let value of att.values" [value]="value.identifier">{{value.identifier}}</option>
-											</select>
+							<ng-container *ngIf="product.catalogEntryTypeCode != 'BundleBean'">
+								<div class="container-fluid">
+									<form #productForm="ngForm" (ngSubmit)="onSubmit()">
+										<div [hidden]="!invalidSKU" class="alert alert-danger">
+											Selection not available, choose a different combination.
 										</div>
-									</ng-container>
-									<div class="form-group">
-										<label for="quantity">Quantity</label>
-										<input type="number" class="form-control" id="quantity" required [(ngModel)]="currentSelection.quantity" name="quantity">
-									</div>
-									<div [hidden]="currentSelection.quantity > 0" class="alert alert-danger">
-										Quantity must be greater or equal to 1.
-									</div>
-									<button type="submit" class="btn btn-default cart" [disabled]="!productForm.form.valid || invalidSKU || currentSelection.quantity < 1"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-								</form>
-							</div>
-							<p><b>Availability:</b> {{(product.buyable) ? 'In Stock' : 'Out of Stock'}}</p>
-							<p><b>Brand:</b> {{product.manufacturer}}</p>
-							<a routerLink="/nowhere"><img src="../../common/images/product-details/share.png" class="share img-responsive" alt="" /></a>
+										<ng-container *ngFor="let att of product.availableAttributes">
+											<div class="form-group" *ngIf="att.usage === 'Defining'">
+												<label for="{{att.identifier}}">{{att.name}}</label>
+												<select class="form-control" name="{{att.identifier}}" id="{{att.identifier}}" required (change)="onAttributeChange()" [(ngModel)]="currentSelection.selectedAttributes[att.identifier]">
+													<option *ngFor="let value of att.values" [value]="value.identifier">{{value.identifier}}</option>
+												</select>
+											</div>
+										</ng-container>
+										<div class="form-group">
+											<label for="quantity">Quantity</label>
+											<input type="number" class="form-control" id="quantity" required [(ngModel)]="currentSelection.quantity" name="quantity">
+										</div>
+										<div [hidden]="currentSelection.quantity > 0" class="alert alert-danger">
+											Quantity must be greater or equal to 1.
+										</div>
+										<button type="submit" class="btn btn-default cart" [disabled]="!productForm.form.valid || invalidSKU || currentSelection.quantity < 1"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+									</form>
+								</div>
+								<p><b>Availability:</b> {{(product.buyable) ? 'In Stock' : 'Out of Stock'}}</p>
+								<p><b>Brand:</b> {{product.manufacturer}}</p>
+								<a routerLink="/nowhere"><img src="../../common/images/product-details/share.png" class="share img-responsive" alt="" /></a>
+							</ng-container>
 						</div>
 						<!--/product-information-->
+						<!--/bundle-component-information-->
+						<ng-container *ngIf="product.catalogEntryTypeCode == 'BundleBean'">
+							<bundle-components [products]="product.components"></bundle-components>
+						</ng-container>
+						<!--/bundle-component-information-->
+
+						<!--/kit-component-information-->
+						<ng-container *ngIf="product.catalogEntryTypeCode == 'PackageBean'">
+							<h2 class="title" translate>The following items are included:</h2>
+							<ng-container *ngFor="let component of product.components; let i = index">
+								<div class="row component-details">
+									<!--component-details-->
+									<div class="col-sm-5 view-component">
+										<a [routerLink]="['/product', component.partNumber]">
+											<img [src]="component.thumbnail" alt="" />
+										</a>
+									</div>
+									<div class="col-sm-7 component-information">
+										<h3><a [routerLink]="['/product', component.partNumber]">{{component.name}}</a></h3>
+										<p>SKU: {{component.partNumber}}</p>
+										<p>{{component.shortDescription}}</p>
+										<div>
+											<span>
+												<ng-container *ngFor="let price of component.price">
+													<span *ngIf="price.usage === 'Offer'">{{price.currency}} ${{price.value}}</span>
+												</ng-container>
+											</span>
+										</div>
+									</div>
+								</div>
+							</ng-container>
+						</ng-container>
+						<!--/kit-component-information-->
 					</div>
 				</div>
 				<!--/product-details-->
-
 				<div class="category-tab shop-details-tab">
 					<!--category-tab-->
 					<div class="col-sm-12">

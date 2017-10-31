@@ -1,0 +1,37 @@
+<div class="left-sidebar">
+	<h2 translate>MyAccount</h2>
+	<div>
+		<ul>
+			<li>
+				<a routerLink="/account/personalInfo" routerLinkActive="active">
+					<span translate>PersonalInfo</span>
+				</a>
+			</li>
+			<li>
+				<a routerLink="/account/changePassword" routerLinkActive="active">
+					<span translate>ChangePassword</span>
+				</a>
+			</li>
+			<li class="nav-item-with-spacer">
+				<a routerLink="/common/addressBook" routerLinkActive="active">
+					<span translate>AddressBook</span>
+				</a>
+			</li>
+			<li>
+				<a routerLink="/account/orderHistory" routerLinkActive="active">
+					<span translate>{{ordDisplay[ordTypes.history]}}</span>
+				</a>
+			</li>
+			<li>
+				<a [routerLink]="['/account/orderHistory', ordTypes.recurring]" routerLinkActive="active">
+					<span translate>{{ordDisplay[ordTypes.recurring]}}</span>
+				</a>
+			</li>
+			<li>
+				<a [routerLink]="['/account/orderHistory', ordTypes.subscription]" routerLinkActive="active">
+					<span translate>{{ordDisplay[ordTypes.subscription]}}</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>

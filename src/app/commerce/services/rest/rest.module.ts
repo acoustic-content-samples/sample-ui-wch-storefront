@@ -13,25 +13,35 @@ import { PersonService } from "./transaction/person.service";
 import { CartService } from "./transaction/cart.service";
 import { GuestIdentityService } from "./transaction/guestIdentity.service";
 import { PersonContactService } from "./transaction/personContact.service";
+import { OrderService } from "./transaction/order.service";
 import { PaymentInstructionService } from "./transaction/paymentInstruction.service";
 import { TransactionService } from "./transaction/transaction.service";
 import { ShippingInfoService } from "./transaction/shippingInfo.service";
 import { LoginIdentityService } from "./transaction/loginIdentity.service";
 import { CategoryViewService } from "./search/categoryView.service";
 import { ProductViewService } from "./search/productView.service";
+import { CountryService } from "./transaction/country.service";
+import { ConfigurationService } from "./transaction/configuration.service";
+import { SubscriptionService } from "./transaction/subscription.service";
+import { ESpotService } from "./transaction/eSpot.service";
 
 @NgModule({
     providers: [
         TransactionService,
         PersonService,
         PersonContactService,
+        OrderService,
         CartService,
         GuestIdentityService,
         ShippingInfoService,
 		LoginIdentityService,
         PaymentInstructionService,
         CategoryViewService,
-        ProductViewService
+        ProductViewService,
+        CountryService,
+        ConfigurationService,
+        SubscriptionService,
+        ESpotService
 	]
 })
 export class RestModule { }

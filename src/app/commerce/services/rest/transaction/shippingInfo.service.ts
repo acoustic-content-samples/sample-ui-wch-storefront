@@ -7,10 +7,11 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
-*/
+ */
 
 /* beautify ignore:start */
-import { Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
+import { URLSearchParams } from '@angular/http';
+import { HttpResponse, HttpParams, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs/Observable';
 import { TransactionService } from "./transaction.service";
 import { CommerceEnvironment } from "../../../commerce.environment";
@@ -38,7 +39,7 @@ export class ShippingInfoService extends TransactionService {
      ** `@property {string} forUser ` User name to act on behalf of.
      ** `@property {string} forUserId ` User identifier to act on behalf of.
      */
-    getShippingInfo(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    getShippingInfo(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -55,13 +56,13 @@ export class ShippingInfoService extends TransactionService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -73,7 +74,7 @@ export class ShippingInfoService extends TransactionService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json', 'application/xml', 'application/xhtml+xml', 'application/atom+xml'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -91,59 +92,59 @@ export class ShippingInfoService extends TransactionService {
         //allow use of param with or without underscore
         parameters['responseFormat'] = parameters['responseFormat'] || parameters['responseFormat'];
         if (parameters['responseFormat'] !== undefined) {
-            queryParameters.set('responseFormat', parameters['responseFormat']);
+            queryParameters = queryParameters.set('responseFormat', parameters['responseFormat']);
         }
 
         //allow use of param with or without underscore
         parameters['pageNumber'] = parameters['pageNumber'] || parameters['pageNumber'];
         if (parameters['pageNumber'] !== undefined) {
-            queryParameters.set('pageNumber', parameters['pageNumber']);
+            queryParameters = queryParameters.set('pageNumber', parameters['pageNumber']);
         }
 
         //allow use of param with or without underscore
         parameters['pageSize'] = parameters['pageSize'] || parameters['pageSize'];
         if (parameters['pageSize'] !== undefined) {
-            queryParameters.set('pageSize', parameters['pageSize']);
+            queryParameters = queryParameters.set('pageSize', parameters['pageSize']);
         }
 
         //allow use of param with or without underscore
         parameters['langId'] = parameters['langId'] || parameters['langId'];
         if (parameters['langId'] !== undefined) {
-            queryParameters.set('langId', parameters['langId']);
+            queryParameters = queryParameters.set('langId', parameters['langId']);
         }
 
         //allow use of param with or without underscore
         parameters['locale'] = parameters['locale'] || parameters['locale'];
         if (parameters['locale'] !== undefined) {
-            queryParameters.set('locale', parameters['locale']);
+            queryParameters = queryParameters.set('locale', parameters['locale']);
         }
 
         //allow use of param with or without underscore
         parameters['forUser'] = parameters['forUser'] || parameters['forUser'];
         if (parameters['forUser'] !== undefined) {
-            queryParameters.set('forUser', parameters['forUser']);
+            queryParameters = queryParameters.set('forUser', parameters['forUser']);
         }
 
         //allow use of param with or without underscore
         parameters['forUserId'] = parameters['forUserId'] || parameters['forUserId'];
         if (parameters['forUserId'] !== undefined) {
-            queryParameters.set('forUserId', parameters['forUserId']);
+            queryParameters = queryParameters.set('forUserId', parameters['forUserId']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -157,20 +158,19 @@ export class ShippingInfoService extends TransactionService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };
@@ -192,7 +192,7 @@ export class ShippingInfoService extends TransactionService {
      ** `@property {string} forUser ` User name to act on behalf of.
      ** `@property {string} forUserId ` User identifier to act on behalf of.
      */
-    updateOrderShippingInfo(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    updateOrderShippingInfo(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -209,13 +209,13 @@ export class ShippingInfoService extends TransactionService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -227,7 +227,7 @@ export class ShippingInfoService extends TransactionService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json', 'application/xml', 'application/xhtml+xml', 'application/atom+xml'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -245,12 +245,11 @@ export class ShippingInfoService extends TransactionService {
         //allow use of param with or without underscore
         parameters['responseFormat'] = parameters['responseFormat'] || parameters['responseFormat'];
         if (parameters['responseFormat'] !== undefined) {
-            queryParameters.set('responseFormat', parameters['responseFormat']);
+            queryParameters = queryParameters.set('responseFormat', parameters['responseFormat']);
         }
 
         //allow use of param with or without underscore
         parameters['body'] = parameters['body'] || parameters['body'];
-
         if (parameters['body'] !== undefined) {
             body = parameters['body'];
         }
@@ -258,29 +257,29 @@ export class ShippingInfoService extends TransactionService {
         //allow use of param with or without underscore
         parameters['forUser'] = parameters['forUser'] || parameters['forUser'];
         if (parameters['forUser'] !== undefined) {
-            queryParameters.set('forUser', parameters['forUser']);
+            queryParameters = queryParameters.set('forUser', parameters['forUser']);
         }
 
         //allow use of param with or without underscore
         parameters['forUserId'] = parameters['forUserId'] || parameters['forUserId'];
         if (parameters['forUserId'] !== undefined) {
-            queryParameters.set('forUserId', parameters['forUserId']);
+            queryParameters = queryParameters.set('forUserId', parameters['forUserId']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -294,20 +293,19 @@ export class ShippingInfoService extends TransactionService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };

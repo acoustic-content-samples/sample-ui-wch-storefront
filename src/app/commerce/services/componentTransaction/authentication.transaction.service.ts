@@ -8,11 +8,12 @@
  * specific language governing permissions and limitations under the License.
 */
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
+import { HttpResponse } from "@angular/common/http";
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import 'rxjs/add/operator/share';
 
+import { Logger } from "angular2-logger/core";
 import { LoginIdentityService } from "../rest/transaction/loginIdentity.service";
 import { PersonService } from "../rest/transaction/person.service";
 import { StorefrontUtils } from "../../../common/storefrontUtils.service";
@@ -27,39 +28,47 @@ export class AuthenticationTransactionService {
 
 	constructor(private loginIdentityService: LoginIdentityService,
 		private personService: PersonService,
-        private storefrontUtils: StorefrontUtils) {
+		private storefrontUtils: StorefrontUtils,
+		private logger: Logger) {
 		// share() allows multiple subscribers to the Observable change
 		this.authUpdate = new Observable<boolean>(observer => this._observer = observer).share();
+		let currentUserCache = sessionStorage.getItem('currentUser');
+		let currentUser = null;
+		if (!!currentUserCache){
+			currentUser = JSON.parse(atob(currentUserCache));
+		}
+		if (currentUser && currentUser.WCTrustedToken && currentUser.WCToken && !currentUser.isGuest) {
+			this._isLoggedIn = true;
+		}
 	}
 
-	login(username: string, password: string): Promise<Response> {
+	login(username: string, password: string): Promise<HttpResponse<any>> {
 		const params = {
 			'storeId': this.storefrontUtils.commerceStoreId,
 			'body': {
 				'logonId': username,
 				'logonPassword': password
-			},
-			'$queryParameters': {
-				'updateCookies': true
 			}
 		};
 		return this.loginIdentityService.login(params, undefined).toPromise().then(res => {
-			console.info('login data %o', res);
-			this._isLoggedIn = true;
+			this.logger.info( this.constructor.name + " login: %o", res );
+			let response = res.body;
+			if (response.WCTrustedToken && response.WCToken) {
+				this._isLoggedIn = true;
+				sessionStorage.setItem('currentUser', btoa(JSON.stringify(response)));
+			}
 			this._observer.next(true);	// update the subscribers to the user's auth status
 			return res;
 		});
 	}
 
-	logout(): Promise<Response> {
+	logout(): Promise<HttpResponse<any>> {
 		const params = {
-			'storeId': this.storefrontUtils.commerceStoreId,
-			'$queryParameters': {
-				'updateCookies': true
-			}
+			'storeId': this.storefrontUtils.commerceStoreId
 		};
+		sessionStorage.removeItem('currentUser');
 		return this.loginIdentityService.logout(params, undefined).toPromise().then(res => {
-			console.info('logout data %o', res);
+			this.logger.info( this.constructor.name + " logout: %o", res );
 			this._isLoggedIn = false;
 			this._observer.next(false);	// update the subscribers to the user's auth status
 			return res;
@@ -70,7 +79,7 @@ export class AuthenticationTransactionService {
 		return this._isLoggedIn;
 	}
 
-	register(username: string, email: string, password: string): Promise<Response> {
+	register(username: string, password: string, confirmPassword: string): Promise<HttpResponse<any>> {
 		const today = new Date();
 		const params = {
 			'storeId': this.storefrontUtils.commerceStoreId,
@@ -80,7 +89,7 @@ export class AuthenticationTransactionService {
 				'registerType': 'R',	// G - Guest User (a user who does not provide any profile information), R - Registered User (a user who provides profile information), A - Administrator (registered and an administrator), S - Site Administrator (super user)
 				'logonId': username,
 				'logonPassword': password,
-				'logonPasswordVerify': password,
+				'logonPasswordVerify': confirmPassword,
 				//'firstName': '',
 				//'lastName': '',
 				//'appendRootOrganizationDN': '???',
@@ -106,7 +115,7 @@ export class AuthenticationTransactionService {
 				//'organizationName': '???',
 				//'personTitle': '???',
 				'profileType': 'C',	// C - customer profile, B - business profile
-				//'challengeAnswer': '',
+				'challengeAnswer': '-',
 				//'challengeQuestion': '',
 				//'city': '',
 				//'state': '',
@@ -120,7 +129,7 @@ export class AuthenticationTransactionService {
 				//	'',
 				//	''
 				//],
-				'email1': email,
+				'email1': username,
 				//'email2': '',
 				//'phone1': '',
 				//'fax1': '',
@@ -136,14 +145,15 @@ export class AuthenticationTransactionService {
 				//'birth_year': '',
 				//'birth_month': '',
 				//'birth_date': ''
-			},
-			'$queryParameters': {
-				'updateCookies': true
 			}
 		};
 		return this.personService.registerPerson(params, undefined).toPromise().then(res => {
-			console.info('register data %o', res);
-			this._isLoggedIn = true;
+			this.logger.info( this.constructor.name + " register: %o", res );
+			let response = res.body;
+			if (response.WCTrustedToken && response.WCToken) {
+				this._isLoggedIn = true;
+				sessionStorage.setItem('currentUser', btoa(JSON.stringify(response)));
+			}
 			this._observer.next(true);	// update the subscribers to the user's auth status
 			return res;
 		});

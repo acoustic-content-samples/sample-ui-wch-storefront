@@ -7,9 +7,11 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
-*/
+ */
+
 /* beautify ignore:start */
-import { Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
+import { URLSearchParams } from '@angular/http';
+import { HttpResponse, HttpParams, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs/Observable';
 import { SearchService } from "./search.service";
 import { CommerceEnvironment } from "../../../commerce.environment";
@@ -40,7 +42,7 @@ export class CategoryViewService extends SearchService {
      ** `@property {boolean} checkEntitlement ` Option to force an entitlement check.
      ** `@property {string} profileName ` Profile name. Profiles determine the subset of data to be returned by a search query.
      */
-    findTopCategories(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    findTopCategories(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -57,13 +59,13 @@ export class CategoryViewService extends SearchService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -75,7 +77,7 @@ export class CategoryViewService extends SearchService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -93,77 +95,77 @@ export class CategoryViewService extends SearchService {
         //allow use of param with or without underscore
         parameters['depthAndLimit'] = parameters['depthAndLimit'] || parameters['depthAndLimit'];
         if (parameters['depthAndLimit'] !== undefined) {
-            queryParameters.set('depthAndLimit', parameters['depthAndLimit']);
+            queryParameters = queryParameters.set('depthAndLimit', parameters['depthAndLimit']);
         }
 
         //allow use of param with or without underscore
         parameters['orderBy'] = parameters['orderBy'] || parameters['orderBy'];
         if (parameters['orderBy'] !== undefined) {
-            queryParameters.set('orderBy', parameters['orderBy']);
+            queryParameters = queryParameters.set('orderBy', parameters['orderBy']);
         }
 
         //allow use of param with or without underscore
         parameters['catalogId'] = parameters['catalogId'] || parameters['catalogId'];
         if (parameters['catalogId'] !== undefined) {
-            queryParameters.set('catalogId', parameters['catalogId']);
+            queryParameters = queryParameters.set('catalogId', parameters['catalogId']);
         }
 
         //allow use of param with or without underscore
         parameters['contractId'] = parameters['contractId'] || parameters['contractId'];
         if (parameters['contractId'] !== undefined) {
-            queryParameters.set('contractId', parameters['contractId']);
+            queryParameters = queryParameters.set('contractId', parameters['contractId']);
         }
 
         //allow use of param with or without underscore
         parameters['currency'] = parameters['currency'] || parameters['currency'];
         if (parameters['currency'] !== undefined) {
-            queryParameters.set('currency', parameters['currency']);
+            queryParameters = queryParameters.set('currency', parameters['currency']);
         }
 
         //allow use of param with or without underscore
         parameters['langId'] = parameters['langId'] || parameters['langId'];
         if (parameters['langId'] !== undefined) {
-            queryParameters.set('langId', parameters['langId']);
+            queryParameters = queryParameters.set('langId', parameters['langId']);
         }
 
         //allow use of param with or without underscore
         parameters['pageSize'] = parameters['pageSize'] || parameters['pageSize'];
         if (parameters['pageSize'] !== undefined) {
-            queryParameters.set('pageSize', parameters['pageSize']);
+            queryParameters = queryParameters.set('pageSize', parameters['pageSize']);
         }
 
         //allow use of param with or without underscore
         parameters['pageNumber'] = parameters['pageNumber'] || parameters['pageNumber'];
         if (parameters['pageNumber'] !== undefined) {
-            queryParameters.set('pageNumber', parameters['pageNumber']);
+            queryParameters = queryParameters.set('pageNumber', parameters['pageNumber']);
         }
 
         //allow use of param with or without underscore
         parameters['checkEntitlement'] = parameters['checkEntitlement'] || parameters['checkEntitlement'];
         if (parameters['checkEntitlement'] !== undefined) {
-            queryParameters.set('checkEntitlement', parameters['checkEntitlement']);
+            queryParameters = queryParameters.set('checkEntitlement', parameters['checkEntitlement']);
         }
 
         //allow use of param with or without underscore
         parameters['profileName'] = parameters['profileName'] || parameters['profileName'];
         if (parameters['profileName'] !== undefined) {
-            queryParameters.set('profileName', parameters['profileName']);
+            queryParameters = queryParameters.set('profileName', parameters['profileName']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -177,20 +179,19 @@ export class CategoryViewService extends SearchService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };
@@ -215,7 +216,7 @@ export class CategoryViewService extends SearchService {
      ** `@property {boolean} checkEntitlement ` Option to force an entitlement check.
      ** `@property {string} profileName ` Profile name. Profiles determine the subset of data to be returned by a search query.
      */
-    findCategoryByUniqueId(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    findCategoryByUniqueId(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -232,13 +233,13 @@ export class CategoryViewService extends SearchService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -250,7 +251,7 @@ export class CategoryViewService extends SearchService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -280,53 +281,53 @@ export class CategoryViewService extends SearchService {
         //allow use of param with or without underscore
         parameters['catalogId'] = parameters['catalogId'] || parameters['catalogId'];
         if (parameters['catalogId'] !== undefined) {
-            queryParameters.set('catalogId', parameters['catalogId']);
+            queryParameters = queryParameters.set('catalogId', parameters['catalogId']);
         }
 
         //allow use of param with or without underscore
         parameters['currency'] = parameters['currency'] || parameters['currency'];
         if (parameters['currency'] !== undefined) {
-            queryParameters.set('currency', parameters['currency']);
+            queryParameters = queryParameters.set('currency', parameters['currency']);
         }
 
         //allow use of param with or without underscore
         parameters['langId'] = parameters['langId'] || parameters['langId'];
         if (parameters['langId'] !== undefined) {
-            queryParameters.set('langId', parameters['langId']);
+            queryParameters = queryParameters.set('langId', parameters['langId']);
         }
 
         //allow use of param with or without underscore
         parameters['contractId'] = parameters['contractId'] || parameters['contractId'];
         if (parameters['contractId'] !== undefined) {
-            queryParameters.set('contractId', parameters['contractId']);
+            queryParameters = queryParameters.set('contractId', parameters['contractId']);
         }
 
         //allow use of param with or without underscore
         parameters['checkEntitlement'] = parameters['checkEntitlement'] || parameters['checkEntitlement'];
         if (parameters['checkEntitlement'] !== undefined) {
-            queryParameters.set('checkEntitlement', parameters['checkEntitlement']);
+            queryParameters = queryParameters.set('checkEntitlement', parameters['checkEntitlement']);
         }
 
         //allow use of param with or without underscore
         parameters['profileName'] = parameters['profileName'] || parameters['profileName'];
         if (parameters['profileName'] !== undefined) {
-            queryParameters.set('profileName', parameters['profileName']);
+            queryParameters = queryParameters.set('profileName', parameters['profileName']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -340,20 +341,19 @@ export class CategoryViewService extends SearchService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };
@@ -379,7 +379,7 @@ export class CategoryViewService extends SearchService {
      ** `@property {boolean} checkEntitlement ` Option to force an entitlement check.
      ** `@property {string} profileName ` Profile name. Profiles determine the subset of data to be returned by a search query.
      */
-    findCategoryByUniqueIds(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    findCategoryByUniqueIds(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -396,13 +396,13 @@ export class CategoryViewService extends SearchService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -414,7 +414,7 @@ export class CategoryViewService extends SearchService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -432,7 +432,7 @@ export class CategoryViewService extends SearchService {
         //allow use of param with or without underscore
         parameters['id'] = parameters['id'] || parameters['id'];
         if (parameters['id'] !== undefined) {
-            queryParameters.set('id', parameters['id']);
+            queryParameters = queryParameters.set('id', parameters['id']);
         }
 
         if (parameters['id'] === undefined) {
@@ -442,59 +442,59 @@ export class CategoryViewService extends SearchService {
         //allow use of param with or without underscore
         parameters['catalogId'] = parameters['catalogId'] || parameters['catalogId'];
         if (parameters['catalogId'] !== undefined) {
-            queryParameters.set('catalogId', parameters['catalogId']);
+            queryParameters = queryParameters.set('catalogId', parameters['catalogId']);
         }
 
         //allow use of param with or without underscore
         parameters['orderBy'] = parameters['orderBy'] || parameters['orderBy'];
         if (parameters['orderBy'] !== undefined) {
-            queryParameters.set('orderBy', parameters['orderBy']);
+            queryParameters = queryParameters.set('orderBy', parameters['orderBy']);
         }
 
         //allow use of param with or without underscore
         parameters['contractId'] = parameters['contractId'] || parameters['contractId'];
         if (parameters['contractId'] !== undefined) {
-            queryParameters.set('contractId', parameters['contractId']);
+            queryParameters = queryParameters.set('contractId', parameters['contractId']);
         }
 
         //allow use of param with or without underscore
         parameters['currency'] = parameters['currency'] || parameters['currency'];
         if (parameters['currency'] !== undefined) {
-            queryParameters.set('currency', parameters['currency']);
+            queryParameters = queryParameters.set('currency', parameters['currency']);
         }
 
         //allow use of param with or without underscore
         parameters['langId'] = parameters['langId'] || parameters['langId'];
         if (parameters['langId'] !== undefined) {
-            queryParameters.set('langId', parameters['langId']);
+            queryParameters = queryParameters.set('langId', parameters['langId']);
         }
 
         //allow use of param with or without underscore
         parameters['checkEntitlement'] = parameters['checkEntitlement'] || parameters['checkEntitlement'];
         if (parameters['checkEntitlement'] !== undefined) {
-            queryParameters.set('checkEntitlement', parameters['checkEntitlement']);
+            queryParameters = queryParameters.set('checkEntitlement', parameters['checkEntitlement']);
         }
 
         //allow use of param with or without underscore
         parameters['profileName'] = parameters['profileName'] || parameters['profileName'];
         if (parameters['profileName'] !== undefined) {
-            queryParameters.set('profileName', parameters['profileName']);
+            queryParameters = queryParameters.set('profileName', parameters['profileName']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -508,20 +508,19 @@ export class CategoryViewService extends SearchService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };
@@ -550,7 +549,7 @@ export class CategoryViewService extends SearchService {
      ** `@property {boolean} checkEntitlement ` Option to force an entitlement check.
      ** `@property {string} profileName ` Profile name. Profiles determine the subset of data to be returned by a search query.
      */
-    findSubCategories(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    findSubCategories(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -567,13 +566,13 @@ export class CategoryViewService extends SearchService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -585,7 +584,7 @@ export class CategoryViewService extends SearchService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -615,77 +614,77 @@ export class CategoryViewService extends SearchService {
         //allow use of param with or without underscore
         parameters['depthAndLimit'] = parameters['depthAndLimit'] || parameters['depthAndLimit'];
         if (parameters['depthAndLimit'] !== undefined) {
-            queryParameters.set('depthAndLimit', parameters['depthAndLimit']);
+            queryParameters = queryParameters.set('depthAndLimit', parameters['depthAndLimit']);
         }
 
         //allow use of param with or without underscore
         parameters['orderBy'] = parameters['orderBy'] || parameters['orderBy'];
         if (parameters['orderBy'] !== undefined) {
-            queryParameters.set('orderBy', parameters['orderBy']);
+            queryParameters = queryParameters.set('orderBy', parameters['orderBy']);
         }
 
         //allow use of param with or without underscore
         parameters['contractId'] = parameters['contractId'] || parameters['contractId'];
         if (parameters['contractId'] !== undefined) {
-            queryParameters.set('contractId', parameters['contractId']);
+            queryParameters = queryParameters.set('contractId', parameters['contractId']);
         }
 
         //allow use of param with or without underscore
         parameters['catalogId'] = parameters['catalogId'] || parameters['catalogId'];
         if (parameters['catalogId'] !== undefined) {
-            queryParameters.set('catalogId', parameters['catalogId']);
+            queryParameters = queryParameters.set('catalogId', parameters['catalogId']);
         }
 
         //allow use of param with or without underscore
         parameters['currency'] = parameters['currency'] || parameters['currency'];
         if (parameters['currency'] !== undefined) {
-            queryParameters.set('currency', parameters['currency']);
+            queryParameters = queryParameters.set('currency', parameters['currency']);
         }
 
         //allow use of param with or without underscore
         parameters['langId'] = parameters['langId'] || parameters['langId'];
         if (parameters['langId'] !== undefined) {
-            queryParameters.set('langId', parameters['langId']);
+            queryParameters = queryParameters.set('langId', parameters['langId']);
         }
 
         //allow use of param with or without underscore
         parameters['pageSize'] = parameters['pageSize'] || parameters['pageSize'];
         if (parameters['pageSize'] !== undefined) {
-            queryParameters.set('pageSize', parameters['pageSize']);
+            queryParameters = queryParameters.set('pageSize', parameters['pageSize']);
         }
 
         //allow use of param with or without underscore
         parameters['pageNumber'] = parameters['pageNumber'] || parameters['pageNumber'];
         if (parameters['pageNumber'] !== undefined) {
-            queryParameters.set('pageNumber', parameters['pageNumber']);
+            queryParameters = queryParameters.set('pageNumber', parameters['pageNumber']);
         }
 
         //allow use of param with or without underscore
         parameters['checkEntitlement'] = parameters['checkEntitlement'] || parameters['checkEntitlement'];
         if (parameters['checkEntitlement'] !== undefined) {
-            queryParameters.set('checkEntitlement', parameters['checkEntitlement']);
+            queryParameters = queryParameters.set('checkEntitlement', parameters['checkEntitlement']);
         }
 
         //allow use of param with or without underscore
         parameters['profileName'] = parameters['profileName'] || parameters['profileName'];
         if (parameters['profileName'] !== undefined) {
-            queryParameters.set('profileName', parameters['profileName']);
+            queryParameters = queryParameters.set('profileName', parameters['profileName']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -699,20 +698,19 @@ export class CategoryViewService extends SearchService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };
@@ -737,7 +735,7 @@ export class CategoryViewService extends SearchService {
      ** `@property {boolean} checkEntitlement ` Option to force an entitlement check.
      ** `@property {string} profileName ` Profile name. Profiles determine the subset of data to be returned by a search query.
      */
-    findCategoryByIdentifier(parameters: any, headers ? : any, url ? : string): Observable < Response > {
+    findCategoryByIdentifier(parameters: any, headers ? : any, url ? : string): Observable < HttpResponse < any >> {
         let useMocks = false;
         //Set domain based on profile.
         if (url && url === 'mocks') {
@@ -754,13 +752,13 @@ export class CategoryViewService extends SearchService {
         }
         let form = {};
         let body = {};
-        let header: Headers;
-        let queryParameters = new URLSearchParams();
+        let header: HttpHeaders;
+        let queryParameters = new HttpParams();
         let formParams = new URLSearchParams();
         if (typeof headers === 'undefined' || headers === null) {
-            header = new Headers();
+            header = new HttpHeaders();
         } else {
-            header = new Headers(headers);
+            header = new HttpHeaders(headers);
         }
         if (parameters === undefined) {
             parameters = {};
@@ -772,7 +770,7 @@ export class CategoryViewService extends SearchService {
         let headerValues = {};
         headerValues['Accept'] = ['application/json'];
         for (let val of headerValues['Accept']) {
-            header.append('Accept', val);
+            header = header.append('Accept', val);
         }
 
         //allow use of param with or without underscore
@@ -802,53 +800,53 @@ export class CategoryViewService extends SearchService {
         //allow use of param with or without underscore
         parameters['catalogId'] = parameters['catalogId'] || parameters['catalogId'];
         if (parameters['catalogId'] !== undefined) {
-            queryParameters.set('catalogId', parameters['catalogId']);
+            queryParameters = queryParameters.set('catalogId', parameters['catalogId']);
         }
 
         //allow use of param with or without underscore
         parameters['contractId'] = parameters['contractId'] || parameters['contractId'];
         if (parameters['contractId'] !== undefined) {
-            queryParameters.set('contractId', parameters['contractId']);
+            queryParameters = queryParameters.set('contractId', parameters['contractId']);
         }
 
         //allow use of param with or without underscore
         parameters['currency'] = parameters['currency'] || parameters['currency'];
         if (parameters['currency'] !== undefined) {
-            queryParameters.set('currency', parameters['currency']);
+            queryParameters = queryParameters.set('currency', parameters['currency']);
         }
 
         //allow use of param with or without underscore
         parameters['langId'] = parameters['langId'] || parameters['langId'];
         if (parameters['langId'] !== undefined) {
-            queryParameters.set('langId', parameters['langId']);
+            queryParameters = queryParameters.set('langId', parameters['langId']);
         }
 
         //allow use of param with or without underscore
         parameters['checkEntitlement'] = parameters['checkEntitlement'] || parameters['checkEntitlement'];
         if (parameters['checkEntitlement'] !== undefined) {
-            queryParameters.set('checkEntitlement', parameters['checkEntitlement']);
+            queryParameters = queryParameters.set('checkEntitlement', parameters['checkEntitlement']);
         }
 
         //allow use of param with or without underscore
         parameters['profileName'] = parameters['profileName'] || parameters['profileName'];
         if (parameters['profileName'] !== undefined) {
-            queryParameters.set('profileName', parameters['profileName']);
+            queryParameters = queryParameters.set('profileName', parameters['profileName']);
         }
 
         if (parameters.$queryParameters) {
             Object.keys(parameters.$queryParameters)
                 .forEach(function(parameterName) {
                     var parameter = parameters.$queryParameters[parameterName];
-                    queryParameters.set(parameterName, parameter);
+                    queryParameters = queryParameters.set(parameterName, parameter);
                 });
         }
 
         if (!header.get('Content-Type')) {
-            header.append('Content-Type', 'application/json; charset=utf-8');
+            header = header.append('Content-Type', 'application/json; charset=utf-8');
         }
 
-        if (header.get('Accept').indexOf('application/json') > -1) {
-            header.set('Accept', 'application/json');
+        if (header.getAll('Accept').indexOf('application/json') > -1) {
+            header = header.set('Accept', 'application/json');
         }
 
         if (header.get('content-type') === 'multipart/form-data' && Object.keys(form).length > 0) {
@@ -862,20 +860,19 @@ export class CategoryViewService extends SearchService {
             }
             body = formData;
         } else if (Object.keys(form).length > 0) {
-            header.set('content-type', 'application/x-www-form-urlencoded');
+            header = header.set('content-type', 'application/x-www-form-urlencoded');
             for (let p in form) {
                 formParams.append(p, form[p]);
             }
             body = formParams;
         }
-
-        let requestOptions = new RequestOptions({
+        let requestOptions = {
             'params': queryParameters,
             'method': method,
             'headers': header,
             'body': body,
             'url': requestUrl
-        });
+        };
 
         return this.invokeService(requestOptions);
     };

@@ -1,0 +1,14 @@
+<div *ngIf="item" class="item-summary row">
+    <div class="col-sm-3">
+        <a [routerLink]="['/product', item.partNumber]"><img class="img-responsive center-block" src="{{item.thumbnail}}" title="{{item.shortDescription}}" /></a>
+    </div>
+    <div class="col-sm-9">
+        <a [routerLink]="['/product', item.partNumber]">{{ item.partNumber}}</a>
+        <div class="item-name">{{item.name}}</div>
+		<div *ngFor="let attr of item.attributes">
+			<div *ngIf="attr.usage === 'Defining'">
+                <label>{{attr.name}}: </label> {{attr.values[0].value}}
+            </div>
+		</div>
+    </div>
+</div>

@@ -15,6 +15,7 @@ import { CommerceModule } from '../commerce/commerce.module';
 
 import { ShopHeaderModule } from './shopHeader/shopHeader.module';
 import { SideNavModule } from './sideNav/sideNav.module';
+import { AccountSideNavModule } from './accountSideNav/accountSideNav.module';
 import { StaticTemplateModule } from './staticTemplate/staticTemplate.module';
 import { CarouselHeroComponent } from './carouselHero/carouselHero.component';
 import { ShopFooterComponent } from './shopFooter/shopFooter.component';
@@ -26,7 +27,8 @@ import { StarRatingComponent } from './starRating/starRating.component';
 		RouterModule,
 		ShopHeaderModule,
         StaticTemplateModule,
-        SideNavModule,
+		SideNavModule,
+		AccountSideNavModule,
         CommerceModule
 	],
 	declarations: [
@@ -39,7 +41,8 @@ import { StarRatingComponent } from './starRating/starRating.component';
 		CarouselHeroComponent,
 		ShopFooterComponent,
         StaticTemplateModule,
-        SideNavModule,
+		SideNavModule,
+		AccountSideNavModule,
         StarRatingComponent
 	]
 })
