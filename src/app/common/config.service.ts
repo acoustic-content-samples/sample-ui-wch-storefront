@@ -24,10 +24,10 @@ export class ConfigService {
 	constructor(private http: Http) { }
 
 	init(): Promise<any> {
-		return this.http.get('/dxconfig/serverConfig.json').toPromise().then(res => {
+		return this.http.get('dxconfig/serverConfig.json').toPromise().then(res => {
 			this.configJSON = res.json();
 			ConfigService.loggerOptions = this.configJSON.logger;
-			return this.http.get('/dxconfig/servicesConfig.json').toPromise().then(res => {
+			return this.http.get('dxconfig/servicesConfig.json').toPromise().then(res => {
 				this.servicesConfig = res.json();
 			});
 		});

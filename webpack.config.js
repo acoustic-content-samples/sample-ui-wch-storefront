@@ -13,7 +13,11 @@ const copy = [
 	{src: 'src/app/common/fonts', dest: 'assets/fonts'},
 	{src: 'src/js', dest: 'assets/js'},
 	{src: 'src/app/common/dxconfig', dest: 'assets/dxconfig'},
-	{src: 'src/app/common/authoring', dest: 'assets'},
+    {src: 'src/app/common/authoring/dxdam', dest: 'assets/dxdam'},
+	{src: 'src/app/common/authoring/content', dest: 'content'},
+    {src: 'src/app/common/authoring/image-profiles', dest: 'image-profiles'},
+    {src: 'src/app/common/authoring/renditions', dest: 'renditions'},
+    {src: 'src/app/common/authoring/types', dest: 'types'},
 	{src: 'src/app/common/templates', dest: 'assets/templates'},
 	{src: 'src/mocks', dest: 'assets/mocks'}
 ];
@@ -27,7 +31,7 @@ copy.forEach(item => fsextra.copy(item.src, item.dest, function (err) {
 }));
 
 module.exports = {
-	devtool: 'eval-source-map',
+	devtool: 'cheap-source-map',
 	entry: {
 		app: [path.resolve(__dirname, 'src/main.ts')]
 	},
