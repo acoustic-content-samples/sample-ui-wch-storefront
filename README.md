@@ -2,7 +2,7 @@
 
 Preparation
 ------
-The deployment step of this repository pushes the Single Page Application's files into the WCH tenant, overlaying existing files. It will overlay any existing files in the web asset folder. We recommend to first do a pull with wchtools in case you want to keep artifacts that you still need. If you use the Sites Single Page Application it will get overlayed.
+The deployment step of this repository pushes the Single Page Application's files into the Acoustic Content (formerly Watson Content Hub) tenant, overlaying existing files. It will overlay any existing files in the web asset folder. We recommend to first do a pull with wchtools in case you want to keep artifacts that you still need. If you use the Sites Single Page Application it will get overlayed.
 
 To use
 ------
