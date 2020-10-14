@@ -105,5 +105,5 @@ Using mock data
 
 ### Accessing the site
 Leverage the Hub Information screen to get the configured host for your content hub (it could be a custom host name or the default host name) and leverage the URL to get to your commerce site. Samples would be (note the slash at the end):
-Default host name: https://myxx.digitalexperience.ibm.com/4464b91f-6430-4201-9e21-010b7d06ef30/
+Default host name: https://content-xx-x.content-cms.com/4464b91f-6430-4201-9e21-010b7d06ef30/
 Or custom host name: https://www.wch-storefront.com/
