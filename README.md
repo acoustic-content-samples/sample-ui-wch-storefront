@@ -15,14 +15,14 @@ To use
 
 	The file 'serverConfig.json' should contain the following values:
 
-	`can be found in Homepange of WCH-> Profile Tab with username-> Hub information -> Content hub ID`
-	"contentHubID": "YOUR WATSON CONTENT HUB ID", 
+	`can be found in Homepange of Content -> Profile Tab with username-> Hub information -> Content hub ID`
+	"contentHubID": "YOUR CONTENT TENANT ID", 
 
-	`--can be found in Homepange of WCH-> Profile Tab with username-> Hub information -> Domain name`
- 	"contentHubDomainName": "YOUR WCH DOMAIN NAME",
+	`--can be found in Homepange of Content -> Profile Tab with username-> Hub information -> Domain name`
+ 	"contentHubDomainName": "YOUR CONTENT DOMAIN NAME",
 
- 	`put your backend commerce server domain name - i.e. commerceserver.ibm.com`
- 	"commerceSearchDomainName": "commerceserver.ibm.com", 
+ 	`put your backend commerce server domain name - i.e. commerceserver.hcl.com`
+ 	"commerceSearchDomainName": "commerceserver.hcl.com", 
 
 	`put your backend commerce server ssl port - i.e. 443`
  	"commerceSearchSecurePort":"443",
@@ -30,25 +30,25 @@ To use
 	`put your backend commerce server context root for search - i.e. /search/resources`
  	"commerceSearchContextPath":"/search/resources",
 
- 	`put your transaction commerce server domain name - i.e. commerceserver.ibm.com`
- 	"commerceTransactionDomainName": "commerceserver.ibm.com", 
+ 	`put your transaction HCL commerce server domain name - i.e. commerceserver.hcl.com`
+ 	"commerceTransactionDomainName": "commerceserver.hcl.com", 
 
-	`put your transaction commerce server SSL port - i.e. 443`
+	`put your transaction HCL commerce server SSL port - i.e. 443`
  	"commerceTransactionSecurePort": "443",
 
-	`put your transaction commerce server context root - i.e. /wcs/resources`
+	`put your transaction HCL commerce server context root - i.e. /wcs/resources`
  	"commerceTransactionContextPath":"/wcs/resources",
 
-	`put your transaction commerce server store ID - i.e. 1`
+	`put your transaction HCL commerce server store ID - i.e. 1`
  	"commerceStoreID": "1",
 
-	`put your transaction commerce server catalog ID - i.e. 10502`
+	`put your transaction HCL commerce server catalog ID - i.e. 10502`
  	"commerceCatalogID": "10502"
 
 
 
 
-	B. In `package.json`, replace the empty strings for `url`, `username`, & `password` with strings containing your WCH API URL, WCH username, & WCH Password respectively
+	B. In `package.json`, replace the empty strings for `url`, `username`, & `password` with strings containing your Content API URL, Content username, & Content Password respectively
 
 
 
@@ -64,8 +64,8 @@ To use
 
 	"password": "YOUR WCH PASSWORD",
 
-	`can be found in Homepange of WCH-> Profile Tab with username-> Hub information -> API URL`
-	"url": "YOUR WCH API URL",
+	`can be found in Homepange of Content -> Profile Tab with username -> Hub information -> API URL`
+	"url": "YOUR Content API URL",
 
 
 
@@ -106,4 +106,4 @@ Using mock data
 ### Accessing the site
 Leverage the Hub Information screen to get the configured host for your content hub (it could be a custom host name or the default host name) and leverage the URL to get to your commerce site. Samples would be (note the slash at the end):
 Default host name: https://content-xx-x.content-cms.com/4464b91f-6430-4201-9e21-010b7d06ef30/
-Or custom host name: https://www.wch-storefront.com/
+Or custom host name: https://www.content-storefront.com/
