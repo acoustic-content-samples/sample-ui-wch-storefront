@@ -1,6 +1,6 @@
 {
   "recordSetCount": 50,
-  "resourceId": "https://derekxuvm.canlab.ibm.com:3738/search/resources/store/1/categoryview/@top?depthAndLimit=11,11&langId=-1",
+  "resourceId": "https://<HCL commerce server>/search/resources/store/1/categoryview/@top?depthAndLimit=11,11&langId=-1",
   "recordSetStartNumber": 0,
   "resourceName": "categoryview",
   "catalogGroupView": [
